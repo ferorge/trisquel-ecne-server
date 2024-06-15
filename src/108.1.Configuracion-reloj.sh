@@ -10,35 +10,54 @@ echo -e "$cian Instalando paquetes $default"
 apt install -y util-linux-extra
 
 ## Configuración de variables
-SERVICIO=''
+SERVICE='systemd-timesyncd'
 timestamp=$(date +%F_%H.%M.%S)
-HORA_LOCAL=$(date)
-HORA_UTC=$(date -u)
-HORA_RTC=$(hwclock)
-HORA_DIF=$(hwclock --verbose | grep drift)
+TIME_LOCAL=$(date)
+TIME_UTC=$(date -u)
+TIME_RTC=$(hwclock)
+TIME_DIF=$(hwclock --verbose | grep drift)
+TIME_ZONE=$(timedatectl list-timezones | grep Buenos_Aires -m 1)
 
-## Impresión de hora local y UTC
-echo -e "$verde Hora local: $rojo $HORA_LOCAL $default"
-echo -e "$verde Hora   UTC: $rojo $HORA_UTC   $default"
+## Impresión de TIME local y UTC
+echo -e "$verde TIME local: $rojo $TIME_LOCAL $default"
+echo -e "$verde TIME   UTC: $rojo $TIME_UTC   $default"
 
-## Impresión de hora del sistema
-echo -e "$verde Hora hardware: $rojo $HORA_RTC $default"
-echo -e "$verde Diferencia entre hora local y hora de hardware (RTC): $default"
-echo -e "$rojo $HORA_DIF $default"
+## Impresión de TIME del sistema
+echo -e "$verde TIME hardware: $rojo $TIME_RTC $default"
+echo -e "$verde Diferencia entre TIME local y TIME de hardware (RTC): $default"
+echo -e "$rojo $TIME_DIF $default"
 timedatectl
 
 ## Respaldo de configuración
-#cp /etc/timezone /var/backups/timezone.$timestamp
+cp /etc/timezone /var/backups/timezone.$timestamp
 
 ## Modificación de configuración
-#echo -e "$cian Modificando configuración $default"
-#echo "NTP=texto-plano.xyz" >> /etc/systemd/timesyncd.conf
-#timedatectl set-ntp True
-#timedatectl set-timezone 'America/Argentina/Buenos_Aires'
+echo -e "$cian Modificando configuración $default"
+
+echo -e "$amarillo Sin systemd $default"
+###### date +%Y%m%d -s "20240615"
+ln -s /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime
+hwclock --systohc
+echo $TIME_ZONE > /etc/timezone
+
+echo -e "$amarillo Con systemd $default"
+echo "
+##########################
+### Editado por ~ferorge #
+##########################
+NTP=texto-plano.xyz
+" >> /etc/systemd/timesyncd.conf
+timedatectl set-ntp True
+timedatectl set-timezone $TIME_ZONE
 
 ## Reinicio de servicio
-#echo -e "$cian Reiniciando servicio $default"
-#systemctl restart systemd-timesyncd
+echo -e "$cian Reiniciando servicio $default"
+systemctl restart $SERVICE
 
 ## Estado de servicio
-systemctl status systemd-timesyncd
+systemctl status $SERVICE
+
+## Verificación de configuración
+echo -e "$cian Verificando configuración $default"
+ls -la /etc/localtime
+cat /etc/timezone
