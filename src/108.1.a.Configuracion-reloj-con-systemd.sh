@@ -23,15 +23,18 @@ cp /etc/timezone /var/backups/timezone.$timestamp
 
 ## Modificación de configuración
 echo -e "$cian Modificando configuración $default"
-echo -e "$amarillo Con systemd $default"
+echo -e "$verde Con systemd $default"
 echo "
 ##########################
 ### Editado por ~ferorge #
 ##########################
-NTP=texto-plano.xyz
+NTP=0.south-america.pool.ntp.org
 " >> /etc/systemd/timesyncd.conf
-timedatectl set-ntp True
+
+systemctl daemon-reload
 timedatectl set-timezone $TIME_ZONE
+timedatectl set-ntp false
+timedatectl set-ntp true
 
 ## Reinicio de servicio
 echo -e "$cian Reiniciando servicio $default"
@@ -42,5 +45,4 @@ systemctl status $SERVICE
 
 ## Verificación de configuración
 echo -e "$cian Verificando configuración $default"
-ls -la /etc/localtime
-cat /etc/timezone
+timedatectl

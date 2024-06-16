@@ -19,12 +19,12 @@ TIME_DIF=$(hwclock --verbose | grep drift)
 TIME_ZONE=$(find /usr/share/zoneinfo/ -name Buenos_Aires)
 
 ## Impresión de TIME local y UTC
-echo -e "$verde TIME local: $rojo $TIME_LOCAL $default"
-echo -e "$verde TIME   UTC: $rojo $TIME_UTC   $default"
+echo -e "$verde Hora local: $rojo $TIME_LOCAL $default"
+echo -e "$verde Hora   UTC: $rojo $TIME_UTC   $default"
 
 ## Impresión de TIME del sistema
-echo -e "$verde TIME hardware: $rojo $TIME_RTC $default"
-echo -e "$verde Diferencia entre TIME local y TIME de hardware (RTC): $default"
+echo -e "$verde Hora hardware: $rojo $TIME_RTC $default"
+echo -e "$verde Diferencia entre Hora local y Hora de hardware (RTC): $default"
 echo -e "$rojo $TIME_DIF $default"
 
 ## Respaldo de configuración
