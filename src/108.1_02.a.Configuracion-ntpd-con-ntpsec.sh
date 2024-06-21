@@ -15,8 +15,8 @@ apt install -y ntpsec
 
 ## Configuración de variables
 SERVICE='ntpd'
-DIR=''
-FILE=''
+DIR='/etc/ntpsec/'
+FILE='ntp.conf'
 timestamp=$(date +%F_%H.%M.%S)
 
 ## Respaldo de configuración
@@ -30,11 +30,20 @@ echo -e "$cian Modificando configuración $default"
 ##########################
 ###### " >> $DIR$FILE
 
+## Configuracion de firewall
+echo -e "$cian Configurando firewall $default"
+ufw allow 123/tcp comment $SERVICE
+
+## Activación de servicio
+echo -e "$cian Activando servicio $default"
+systemctl enable $SERVICE
+
 ## Reinicio de servicio
 echo -e "$cian Reiniciando servicio $default"
 systemctl restart $SERVICE
 
-## Estado de servicio
+## Verificación de servicio
+echo -e "$cian Verificando servicio $default"
 systemctl status $SERVICE
 
 ## Verificación de configuración
