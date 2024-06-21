@@ -14,7 +14,7 @@ echo -e "$cian Instalando paquetes $default"
 apt install -y ntpsec
 
 ## Configuración de variables
-SERVICE='systemd-timesyncd'
+SERVICE='ntpd'
 DIR=''
 FILE=''
 timestamp=$(date +%F_%H.%M.%S)
@@ -32,10 +32,10 @@ echo -e "$cian Modificando configuración $default"
 
 ## Reinicio de servicio
 echo -e "$cian Reiniciando servicio $default"
-###### systemctl restart $SERVICE
+systemctl restart $SERVICE
 
 ## Estado de servicio
-###### systemctl status $SERVICE
+systemctl status $SERVICE
 
 ## Verificación de configuración
 echo -e "$cian Verificando configuración $default"
