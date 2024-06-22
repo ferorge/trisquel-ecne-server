@@ -15,6 +15,10 @@ apt install -y ntpsec
 
 ## Configuración de variables
 SERVICE='ntpd'
+FQDN=$(hostname -f)
+USER=''
+VAR_DIR=''
+RUN=''
 DIR='/etc/ntpsec/'
 FILE='ntp.conf'
 timestamp=$(date +%F_%H.%M.%S)
@@ -33,6 +37,12 @@ echo -e "$cian Modificando configuración $default"
 ## Configuracion de firewall
 echo -e "$cian Configurando firewall $default"
 ufw allow 123/tcp comment $SERVICE
+
+## Endurecimiento de servicio
+sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
+sed -i "s/__USER__/$USER/g" $SERVICE
+sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
+sed -i -r "s#__RUN__#$RUN#g" $SERVICE
 
 ## Activación de servicio
 echo -e "$cian Activando servicio $default"

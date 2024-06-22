@@ -14,7 +14,8 @@ echo -e "$cian Instalando paquetes $default"
 ###### apt install -y 'package'
 
 ## Configuración de variables
-SERVICE=''
+UNIT=''
+SERVICE="/lib/systemd/system/$UNIT.service"
 FQDN=$(hostname -f)
 USER=''
 VAR_DIR=''
@@ -38,27 +39,27 @@ echo -e "$cian Modificando configuracion $default"
 ########################
 ###### ' >> $DIR$FILE
 
-## Configuración de firewall
-echo -e "$cian Configurando firewall $default"
-###### ufw allow 'puerto'/'protocolo' comment $SERVICE
-
 ## Endurecimiento de servicio
 sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
 sed -i "s/__USER__/$USER/g" $SERVICE
 sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
 sed -i -r "s#__RUN__#$RUN#g" $SERVICE
 
+## Configuración de firewall
+echo -e "$cian Configurando firewall $default"
+###### ufw allow 'puerto'/'protocolo' comment $UNIT
+
 ## Activación de servicio
 echo -e "$cian Activando servicio $default"
-###### systemctl enable $SERVICE
+###### systemctl enable $UNIT
 
 ## Reinicio de servicio
 echo -e "$cian Reiniciando servicio $default"
-###### systemctl restart $SERVICE
+###### systemctl restart $UNIT
 
 ## Verificación de servicio
 echo -e "$cian Verificando servicio $default"
-###### systemctl status $SERVICE
+###### systemctl status $UNIT
 
 ## Verificacion de configuracion
 echo -e "$cian Verificando configuracion $default"
