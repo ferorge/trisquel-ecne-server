@@ -43,7 +43,7 @@ echo -e "$cian Configurando firewall $default"
 ###### ufw allow 'puerto'/'protocolo' comment $SERVICE
 
 ## Endurecimiento de servicio
-sed "/\[Service\]/r ${0%/*}/template-service.txt" $SERVICE
+sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
 sed -i "s/__USER__/$USER/g" $SERVICE
 sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
 sed -i -r "s#__RUN__#$RUN#g" $SERVICE
