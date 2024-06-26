@@ -17,10 +17,10 @@ apt install -y chrony
 UNIT='chrony'
 SERVICE="/lib/systemd/system/$UNIT.service"
 FQDN=$(hostname -f)
-USER="$UNIT"
+USER="_chrony"
 VAR_DIR='/var/log/chrony/'
 RUN=''
-DIR='/etc/'
+DIR='/etc/chrony/'
 FILE='$UNIT.conf'
 CFG="$UNIT"
 timestamp=$(date +%F_%H.%M.%S)
