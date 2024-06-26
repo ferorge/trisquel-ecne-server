@@ -6,6 +6,9 @@
 ###### Licenciado bajo GPLv3 por ~ferorge <ferorge@texto-plano.xyz>
 ###### https://www.gnu.org/licenses/gpl.txt
 
+## Fuente
+###### Enlace a la fuente.
+
 ## Importación de colores
 source "${0%/*}"/000.Colores.sh
 
