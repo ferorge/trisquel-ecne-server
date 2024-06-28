@@ -7,7 +7,7 @@
 ###### https://www.gnu.org/licenses/gpl.txt
 
 ## Fuente
-###### https://learning.lpi.org/es/learning-materials/101-500/104/104.3/
+###### https://learning.lpi.org/es/learning-materials/101-500/103/103.1/103.1_01
 
 ## Importación de colores
 source "${0%/*}"/000.Colores.sh
