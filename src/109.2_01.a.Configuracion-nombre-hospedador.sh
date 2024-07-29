@@ -23,7 +23,9 @@ IP=$(curl -s ifconfig.me)
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuracion $default"
 DIR='/etc/'
-FILE='hosts'
+FILE='hostname'
+cp $DIR$FILE /var/backups/$FILE.$timestamp
+FILE='machine-info'
 cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
@@ -34,12 +36,6 @@ hostnamectl --static hostname $HOST
 hostnamectl chassis server
 hostnamectl deployment production
 hostnamectl location "Lanús, Argentina"
-
-echo "
-########################
-# Editado por ~ferorge #
-########################
-$IP	$FQDN $HOST" >> $DIR$FILE
 
 ## __Verificacion de configuracion__
 echo -e "$cian Verificando configuracion $default"
