@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Actualizar zona dynv6
+# Verificación de zona en dynv6.com
 
 ## __Autoría y licencia__
-###### Configuración de nombres © 2024 por \~ferorge
+###### Verificación de zona en dynv6.com © 2024 por \~ferorge
 ###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
 ###### Licenciado bajo GNU Public License version 3.
 ###### Para ver una copia de esta licencia, visite:
 ###### [GPLv3]:(https://www.gnu.org/licenses/gpl.txt)
 
 ## __Fuente__
-###### []:()
+###### [Documentación en dynv6.com]:(https://dynv6.com/docs/apis)
 
 ## __Importación de colores__
 source "${0%/*}"/000.Colores.sh
@@ -29,31 +29,34 @@ JSON=$(curl -s \
     -H "Accept: application/json" \
     http://dynv6.com/api/v2/zones)
 
-ZONE_IP=$(echo $JSON | grep -o '"ipv4address":"[^"]*' | grep -o '[^"]*$')
+ZONE_IP=$(echo $JSON | grep $FQDN | grep -o '"ipv4address":"[^"]*' | grep -o '[^"]*$')
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuracion $default"
+echo -e "$cian Respaldando configuración $default"
 DIR=''
 FILE=''
 #cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuracion $default"
-
-## __Verificacion de configuración__
-echo -e "$cian Verificando configuracion $default"
+echo -e "$cian Modificando configuración $default"
 
 if [[ $CURRENT_IP != $ZONE_IP ]]; then
-  logger "current IP $CURRENT_IP"
-  logger "zone IP $ZONE_IP"
   source "${0%/*}"/109.2_01.a.Configuracion-nombre-hospedador.sh
   source "${0%/*}"/109.2_01.b.Configuracion-nombres-red.sh
 #  source "${0%/*}"/510.Actualizar-zona-dynv6.sh
   UPDATE=$(curl -s "http://ipv4.dynv6.com/api/update?zone=$FQDN&ipv4=auto&token=$TOKEN")
   logger $UPDATE
-  logger $HOST $FQDN $CURRENT_IP $ZONE_IP $UPDATE
+  HOST=$(hostname)
+  FQDN=$(hostname -f)
+  CURRENT_IP=$(curl -s ifconfig.me)
+  ZONE_IP=$(echo $JSON | grep -o '"ipv4address":"[^"]*' | grep -o '[^"]*$')
 else
   logger 'zone equal current IP'
 fi
 
-
+## __Verificacion de configuración__
+echo -e "$cian Verificando configuración $default"
+logger 'hostname: ' $HOST
+logger 'FQDN: ' $FQDN
+logger 'current IP: ' $CURRENT_IP
+logger 'zone IP' $ZONE_IP
