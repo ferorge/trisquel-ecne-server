@@ -34,4 +34,4 @@ echo "$CURRENT_IP	$FQDN $HOST" >> $DIR$FILE
 
 ## __Verificacion de configuracion__
 echo -e "$cian Verificando configuracion $default"
-
+grep $HOST $DIR$FILE
