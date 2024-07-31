@@ -60,3 +60,12 @@ logger 'hostname: ' $HOST
 logger 'FQDN: ' $FQDN
 logger 'current IP: ' $CURRENT_IP
 logger 'zone IP' $ZONE_IP
+
+## __Verificacion de periodicidad__
+echo -e "$cian Verificando periodicidad $default"
+###### Busca todos los enlaces simbólicos dentro de los directorios cron  
+###### y lo filtra con el nombre de este guion.
+find /etc/cron.* -type l -ls | grep $(basename $0)
+if [[ $? != 0 ]];then
+  logger 'Revisión periódica desactivada.'
+fi
