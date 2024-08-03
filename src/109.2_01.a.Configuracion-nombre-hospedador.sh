@@ -16,8 +16,6 @@
 source "${0%/*}"/000.Colores.sh
 
 ## __Configuración de variables__
-#HOST='sobnix'
-#FQDN='sobnix.dynv6.net'
 HOST='sobnix.dynv6.net'
 
 ## __Respaldo de configuración__
