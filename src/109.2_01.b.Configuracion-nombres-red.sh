@@ -16,7 +16,7 @@
 source "${0%/*}"/000.Colores.sh
 
 ## __Configuración de variables__
-HOST=$(hostname)
+HOST=$(hostname -s)
 FQDN=$(hostname -f)
 CURRENT_IP=$(curl -s ifconfig.me)
 
