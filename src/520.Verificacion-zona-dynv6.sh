@@ -16,7 +16,7 @@
 source "${0%/*}"/000.Colores.sh
 
 ## __Configuración de variables__
-HOST=$(hostname)
+HOST=$(hostname -s)
 FQDN=$(hostname -f)
 CURRENT_IP=$(curl -s ifconfig.me)
 
@@ -46,7 +46,7 @@ if [[ $CURRENT_IP != $ZONE_IP ]]; then
 #  source "${0%/*}"/510.Actualizar-zona-dynv6.sh
   UPDATE=$(curl -s "http://ipv4.dynv6.com/api/update?zone=$FQDN&ipv4=auto&token=$TOKEN")
   logger $UPDATE
-  HOST=$(hostname)
+  HOST=$(hostname -s)
   FQDN=$(hostname -f)
   CURRENT_IP=$(curl -s ifconfig.me)
   ZONE_IP=$(echo $JSON | grep -o '"ipv4address":"[^"]*' | grep -o '[^"]*$')
