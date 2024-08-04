@@ -27,8 +27,7 @@ cp $DIR$FILE /var/backups/$FILE.$timestamp
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
 
-toilet -s -f ivrit $FQDN > $DIR$FILE
-toilet -W -o -f ivrit $FQDN >> $DIR$FILE
+toilet -f ivrit $FQDN > $DIR$FILE
 
 echo '
 --------------------------------------------------
