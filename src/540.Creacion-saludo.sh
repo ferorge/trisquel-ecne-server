@@ -39,7 +39,7 @@ chmod 0664 $DIR$FILE
 
 logger "Saludo modificado por $USER"
 
-#T i l d e
-#F e d e r a d o
-#L i b r e
-#S o b e r a n o
+if [ $UID == 0 ]; then
+  chown root:staff $DIR$FILE
+  chmod 0664 $DIR$FILE
+fi
