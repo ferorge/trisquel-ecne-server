@@ -28,12 +28,11 @@ FILE='motd'
 echo -e "$cian Modificando configuración $default"
 
 #MSG=$(fortune rms2 | fold -s -w 80)
-MSG=$(/usr/games/fortune /usr/share/games/fortunes/es/rms2 | /usr/games/cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow)
-echo "
-$MSG
+MSG=$(/usr/games/fortune /usr/share/games/fortunes/es/rms2)
+COW=$(/usr/games/cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow $MSG)
+echo "$COW
 
--------------------------------------------------
-" > $DIR$FILE
+-------------------------------------------------" > $DIR$FILE
 
 logger "Mensaje del día modificado por $USER"
 
