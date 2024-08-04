@@ -22,21 +22,22 @@ timestamp=$(date +%F_%H.%M.%S)
 echo -e "$cian Respaldando configuración $default"
 DIR='/var/local/'
 FILE='motd.md'
-cp $DIR$FILE /var/backups/$FILE.$timestamp
+##### cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
 
-MSG=$(fortune rms2 | fold -s -w 80)
+#MSG=$(fortune rms2 | fold -s -w 80)
+MSG=$(/usr/games/fortune /usr/share/games/fortunes/es/rms2 | /usr/games/cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow)
 echo "
 > $MSG
 
--------------------------------------------------------------------------------
+-------------------------------------------------
 " > $DIR$FILE
 
-logger 'motd was made'
+logger "Mensaje del día modificado por $USER"
 
-chmod 0664 $DIR$FILE
-
-## __Verificacion de configuración__
-echo -e "$cian Verificando configuración $default"
+if [ $UID == 0 ]; then
+  chown root:staff $DIR$FILE
+  chmod 0664 $DIR$FILE
+fi
