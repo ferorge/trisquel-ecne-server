@@ -30,14 +30,16 @@ echo -e "$cian Modificando configuración $default"
 toilet -f ivrit $FQDN > $DIR$FILE
 
 echo '
--------------------------------------------------------------------------------
+-------------------------------------------------
 ###### Servidor + Publico | Libre > Pubnix
 
 ###### Pubnix | Auto alojado > Soberano
--------------------------------------------------------------------------------
+-------------------------------------------------
 ' >> $DIR$FILE
 
 chmod 0664 $DIR$FILE
+
+logger "Saludo modificado por $USER"
 
 #T i l d e
 #F e d e r a d o
