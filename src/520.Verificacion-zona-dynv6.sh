@@ -12,6 +12,11 @@
 ## __Fuente__
 ###### [Documentación en dynv6.com]:(https://dynv6.com/docs/apis)
 
+## __Cambio de directorio de trabajo__
+###### Es necesario cuando el script es ejecutado a través de un enlace
+###### simbólico en cron.
+cd /var/local/ubuntu-noble-server/src/
+
 ## __Importación de colores__
 source "${0%/*}"/000.Colores.sh
 
