@@ -12,18 +12,19 @@
 ## __Fuente__
 ###### [Documentación en dynv6.com]:(https://dynv6.com/docs/apis)
 
-## __Cambio de directorio de trabajo__
-###### Es necesario cuando el script es ejecutado a través de un enlace
-###### simbólico en cron.
-cd /var/local/ubuntu-noble-server/src/
-
-## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
-
 ## __Configuración de variables__
 HOST=$(hostname -s)
 FQDN=$(hostname -f)
 CURRENT_IP=$(curl -s ifconfig.me)
+WD='/var/local/ubuntu-noble-server/src'
+
+## __Cambio de directorio de trabajo__
+###### Es necesario cuando el script es ejecutado a través de un enlace
+###### simbólico en cron.
+cd $WD
+
+## __Importación de colores__
+source $WD/000.Colores.sh
 
 ###### Token HTTP de la cuenta en dynv6.com
 TOKEN=$(cat /var/local/dynv6_token.txt)
@@ -45,26 +46,21 @@ FILE=''
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
 
-if [[ $CURRENT_IP != $ZONE_IP ]]; then
-  source "${0%/*}"/109.2_01.a.Configuracion-nombre-hospedador.sh
-  source "${0%/*}"/109.2_01.b.Configuracion-nombres-red.sh
-#  source "${0%/*}"/510.Actualizar-zona-dynv6.sh
+if [[ $CURRENT_IP == $ZONE_IP ]]; then
+  source $WD/109.2_01.a.Configuracion-nombre-hospedador.sh
+  source $WD/109.2_01.b.Configuracion-nombres-red.sh
   UPDATE=$(curl -s "http://ipv4.dynv6.com/api/update?zone=$FQDN&ipv4=auto&token=$TOKEN")
   logger $UPDATE
-  HOST=$(hostname -s)
-  FQDN=$(hostname -f)
   CURRENT_IP=$(curl -s ifconfig.me)
   ZONE_IP=$(echo $JSON | grep -o '"ipv4address":"[^"]*' | grep -o '[^"]*$')
+  logger 'current IP: ' $CURRENT_IP
+  logger "$HOST IP: " $ZONE_IP
 else
-  logger 'zone equal current IP'
+  logger "$HOST equal current IP: $CURRENT_IP"
 fi
 
 ## __Verificacion de configuración__
 echo -e "$cian Verificando configuración $default"
-logger 'hostname: ' $HOST
-logger 'FQDN: ' $FQDN
-logger 'current IP: ' $CURRENT_IP
-logger 'zone IP' $ZONE_IP
 
 ## __Verificacion de periodicidad__
 echo -e "$cian Verificando periodicidad $default"
