@@ -38,4 +38,4 @@ hostnamectl location "Lanús, Argentina"
 ## __Verificacion de configuracion__
 echo -e "$cian Verificando configuracion $default"
 hostnamectl status
-
+logger "hostname: $(hostname -s)"
