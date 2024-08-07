@@ -28,5 +28,9 @@ cp $DIR$FILE /var/backups/$FILE.$timestamp
 echo -e "$cian Modificando configuración $default"
 toilet -W -f mini Usuaries > $DIR$FILE
 
-chown root:staff $DIR$FILE
-chmod 0664 $DIR$FILE
+logger "Mensaje del día modificado por $USER"
+
+if [ $UID == 0 ]; then
+  chown root:staff $DIR$FILE
+  chmod 0664 $DIR$FILE
+fi
