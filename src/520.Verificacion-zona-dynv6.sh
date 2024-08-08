@@ -46,7 +46,7 @@ FILE=''
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
 
-if [[ $CURRENT_IP == $ZONE_IP ]]; then
+if [[ $CURRENT_IP != $ZONE_IP ]]; then
   source $WD/109.2_01.a.Configuracion-nombre-hospedador.sh
   source $WD/109.2_01.b.Configuracion-nombres-red.sh
   UPDATE=$(curl -s "http://ipv4.dynv6.com/api/update?zone=$FQDN&ipv4=auto&token=$TOKEN")
