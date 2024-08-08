@@ -57,6 +57,8 @@ Usuarios conectados: $(who -q)
 EOF
 ' > $DIR$FILE
 
+ln -s $DIR$FILE /etc/profile.d/000-$FILE
+
 ## __Modificación de permisos__
 if [ $UID == 0 ]; then
   chown root:staff $DIR$FILE
