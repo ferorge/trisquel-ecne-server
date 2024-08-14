@@ -46,8 +46,8 @@ echo -e "$cian Modificando configuración $default"
 ###### ' >> $DIR$FILE
 
 ## __Endurecimiento de servicio__
-#sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
-#sed -i "s/__USER__/$USER/g" $SERVICE
+sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
+sed -i "s/__USER__/$USER/g" $SERVICE
 #sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
 #sed -i -r "s#__RUN__#$RUN#g" $SERVICE
 
