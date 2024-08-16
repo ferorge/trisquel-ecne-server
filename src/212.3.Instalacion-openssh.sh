@@ -21,20 +21,12 @@ apt install -y openssh-server
 
 ## __Configuración de variables__
 UNIT='ssh'
-SERVICE="/lib/systemd/system/$UNIT.service"
-FQDN=$(hostname -f)
-USER='sshd'
-VAR_DIR=''
-RUN=''
 timestamp=$(date +%F_%H.%M.%S)
-
-## Creación de usuario
-###### useradd --system --user-group --groups ssl-cert --comment $USER-daemon --home-dir $VAR_DIR --shell /usr/sbin/nologin $USER
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
-DIR='/etc/ssh'
-FILE=''
+DIR='/etc/ssh/'
+FILE='sshd_config'
 ###### cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
@@ -46,23 +38,8 @@ echo -e "$cian Modificando configuración $default"
 ###### ' >> $DIR$FILE
 
 ## __Endurecimiento de servicio__
-sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
-###### sed -i "s/__USER__/$USER/g" $SERVICE
-###### sed -i "s/__USER__/$USER/g" $SERVICE
-###### sed -i -r "s#__RUN__#$RUN#g" $SERVICE
-###### sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
-sed -i 's/CapabilityBoundingSet=/CapabilityBoundingSet=~CAP_AUDIT_* CAP_FOWNER CAP_IPC_OWNER CAP_DAC_* CAP_BPF CAP_KILL CAP_FSETID CAP_SETFCAP CAP_LEASE CAP_LINUX_IMMUTABLE CAP_IPC_LOCK CAP_BLOCK_SUSPEND CAP_SYS_ADMIN CAP_SYS_RAWIO CAP_SYS_PTRACE CAP_SYS_BOOT CAP_SYS_PACCT CAP_SYS_NICE CAP_SYS_RESOURCE CAP_SYS_TTY_CONFIG CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_BROADCAST CAP_NET_RAW CAP_SETPCAP/g' $SERVICE
-sed -i 's/PrivateUsers=true/PrivateUsers=false/g' $SERVICE
-sed -i 's/ProcSubset=pid/#ProcSubset=pid/g' $SERVICE
-sed -i 's/ProtectSystem=strict/#ProtectSystem=strict/g' $SERVICE
-sed -i 's/RestrictAddressFamilies=/RestrictAddressFamilies=AF_INET AF_UNIX/g' $SERVICE
-sed -i 's/SystemCallFilter=@system-service/SystemCallFilter=~@clock @cpu-emulation @debug @module @obsolete @raw-io @reboot @swap/g' $SERVICE
-###### Permite elevar a permisos de root.
-sed -i 's/NoNewPrivileges=true/NoNewPrivileges=false/g' $SERVICE
-###### Permite acceder a /tmp
-sed -i 's/PrivateTmp=true/PrivateTmp=false/g' $SERVICE
-###### Permite acceder a /home
-sed -i 's/ProtectHome=true/ProtectHome=false/g' $SERVICE
+source "${0%/*}"/endurecimiento/SSH-7408.sh
+source "${0%/*}"/endurecimiento/BOOT-5264_sshd.sh
 
 ## __Configuración de firewall__
 echo -e "$cian Configurando firewall $default"
