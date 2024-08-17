@@ -20,7 +20,7 @@ echo -e "$cian Instalando paquetes $default"
 apt install -y finger-server oidentd
 
 ## __Configuración de variables__
-UNIT='inetd'
+UNIT='inetutils-inetd'
 SERVICE="/lib/systemd/system/$UNIT.service"
 FQDN=$(hostname -f)
 USER=''
@@ -33,17 +33,20 @@ timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
-DIR=''
-FILE=''
-###### cp $DIR$FILE /var/backups/$FILE.$timestamp
+DIR='/etc/cfingerd/'
+FILE='cfingerd.conf'
+cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
-###### echo '
+sed -i "s/-ALLOW_NONIDENT_ACCESS/+ALLOW_NONIDENT_ACCESS/g" $DIR$FILE
+
+echo '
 ########################
 # Editado por ~ferorge #
 ########################
-###### ' >> $DIR$FILE
+###### -ALLOW_NONIDENT_ACCESS -> +ALLOW_NONIDENT_ACCESS
+' >> $DIR$FILE
 
 ## __Endurecimiento de servicio__
 sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
@@ -70,14 +73,3 @@ systemctl status $UNIT
 ## __Verificacion de configuración__
 echo -e "$cian Verificando configuración $default"
 
-
-
-#greeting='# Te damos la bienvenida a nuestro servidor tilde de uso compartido.'
-#plan="# En este fichero puedes indicarle a otras personas el plan en el que trabajas o a lo que te dedicas actualmente."
-#project="# En este fichero puedes indicarle a otras personas el o los proyectos en los que trabajas actualmente."
-#echo -e $"$greeting\n$plan\n" > /etc/skel/.plan
-#echo -e $"$greeting\n$project\n" > /etc/skel/.project
-
-cowthink 'Estoy trabajando en un nuevo proyecto.' > /etc/skel/.project
-cowsay 'Estoy trabajando en un nuevo plan.' > /etc/skel/.plan
-touch /etc/skel/.fingerlog
