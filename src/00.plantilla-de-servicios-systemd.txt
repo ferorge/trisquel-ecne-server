@@ -1,20 +1,24 @@
+###########################
+# Endurecido por ~ferorge #
+###########################
 Type=simple
 Restart=always
-User=__USER__
-Group=__GROUP__
-### ExecStart=__RUN__
-ReadWritePaths=__PATH__
-ConfigurationDirectory=__CFG__
+#User=__USER__
+#Group=__GROUP__
+#ExecStart=__RUN__
+#ReadWritePaths=__PATH__
+#ConfigurationDirectory=__CFG__
+#RootDirectory=__PATH__
 AmbientCapabilities=
 CapabilityBoundingSet=
-### DeviceAllow=char-tty rw
+### DeviceAllow=
 ### IPAddressDeny=any
 LockPersonality=true
 MemoryDenyWriteExecute=true
 NoNewPrivileges=true
 PrivateDevices=true
 PrivateMounts=true
-### PrivateNetwork=false
+PrivateNetwork=true
 PrivateTmp=true
 PrivateUsers=true
 ProcSubset=pid
@@ -32,9 +36,9 @@ RestrictAddressFamilies=
 RestrictNamespaces=true
 RestrictRealtime=true
 RestrictSUIDSGID=true
-### RootDirectory=__PATH__
 SystemCallArchitectures=native
 SystemCallFilter=@system-service
 SystemCallFilter=~@privileged @resources
 UMask=077
+###########################
 
