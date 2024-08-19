@@ -31,13 +31,13 @@ echo -e "$cian Respaldando configuración $default"
 cp $SERVICE /var/backups/$UNIT.service.$timestamp
 
 ## __Endurecimiento de servicio__
-grep Endurecimiento $SERVICE
+grep Endurecido $SERVICE
 if [[ $? != 0 ]];then
   sed -i "/\[Service\]/r ${0%/*}/../00.plantilla-de-servicios-systemd.txt" $SERVICE
   ###### sed -i "s/__USER__/$USER/g" $SERVICE
-  ###### sed -i "s/__USER__/$USER/g" $SERVICE
+  ###### sed -i "s/__GROUP__/$USER/g" $SERVICE
   ###### sed -i -r "s#__RUN__#$RUN#g" $SERVICE
-  sed -i "s/__PATH__/$VAR_DIR/g" $SERVICE
+  sed -i "s#__PATH__#$VAR_DIR#g" $SERVICE
   sed -i 's/CapabilityBoundingSet=/CapabilityBoundingSet=~CAP_AUDIT_* CAP_FOWNER CAP_IPC_OWNER CAP_DAC_* CAP_BPF CAP_KILL CAP_FSETID CAP_SETFCAP CAP_LEASE CAP_LINUX_IMMUTABLE CAP_IPC_LOCK CAP_BLOCK_SUSPEND CAP_SYS_ADMIN CAP_SYS_RAWIO CAP_SYS_PTRACE CAP_SYS_BOOT CAP_SYS_PACCT CAP_SYS_NICE CAP_SYS_RESOURCE CAP_SYS_TTY_CONFIG CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_BROADCAST CAP_NET_RAW CAP_SETPCAP/g' $SERVICE
   sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
   sed -i 's/PrivateUsers=true/PrivateUsers=false/g' $SERVICE
