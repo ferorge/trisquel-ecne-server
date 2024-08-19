@@ -42,7 +42,7 @@ if [[ $? != 0 ]];then
   sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
   sed -i 's/PrivateUsers=true/PrivateUsers=false/g' $SERVICE
   sed -i 's/ProtectHome=true/ProtectHome=false/g' $SERVICE
-  sed -i 's/__AF__/AF_INET/g' $SERVICE
+  sed -i 's/RestrictAddressFamilies=/RestrictAddressFamilies=AF_INET/g' $SERVICE
 fi
 
 ## __Recarga de demonio__
