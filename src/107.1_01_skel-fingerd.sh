@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Título
+# Esqueleto para finger
 
 ## __Autoría y licencia__
-###### Título © 2024 por \~ferorge
+###### Esqueleto para finger © 2024 por \~ferorge
 ###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
 ###### Licenciado bajo GNU Public License version 3.
 ###### Para ver una copia de esta licencia, visite:
@@ -51,10 +51,21 @@ echo -e "$cian Modificando configuración $default"
 # Editado por ~ferorge #
 ########################
 ###### En este fichero puedes indicarle a otras personas el proyecto en el que  
-###### trabajas o que te gustaría participar..
+###### trabajas o que te gustaría participar.
 ###### ' >> $DIR$FILE
 
 cowsay "Mi proyecto para la comunidad $FQDN" > $DIR$FILE
+chmod 0644 $DIR$FILE
+
+## __Respaldo de configuración__
+echo -e "$cian Respaldando configuración $default"
+DIR='/etc/skel/'
+FILE='.xface'
+cp $DIR$FILE /var/backups/$FILE.$timestamp
+
+## __Modificación de configuración__
+echo -e "$cian Modificando configuración $default"
+cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow '<>' > $DIR$FILE
 chmod 0644 $DIR$FILE
 
 touch /etc/skel/.fingerlog
