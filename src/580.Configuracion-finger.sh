@@ -21,15 +21,8 @@ apt install -y finger-server oidentd
 
 ## __Configuración de variables__
 UNIT='inetutils-inetd'
-SERVICE="/lib/systemd/system/$UNIT.service"
 FQDN=$(hostname -f)
-USER=''
-VAR_DIR=''
-RUN=''
 timestamp=$(date +%F_%H.%M.%S)
-
-## Creación de usuario
-###### useradd --system --user-group --groups ssl-cert --comment $USER-daemon --home-dir $VAR_DIR --shell /usr/sbin/nologin $USER
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
@@ -49,10 +42,7 @@ echo '
 ' >> $DIR$FILE
 
 ## __Endurecimiento de servicio__
-sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
-sed -i "s/__USER__/$USER/g" $SERVICE
-sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
-sed -i -r "s#__RUN__#$RUN#g" $SERVICE
+source "${0%/*}"/endurecimiento/BOOT-5264_inetutils-inetd.sh
 
 ## __Configuración de firewall__
 echo -e "$cian Configurando firewall $default"
