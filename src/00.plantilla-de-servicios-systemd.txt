@@ -3,12 +3,12 @@
 ###########################
 Type=simple
 Restart=always
-#User=__USER__
-#Group=__GROUP__
+User=
+Group=
 #ExecStart=__RUN__
 ReadWritePaths=/tmp
 #ConfigurationDirectory=__CFG__
-#RootDirectory=__PATH__
+#RootDirectory=__JAIL__
 AmbientCapabilities=
 CapabilityBoundingSet=
 ### DeviceAllow=
