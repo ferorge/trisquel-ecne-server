@@ -41,6 +41,9 @@ echo '
 ###### -ALLOW_NONIDENT_ACCESS -> +ALLOW_NONIDENT_ACCESS
 ' >> $DIR$FILE
 
+## __Modificación de esqueleto__
+source "${0%/*}"/107.1_01_skel-fingerd.sh
+
 ## __Endurecimiento de servicio__
 source "${0%/*}"/endurecimiento/BOOT-5264_inetutils-inetd.sh
 
