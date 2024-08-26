@@ -41,6 +41,16 @@ echo '
 ###### -ALLOW_NONIDENT_ACCESS -> +ALLOW_NONIDENT_ACCESS
 ' >> $DIR$FILE
 
+## __Respaldo de configuración__
+echo -e "$cian Respaldando configuración $default"
+DIR='/etc/cfingerd/'
+FILE='top_finger.txt'
+cp $DIR$FILE /var/backups/$FILE.$timestamp
+
+## __Modificación de configuración__
+echo -e "$cian Modificando configuración $default"
+cat /var/local/saludo > $DIR$FILE
+
 ## __Modificación de esqueleto__
 source "${0%/*}"/107.1_01_skel-fingerd.sh
 
@@ -49,7 +59,7 @@ source "${0%/*}"/endurecimiento/BOOT-5264_inetutils-inetd.sh
 
 ## __Configuración de firewall__
 echo -e "$cian Configurando firewall $default"
-ufw allow 79/tcp comment $UNIT.fingerd
+ufw allow 79/tcp comment $UNIT.cfingerd
 
 ## __Activación de servicio__
 echo -e "$cian Activando servicio $default"
@@ -65,4 +75,3 @@ systemctl status $UNIT
 
 ## __Verificacion de configuración__
 echo -e "$cian Verificando configuración $default"
-
