@@ -44,6 +44,9 @@ echo '
 ## __Modificación de top finger__
 source "${0%/*}"/581.Modificacion-top-finger.sh
 
+## __Modificación de bottom finger__
+source "${0%/*}"/582.Modificacion-bottom-finger.sh
+
 ## __Modificación de esqueleto__
 source "${0%/*}"/107.1_01_skel-fingerd.sh
 
