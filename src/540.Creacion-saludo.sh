@@ -27,12 +27,12 @@ cp $DIR$FILE /var/backups/$FILE.$timestamp
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
 
-toilet -f ivrit "        $FQDN" > $DIR$FILE
+toilet -f ivrit "    $FQDN" > $DIR$FILE
 
 echo '-------------------------------------------------
 ###### Servidor + Publico | Libre > Pubnix
 
-###### Pubnix | Auto alojado > Soberano
+###### Pubnix | Auto alojado > Soberano   
 -------------------------------------------------' >> $DIR$FILE
 
 chmod 0664 $DIR$FILE
