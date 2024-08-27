@@ -49,7 +49,7 @@ cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
-cat /var/local/saludo > $DIR$FILE
+sed "s/^/\$CENTER /g" /var/local/saludo > $DIR$FILE
 
 ## __Modificación de esqueleto__
 source "${0%/*}"/107.1_01_skel-fingerd.sh
