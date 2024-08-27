@@ -41,15 +41,8 @@ echo '
 ###### -ALLOW_NONIDENT_ACCESS -> +ALLOW_NONIDENT_ACCESS
 ' >> $DIR$FILE
 
-## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
-DIR='/etc/cfingerd/'
-FILE='top_finger.txt'
-cp $DIR$FILE /var/backups/$FILE.$timestamp
-
-## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
-sed "s/^/\$CENTER /g" /var/local/saludo > $DIR$FILE
+## __Modificación de top finger__
+source "${0%/*}"/581.Modificacion-top-finger.sh
 
 ## __Modificación de esqueleto__
 source "${0%/*}"/107.1_01_skel-fingerd.sh
