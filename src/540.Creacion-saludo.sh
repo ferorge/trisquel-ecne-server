@@ -16,7 +16,8 @@
 source "${0%/*}"/000.Colores.sh
 
 ## __Configuración de variables__
-FQDN=$(hostname -s)
+HOST=$(hostname -s)
+timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
@@ -27,7 +28,7 @@ cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
 
-toilet -f ivrit "    $FQDN" > $DIR$FILE
+toilet -f ivrit "    $HOST" > $DIR$FILE
 
 echo '_________________________________________________
 
@@ -35,8 +36,6 @@ echo '_________________________________________________
 
 ###### Pubnix | Auto alojado > Soberano   
 _________________________________________________' >> $DIR$FILE
-
-chmod 0664 $DIR$FILE
 
 logger "Saludo modificado por $USER"
 
