@@ -16,9 +16,9 @@ adduser fernando
 
 # Modificacion de id
 ~~~
-cp /etc/passwd /var/backups/passwd
+cp /etc/passwd /var/local/backups/passwd
 sed -i 's/1001/1000/g' /etc/passwd
-cp /etc/group /var/backups/group
+cp /etc/group /var/local/backups/group
 sed -i 's/1001/1000/g' /etc/group
 chown -R fernando:fernando /home/fernando
 ~~~

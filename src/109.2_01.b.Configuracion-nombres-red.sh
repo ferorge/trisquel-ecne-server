@@ -24,7 +24,7 @@ CURRENT_IP=$(curl -s ifconfig.me)
 echo -e "$cian Respaldando configuracion $default"
 DIR='/etc/'
 FILE='hosts'
-cp $DIR$FILE /var/backups/$FILE.$timestamp
+cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuracion $default"

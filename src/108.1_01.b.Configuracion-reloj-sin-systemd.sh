@@ -35,7 +35,7 @@ echo -e "$verde Diferencia entre Hora local y Hora de hardware (RTC): $default"
 echo -e "$rojo $TIME_DIF $default"
 
 ## Respaldo de configuración
-cp /etc/timezone /var/backups/timezone.$timestamp
+cp /etc/timezone /var/local/backups/timezone.$timestamp
 
 ## Modificación de configuración
 echo -e "$cian Modificando configuración $default"

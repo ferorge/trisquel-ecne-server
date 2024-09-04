@@ -41,7 +41,7 @@ ZONE_IP=$(echo $JSON | grep $FQDN | grep -o '"ipv4address":"[^"]*' | grep -o '[^
 echo -e "$cian Respaldando configuración $default"
 DIR=''
 FILE=''
-#cp $DIR$FILE /var/backups/$FILE.$timestamp
+#cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"

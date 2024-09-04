@@ -22,9 +22,9 @@ HOST='sobnix.dynv6.net'
 echo -e "$cian Respaldando configuracion $default"
 DIR='/etc/'
 FILE='hostname'
-cp $DIR$FILE /var/backups/$FILE.$timestamp
+cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 FILE='machine-info'
-cp $DIR$FILE /var/backups/$FILE.$timestamp
+cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuracion $default"

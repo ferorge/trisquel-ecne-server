@@ -35,7 +35,7 @@ echo -e "$cian Creando usuario $default"
 
 ## Respaldo de configuración
 echo -e "$cian Respaldando configuración $default"
-##### #cp $DIR$FILE /var/backups/$FILE.$timestamp
+##### #cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## Modificación de configuración
 echo -e "$cian Modificando configuración $default"
@@ -46,7 +46,7 @@ echo -e "$cian Modificando configuración $default"
 ###### " >> $DIR$FILE
 
 ## Endurecimiento de servicio
-cp $SERVICE /var/backups/$UNIT.service.$timestamp
+cp $SERVICE /var/local/backups/$UNIT.service.$timestamp
 sed -i "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
 sed -i "s/__USER__/$USER/g" $SERVICE
 sed -i "s/__GROUP__/$USER/g" $SERVICE

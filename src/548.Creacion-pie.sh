@@ -22,7 +22,7 @@ HOST=$(hostname -s)
 echo -e "$cian Respaldando configuración $default"
 DIR='/var/local/'
 FILE='pie'
-cp $DIR$FILE /var/backups/$FILE.$timestamp
+cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"

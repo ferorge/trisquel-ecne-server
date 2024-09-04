@@ -25,7 +25,7 @@ UPDATE=$(curl -s "http://ipv4.dynv6.com/api/update?zone=$FQDN&ipv4=auto&token=$T
 echo -e "$cian Respaldando configuracion $default"
 DIR=''
 FILE=''
-#cp $DIR$FILE /var/backups/$FILE.$timestamp
+#cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuracion $default"

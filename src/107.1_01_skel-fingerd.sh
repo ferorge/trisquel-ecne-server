@@ -23,7 +23,7 @@ timestamp=$(date +%F_%H.%M.%S)
 echo -e "$cian Respaldando configuración $default"
 DIR='/etc/skel/'
 FILE='.plan'
-cp $DIR$FILE /var/backups/$FILE.$timestamp
+cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
@@ -42,7 +42,7 @@ chmod 0644 $DIR$FILE
 echo -e "$cian Respaldando configuración $default"
 DIR='/etc/skel/'
 FILE='.project'
-cp $DIR$FILE /var/backups/$FILE.$timestamp
+cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
@@ -61,7 +61,7 @@ chmod 0644 $DIR$FILE
 echo -e "$cian Respaldando configuración $default"
 DIR='/etc/skel/'
 FILE='.xface'
-cp $DIR$FILE /var/backups/$FILE.$timestamp
+cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
