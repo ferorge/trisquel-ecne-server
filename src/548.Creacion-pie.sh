@@ -28,7 +28,8 @@ cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 echo -e "$cian Modificando configuración $default"
 
 echo "
--------------------------------------------------
+_________________________________________________
+
 $HOST | Pubnix soberano" > $DIR$FILE
 
 logger "Pie modificado por $USER"
