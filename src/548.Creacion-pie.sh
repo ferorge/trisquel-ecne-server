@@ -17,6 +17,7 @@ source "${0%/*}"/000.Colores.sh
 
 ## __Configuración de variables__
 HOST=$(hostname -s)
+timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
