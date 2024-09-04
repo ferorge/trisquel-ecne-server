@@ -26,7 +26,7 @@ cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
-toilet -W -f mini '   Usuaries' > $DIR$FILE
+toilet -f ivrit '   Usuaries' > $DIR$FILE
 
 logger "Mensaje del día modificado por $USER"
 

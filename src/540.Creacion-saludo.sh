@@ -29,11 +29,12 @@ echo -e "$cian Modificando configuración $default"
 
 toilet -f ivrit "    $FQDN" > $DIR$FILE
 
-echo '-------------------------------------------------
+echo '_________________________________________________
+
 ###### Servidor + Publico | Libre > Pubnix
 
 ###### Pubnix | Auto alojado > Soberano   
--------------------------------------------------' >> $DIR$FILE
+_________________________________________________' >> $DIR$FILE
 
 chmod 0664 $DIR$FILE
 
