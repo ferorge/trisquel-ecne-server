@@ -37,12 +37,15 @@ if [[ $? != 0 ]];then
   source "${0%/*}"/542.Creacion-mensaje-del-dia.sh
 fi
 
-ls /var/local/usuaries
-if [[ $? != 0 ]];then
-  source "${0%/*}"/544.Creacion-usuaries.sh
-fi
+#ls /var/local/usuaries
+#if [[ $? != 0 ]];then
+#  source "${0%/*}"/544.Creacion-usuaries.sh
+#fi
 
-cat /var/local/saludo /var/local/motd /var/local/usuaries > $DIR$FILE
+#cat /var/local/saludo /var/local/motd /var/local/usuaries > $DIR$FILE
+sed 's/######//g' /var/local/saludo > $DIR$FILE
+#sed "1,$ s/^/ /g" /var/local/motd >> $DIR$FILE
+cat /var/local/usuaries >> $DIR$FILE
 echo '~' >> $DIR$FILE
 
 logger "Gophermap modificado por $USER"
