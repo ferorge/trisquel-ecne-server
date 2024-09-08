@@ -37,14 +37,15 @@ if [[ $? != 0 ]];then
   source "${0%/*}"/542.Creacion-mensaje-del-dia.sh
 fi
 
-#ls /var/local/usuaries
-#if [[ $? != 0 ]];then
-#  source "${0%/*}"/544.Creacion-usuaries.sh
-#fi
+ls /var/local/usuaries
+if [[ $? != 0 ]];then
+  source "${0%/*}"/544.Creacion-usuaries.sh
+fi
 
-#cat /var/local/saludo /var/local/motd /var/local/usuaries > $DIR$FILE
 sed 's/######/ /g' /var/local/saludo > $DIR$FILE
-#sed "1,$ s/^/ /g" /var/local/motd >> $DIR$FILE
+cat /var/local/motd | cowsay -f tux >> $DIR$FILE
+echo '_________________________________________________
+' >> $DIR$FILE
 vrms | fold -s -w 64 >> $DIR$FILE
 echo '_________________________________________________
 ' >> $DIR$FILE
