@@ -45,12 +45,13 @@ export WIDTH=$(tput cols)
 $(echo -e \\e[2J\\e[\;H)
 $(cat /var/local/saludo)
 
-$(cat /var/local/motd)
+$(cat /var/local/motd | /usr/games/cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow)
+_________________________________________________
 $(vrms | fold -s -w 50)
--------------------------------------------------
+_________________________________________________
 
 Tiempo en linea: $(uptime -p)
--------------------------------------------------
+_________________________________________________
 
 Usuarios conectados: $(who -q)
 
