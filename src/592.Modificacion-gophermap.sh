@@ -46,7 +46,11 @@ fi
 sed 's/######/ /g' /var/local/saludo > $DIR$FILE
 #sed "1,$ s/^/ /g" /var/local/motd >> $DIR$FILE
 vrms | fold -s -w 64 >> $DIR$FILE
-echo '_________________________________________________' >> $DIR$FILE
+echo '_________________________________________________
+' >> $DIR$FILE
+echo " En línea desde: $(uptime -s)" >> $DIR$FILE
+echo '_________________________________________________
+' >> $DIR$FILE
 cat /var/local/usuaries >> $DIR$FILE
 echo '~' >> $DIR$FILE
 
