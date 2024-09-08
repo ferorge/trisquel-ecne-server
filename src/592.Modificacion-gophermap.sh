@@ -45,6 +45,8 @@ fi
 #cat /var/local/saludo /var/local/motd /var/local/usuaries > $DIR$FILE
 sed 's/######/ /g' /var/local/saludo > $DIR$FILE
 #sed "1,$ s/^/ /g" /var/local/motd >> $DIR$FILE
+vrms | fold -s -w 64 >> $DIR$FILE
+echo '_________________________________________________' >> $DIR$FILE
 cat /var/local/usuaries >> $DIR$FILE
 echo '~' >> $DIR$FILE
 
