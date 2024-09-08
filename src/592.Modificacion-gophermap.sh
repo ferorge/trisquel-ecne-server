@@ -43,7 +43,7 @@ fi
 #fi
 
 #cat /var/local/saludo /var/local/motd /var/local/usuaries > $DIR$FILE
-sed 's/######//g' /var/local/saludo > $DIR$FILE
+sed 's/######/ /g' /var/local/saludo > $DIR$FILE
 #sed "1,$ s/^/ /g" /var/local/motd >> $DIR$FILE
 cat /var/local/usuaries >> $DIR$FILE
 echo '~' >> $DIR$FILE
