@@ -16,7 +16,7 @@
 source "${0%/*}"/../000.Colores.sh
 
 ## __Configuración de variables__
-UNIT='inetutils-inetd'
+UNIT='gophernicus@'
 SERVICE="/lib/systemd/system/$UNIT.service"
 timestamp=$(date +%F_%H.%M.%S)
 
