@@ -45,11 +45,9 @@ fi
 DIV='_______________________________________________'
 
 sed 's/######/ /g' /var/local/saludo > $DIR$FILE
-cat /var/local/motd | cowsay -f tux >> $DIR$FILE
+cat /var/local/motd | cowsay -f tux | sed 's/^/### /g'  >> $DIR$FILE
 echo $DIV >> $DIR$FILE
-VRMS=$(vrms)
-echo "### $VRMS" >> $DIR$FILE
-#echo "### $(vrms | fold -s -w 64)" >> $DIR$FILE
+vrms |fold -w 64 | sed 's/^/### /g' >> $DIR$FILE
 echo $DIV >> $DIR$FILE
 echo "
 ### En línea desde: $(uptime -s)" >> $DIR$FILE
