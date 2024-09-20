@@ -21,7 +21,7 @@ timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
-DIR='/var/gemini/'
+DIR='/var/gemini/gmi/'
 FILE='index.gmi'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
@@ -58,6 +58,15 @@ sed "1,4 s/^/### /g" /var/local/usuaries >> $DIR$FILE
 sed -i "1,6 s/^/# /g" $DIR$FILE
 sed -i "8,11 s/^/###/g" $DIR$FILE
 sed -i "s/$DIV/## $DIV/g" $DIR$FILE
+
+USERS_DIR='../users/'
+USERS=$(ls $DIR$USERS_DIR)
+
+for USER in $USERS
+do
+  echo '=> ~'$USER$'\t''~'$USER >> $DIR$FILE
+done
+echo '' >> $DIR$FILE
 
 logger "index.gmi modificado por $USER"
 
