@@ -30,12 +30,12 @@ echo -e "$cian Modificando configuración $default"
 
 toilet -f ivrit -k "    $HOST" > $DIR$FILE
 
-echo '_________________________________________________
+echo '_______________________________________________
 
 ###### Servidor + Publico | Libre > Pubnix
 
 ###### Pubnix | Auto alojado > Soberano   
-_________________________________________________' >> $DIR$FILE
+_______________________________________________' >> $DIR$FILE
 
 logger "Saludo modificado por $USER"
 
