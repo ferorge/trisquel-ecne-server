@@ -20,41 +20,32 @@ echo -e "$cian Instalando paquetes $default"
 apt install -y molly-brown amfora
 
 ## __Configuración de variables__
-UNIT='molly-brown@default'
 FQDN=$(hostname -f)
+UNIT="molly-brown@$FQDN"
 VAR_DIR='/var/gemini'
 USERS_DIR="$VAR_DIR/users/"
 timestamp=$(date +%F_%H.%M.%S)
 USER=molly-brown
-
-# Creación de usuario
-useradd --system --user-group --groups ssl-cert --comment molly-brown_daemon --home-dir $VAR_DIR --shell /usr/sbin/nologin $USER
-
+echo $UNIT
 # Obtiene la lista de usuarios, considerando que todos pertenecen al grupo 100.
 CURRENT_USERS=$(grep :100: /etc/passwd | grep -v x:100: | cut -d: -f1)
 
-# Crea el directorio para cada usuario y otorga los permisos.
-for user in $CURRENT_USERS
-do
-  ls /home/$user/public_gemini
-if [[ $? == 0 ]];then
-  mv /home/$user/public_gemini $USERS_DIR$user
-else
-  mkdir -p $USERS_DIR$user
+# Creación de usuario
+id $USER
+if [[ $? != 0 ]];then
+  useradd --system --user-group --groups ssl-cert --comment molly-brown_daemon --home-dir $VAR_DIR --shell /usr/sbin/nologin $USER
 fi
-  chown -R $user:molly-brown $USERS_DIR$user
-  chmod 0755 $USERS_DIR$user
-  ln -s $USERS_DIR$user /home/$user/public_gemini
-done
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
 DIR='/etc/molly-brown/'
-FILE='default.conf'
+FILE="$FQDN.conf"
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
+grep -q ferorge $DIR$FILE
+if [[ $? != 0 ]];then
 echo "
 ########################
 # Editado por ~ferorge #
@@ -68,14 +59,33 @@ HomeDocBase = 'users/'
 AccessLog = '$VAR_DIR/log/access.log'
 ErrorLog = '$VAR_DIR/log/error.log'
 " >> $DIR$FILE
+fi
 
 mkdir -p $VAR_DIR/{gmi,log,users}
-chmod -R 0755 $VAR_DIR
+chmod -R 0775 $VAR_DIR
 
 touch $VAR_DIR/log/{access,error}.log
 chmod 0640 $VAR_DIR/log/{access,error}.log
 
 chown -R molly-brown:molly-brown $VAR_DIR
+chown -R molly-brown:staff $VAR_DIR/gmi
+
+# Crea el directorio para cada usuario y otorga los permisos.
+for user in $CURRENT_USERS
+do
+  ls /home/$user/public_gemini
+  if [[ $? == 0 ]];then
+    test -L /home/$user/public_gemini
+    if [[ $? != 0 ]];then
+      mv /home/$user/public_gemini $USERS_DIR$user
+    fi
+  else
+    mkdir -p $USERS_DIR$user
+  fi
+  chown -R $user:molly-brown $USERS_DIR$user
+#  chmod 0755 $USERS_DIR$user
+  ln -s $USERS_DIR$user /home/$user/public_gemini
+done
 
 ## __Modificación de index.gmi__
 source "${0%/*}"/602.Modificacion-index.gmi.sh
@@ -102,5 +112,5 @@ systemctl restart $UNIT
 echo -e "$cian Verificando servicio $default"
 systemctl status $UNIT
 
-## __Verificacion de configuración__
+## __Verificación de configuración__
 echo -e "$cian Verificando configuración $default"
