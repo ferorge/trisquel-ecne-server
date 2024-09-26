@@ -29,7 +29,10 @@ RUN=''
 timestamp=$(date +%F_%H.%M.%S)
 
 ## Creación de usuario
-###### useradd --system --user-group --groups ssl-cert --comment $USER-daemon --home-dir $VAR_DIR --shell /usr/sbin/nologin $USER
+id $USER
+if [[ $? != 0 ]];then
+  useradd --system --user-group --groups ssl-cert --comment $USER-daemon --home-dir $VAR_DIR --shell /usr/sbin/nologin $USER
+fi
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
@@ -39,11 +42,14 @@ FILE=''
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
+grep ferorge $DIR$FILE
+if [[ $? != 0 ]];then
 ###### echo '
 ########################
 # Editado por ~ferorge #
 ########################
 ###### ' >> $DIR$FILE
+fi
 
 ## __Endurecimiento de servicio__
 sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
@@ -67,5 +73,5 @@ echo -e "$cian Reiniciando servicio $default"
 echo -e "$cian Verificando servicio $default"
 ###### systemctl status $UNIT
 
-## __Verificacion de configuración__
+## __Verificación de configuración__
 echo -e "$cian Verificando configuración $default"
