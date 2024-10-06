@@ -45,20 +45,18 @@ fi
 
 DIV='_______________________________________________'
 
-sed 's/######/##### /g' /var/local/saludo > $MD
-cat /var/local/motd | cowsay -f tux | sed 's/^/        /g'  >> $MD
+sed 's/###### /##### __/g' /var/local/saludo > $MD
+sed -i "1,6 s/^/      /g" $MD
+sed -i "9 s/$/__/g ; 11 s/$/__/g" $MD
+cat /var/local/motd | cowsay -f tux | sed 's/^/          /g'  >> $MD
 echo $DIV >> $MD
-vrms |fold -w 64 | sed "2,$ s/^/##### /g" >> $MD
+vrms |fold -w 64 | sed "2,$ s/^/>  /g" >> $MD
 echo $DIV >> $MD
 echo "
 ##### __En línea desde: $(uptime -s)__" >> $MD
 echo $DIV >> $MD
-sed 's/^/        /g' /var/local/usuaries >> $MD
+sed 's/^/      /g' /var/local/usuaries >> $MD
 echo $DIV >> $MD
-#sed "1,4 s/^/### /g" /var/local/usuaries >> $MD
-#sed -i "1,6 s/^/# /g" $MD
-#sed -i "8,11 s/^/###/g" $MD
-#sed -i "s/$DIV/## $DIV/g" $MD
 
 multimarkdown --nolabels -o $DIR$FILE $MD
 
@@ -77,18 +75,3 @@ if [ $UID == 0 ]; then
   chown root:staff $DIR$FILE
   chmod 0664 $DIR$FILE
 fi
-
-
-#sed 's/######/ /g' /var/local/saludo > $DIR$FILE
-#cat /var/local/motd | cowsay -f tux >> $DIR$FILE
-#echo '_________________________________________________
-#' >> $DIR$FILE
-#vrms | fold -s -w 64 >> $DIR$FILE
-#echo '_________________________________________________
-#' >> $DIR$FILE
-#echo " En línea desde: $(uptime -s)" >> $DIR$FILE
-#echo '_________________________________________________
-#' >> $DIR$FILE
-#cat /var/local/usuaries >> $DIR$FILE
-#echo '~' >> $DIR$FILE
-#
