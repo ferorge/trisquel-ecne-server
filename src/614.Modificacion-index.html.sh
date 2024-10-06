@@ -19,15 +19,8 @@ source "${0%/*}"/000.Colores.sh
 FQDN=$(hostname -f)
 timestamp=$(date +%F_%H.%M.%S)
 
-## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
-DIR='/var/www/html/'
-FILE='index.html'
-MD='/tmp/index.md'
-cp $DIR$FILE /var/local/backups/$FILE.$timestamp
-
-## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+## __Generación de requisitos previos__
+echo -e "$cian Generando requisitos previos $default"
 ls /var/local/saludo > /dev/null
 if [[ $? != 0 ]];then
   source "${0%/*}"/540.Creacion-saludo.sh
@@ -43,6 +36,15 @@ if [[ $? != 0 ]];then
   source "${0%/*}"/544.Creacion-usuaries.sh
 fi
 
+## __Respaldo de configuración__
+echo -e "$cian Respaldando configuración $default"
+DIR='/var/www/html/'
+FILE='index.html'
+MD='/tmp/index.md'
+cp $DIR$FILE /var/local/backups/$FILE.$timestamp
+
+## __Modificación de configuración__
+echo -e "$cian Modificando configuración $default"
 DIV='_______________________________________________'
 
 sed 's/###### /##### __/g' /var/local/saludo > $MD

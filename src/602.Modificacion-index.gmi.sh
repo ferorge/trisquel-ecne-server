@@ -19,6 +19,23 @@ source "${0%/*}"/000.Colores.sh
 FQDN=$(hostname -f)
 timestamp=$(date +%F_%H.%M.%S)
 
+## __Configuración de requisitos previos__
+echo -e "$cian Configurando requisitos previos $default"
+ls /var/local/saludo > /dev/null
+if [[ $? != 0 ]];then
+  source "${0%/*}"/540.Creacion-saludo.sh
+fi
+
+ls /var/local/motd > /dev/null
+if [[ $? != 0 ]];then
+  source "${0%/*}"/542.Creacion-mensaje-del-dia.sh
+fi
+
+ls /var/local/usuaries > /dev/null
+if [[ $? != 0 ]];then
+  source "${0%/*}"/544.Creacion-usuaries.sh
+fi
+
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
 DIR='/var/gemini/gmi/'
@@ -27,20 +44,6 @@ cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
-ls /var/local/saludo
-if [[ $? != 0 ]];then
-  source "${0%/*}"/540.Creacion-saludo.sh
-fi
-
-ls /var/local/motd
-if [[ $? != 0 ]];then
-  source "${0%/*}"/542.Creacion-mensaje-del-dia.sh
-fi
-
-ls /var/local/usuaries
-if [[ $? != 0 ]];then
-  source "${0%/*}"/544.Creacion-usuaries.sh
-fi
 
 DIV='_______________________________________________'
 
@@ -53,6 +56,7 @@ echo "
 ### En línea desde: $(uptime -s)" >> $DIR$FILE
 echo $DIV >> $DIR$FILE
 sed "1,4 s/^/### /g" /var/local/usuaries >> $DIR$FILE
+echo $DIV >> $DIR$FILE
 sed -i "1,6 s/^/# /g" $DIR$FILE
 sed -i "8,11 s/^/###/g" $DIR$FILE
 sed -i "s/$DIV/## $DIV/g" $DIR$FILE
@@ -66,7 +70,7 @@ do
 done
 echo '' >> $DIR$FILE
 
-logger "index.gmi modificado por $USER"
+logger "$FILE modificado por $USER"
 
 if [ $UID == 0 ]; then
   chown root:staff $DIR$FILE
