@@ -26,12 +26,9 @@ cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
-#toilet -f ivrit -k ' Usuaries' > $DIR$FILE
 toilet -f mini -k '  Usuaries' > $DIR$FILE
-echo '_______________________________________________
-' >> $DIR$FILE
 
-logger "Mensaje del día modificado por $USER"
+logger "$FILE modificado por $USER"
 
 if [ $UID == 0 ]; then
   chown root:staff $DIR$FILE
