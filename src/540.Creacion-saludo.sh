@@ -34,10 +34,10 @@ echo '_______________________________________________
 
 ###### Servidor + Publico | Libre > Pubnix
 
-###### Pubnix | Auto alojado > Soberano   
+###### Pubnix | Auto alojado > Soberano
 _______________________________________________' >> $DIR$FILE
 
-logger "Saludo modificado por $USER"
+logger "$FILE modificado por $USER"
 
 if [ $UID == 0 ]; then
   chown root:staff $DIR$FILE
