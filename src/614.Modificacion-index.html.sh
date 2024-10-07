@@ -38,7 +38,7 @@ fi
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
-DIR='/var/www/html/'
+DIR='/var/www/html/public/'
 FILE='index.html'
 MD='/tmp/index.md'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
@@ -60,16 +60,16 @@ echo $DIV >> $MD
 sed 's/^/      /g' /var/local/usuaries >> $MD
 echo $DIV >> $MD
 
-multimarkdown --nolabels -o $DIR$FILE $MD
+USERS=$(grep :100: /etc/passwd | grep -v systemd | cut -d : -f 1)
 
-#USERS_DIR='../users/'
-#USERS=$(ls $DIR$USERS_DIR)
-#
-#for USER in $USERS
-#do
-#  echo '=> ~'$USER$'\t''~'$USER >> $DIR$FILE
-#done
-#echo '' >> $DIR$FILE
+for USER in $USERS
+do
+  echo "[~$USER](https://sobnix.dynv6.net/~$USER)  " >> $MD
+done
+echo '' >> $MD
+echo $DIV >> $MD
+
+multimarkdown --nolabels -o $DIR$FILE $MD
 
 logger "$FILE modificado por $USER"
 
