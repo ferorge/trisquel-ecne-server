@@ -24,9 +24,13 @@ UNIT='apache2'
 SERVICE="/lib/systemd/system/$UNIT.service"
 FQDN=$(hostname -f)
 USER='www-data'
-VAR_DIR=''
+VAR_DIR='/var/www'
+USERS_DIR="$VAR_DIR/users"
 RUN=''
 timestamp=$(date +%F_%H.%M.%S)
+
+### Obtiene la lista de usuarios, considerando que todos pertenecen al grupo 100.
+CURRENT_USERS=$(grep :100: /etc/passwd | grep -v x:100: | cut -d: -f1)
 
 ## Creación de usuario
 id $USER
@@ -93,11 +97,43 @@ ServerName $FQDN
 " >> $DIR$FILE
 fi
 
+mkdir -p $VAR_DIR/{html,log,users}
+chmod -R 0755 $VAR_DIR
+
+touch $VAR_DIR/log/{access,error}.log
+chmod 0640 $VAR_DIR/log/{access,error}.log
+
+chown -R $USER:$USER $VAR_DIR
+chown -R $USER:staff $VAR_DIR/www
+
+# Crea el directorio para cada usuario y otorga los permisos.
+for user in $CURRENT_USERS
+do
+  ls /home/$user/public_html
+  if [[ $? == 0 ]];then
+    test -L /home/$user/public_html
+    if [[ $? != 0 ]];then
+      mv /home/$user/public_html $USERS_DIR$user
+    fi
+  else
+    mkdir -p $USERS_DIR$user
+  fi
+  chown -R $user:$USER $USERS_DIR$user
+#  chmod 0755 $USERS_DIR$user
+  ln -s $USERS_DIR$user /home/$user/public_gemini
+done
+
 ## __Configuración de virtual host__
 source "${0%/*}"/612.Configuracion-VirtualHost.sh
 
 ## __Configuración de index.html__
 source "${0%/*}"/614.Modificacion-index.html.sh
+
+## __Modificación de esqueleto__
+source "${0%/*}"/107.1_01_skel-http.sh
+
+## __Endurecimiento de servicio__
+source "${0%/*}"/endurecimiento/BOOT-5264_apache2.sh
 
 ## __Desactivación de sitios__
 a2dissite 000-default
@@ -141,31 +177,6 @@ curl http://$FQDN
 echo -e "$cian Verificando sitio HTTPS $default"
 curl https://$FQDN
 echo -e "$cian Verificando UserDir HTTP $default"
-curl http://$FQDN/~fernando/
+curl http://$FQDN/~$user/
 echo -e "$cian Verificando UserDir HTTPS $default"
-curl https://$FQDN/~fernando/
-
-
-
-
-
-mkdir /home/fernando/public_html
-chown fernando:fernando /home/fernando/public_html
-chmod 755 /home/fernando/public_html
-
-echo '
-<html>
-<body>
-<div style="width: 100%; font-size: 40px; font-weight: bold; text-align: center;">
-UserDir Test Page
-</div>
-</body>
-</html>
-' > /home/fernando/public_html/index.html
-
-chown fernando:fernando /home/fernando/public_html/index.html
-chmod 644 /home/fernando/public_html/index.html
-
-
-
-
+curl https://$FQDN/~$user/
