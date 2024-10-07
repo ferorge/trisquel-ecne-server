@@ -26,7 +26,7 @@ VAR_DIR='/var/gemini'
 USERS_DIR="$VAR_DIR/users/"
 timestamp=$(date +%F_%H.%M.%S)
 USER=molly-brown
-echo $UNIT
+
 # Obtiene la lista de usuarios, considerando que todos pertenecen al grupo 100.
 CURRENT_USERS=$(grep :100: /etc/passwd | grep -v x:100: | cut -d: -f1)
 
