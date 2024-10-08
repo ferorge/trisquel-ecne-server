@@ -120,7 +120,7 @@ do
   fi
   chown -R $user:$USER $USERS_DIR$user
 #  chmod 0755 $USERS_DIR$user
-  ln -s $USERS_DIR$user /home/$user/public_gemini
+  ln -s $USERS_DIR$user /home/$user/public_html
 done
 
 ## __Configuración de virtual host__
