@@ -97,16 +97,22 @@ ServerName $FQDN
 " >> $DIR$FILE
 fi
 
+### Creación de directorios.
 mkdir -p $VAR_DIR/{html,log,users}
 chmod -R 0755 $VAR_DIR
 
+### Adición de ico y css.
+cp "${0%/*}"/html/{favicon.ico,lynx.css} $DIR
+
+### Adición de logs.
 touch $VAR_DIR/log/{access,error}.log
 chmod 0640 $VAR_DIR/log/{access,error}.log
 
+### Configuración de permisos.
 chown -R $USER:$USER $VAR_DIR
-chown -R $USER:staff $VAR_DIR/www
+chown -R $USER:staff $VAR_DIR
 
-# Crea el directorio para cada usuario y otorga los permisos.
+### Crea el directorio para cada usuario y otorga los permisos.
 for user in $CURRENT_USERS
 do
   ls /home/$user/public_html
