@@ -41,7 +41,9 @@ echo '' >> $DIR$FILE
 
 multimarkdown --nolabels -o $DIR$FILE $MD
 
+cp "${0%/*}"/html/{favicon.ico,lynx.css} $DIR
+
 if [ $UID == 0 ]; then
-  chown root:staff $DIR$FILE
-  chmod 0664 $DIR$FILE
+  chown root:staff $DIR{"favicon.ico","index.html","lynx.css"}
+  chmod 0664 $DIR{"favicon.ico","index.html","lynx.css"}
 fi
