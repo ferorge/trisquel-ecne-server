@@ -23,6 +23,7 @@ USER='www-data'
 VAR_DIR='/var/www/'
 RUN=''
 timestamp=$(date +%F_%H.%M.%S)
+CBS='~CAP_MAC_* CAP_SYS_CHROOT CAP_NET_RAW CAP_NET_BROADCAST CAP_NET_ADMIN CAP_SYS_TTY_CONFIG CAP_SYS_RESOURCE CAP_SYS_NICE CAP_SYS_PACCT CAP_SYS_BOOT CAP_SYS_PTRACE CAP_SYS_RAWIO CAP_SYS_ADMIN CAP_BLOCK_SUSPEND CAP_IPC_LOCK CAP_LINUX_IMMUTABLE CAP_LEASE CAP_KILL CAP_BPF CAP_SETFCAP CAP_FSETID CAP_CHOWN CAP_IPC_OWNER CAP_FOWNER CAP_DAC_* CAP_SETPCAP CAP_SETGID CAP_SETUID CAP_AUDIT_*'
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
@@ -37,7 +38,7 @@ if [[ $? != 0 ]];then
   sed -i "s/User=/#User=/" $SERVICE
   sed -i "s/Group=/#Group=/g" $SERVICE
   sed -i "s/ReadWritePaths=/#ReadWritePaths=/g" $SERVICE
-  sed -i 's/CapabilityBoundingSet=/\#CapabilityBoundingSet=/g' $SERVICE
+  sed -i "s/CapabilityBoundingSet=/CapabilityBoundingSet=$CBS/g" $SERVICE
   sed -i 's/ProtectSystem=/\#ProtectSystem=/g' $SERVICE
   sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
   sed -i 's/PrivateUsers=true/PrivateUsers=false/g' $SERVICE

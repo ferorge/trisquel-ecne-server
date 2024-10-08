@@ -16,7 +16,7 @@
 source "${0%/*}"/../000.Colores.sh
 
 ## __Configuración de variables__
-UNIT='gophernicus@'
+UNIT='apache2'
 SERVICE="/lib/systemd/system/$UNIT.service"
 timestamp=$(date +%F_%H.%M.%S)
 
@@ -56,6 +56,8 @@ CAP_MAC_*"
 
 echo '' > /tmp/CAP_test.txt
 
+sed -i "s/#CapabilityBoundingSet=/CapabilityBoundingSet=~/g" $SERVICE
+sed -i "s/CapabilityBoundingSet=/CapabilityBoundingSet=~/g" $SERVICE
 for CAP in $CAPS
 do
   echo $CAP
