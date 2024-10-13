@@ -43,9 +43,11 @@ export WIDTH=$(tput cols)
 
 /usr/games/lolcat -f -a -s 200 <<EOF
 $(echo -e \\e[2J\\e[\;H)
-$(cat /var/local/saludo)
-
-$(cat /var/local/motd | /usr/games/cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow)
+$(cat /var/gopher/_cartel.md)
+_________________________________________________
+$(cat /var/gopher/_eslogan.md)
+_________________________________________________
+$(cat /var/gopher/_motd.md | /usr/games/cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow)
 _________________________________________________
 $(vrms | fold -s -w 50)
 _________________________________________________
