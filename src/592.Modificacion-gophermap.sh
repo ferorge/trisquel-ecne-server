@@ -18,6 +18,7 @@ source "${0%/*}"/000.Colores.sh
 ## __Configuración de variables__
 FQDN=$(hostname -f)
 timestamp=$(date +%F_%H.%M.%S)
+DIV='_________________________________________________'
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
@@ -27,35 +28,50 @@ cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
-ls /var/local/saludo
-if [[ $? != 0 ]];then
-  source "${0%/*}"/540.Creacion-saludo.sh
-fi
+#ls /var/local/saludo
+#if [[ $? != 0 ]];then
+#  source "${0%/*}"/540.Creacion-saludo.sh
+#fi
+#
+#ls /var/local/motd
+#if [[ $? != 0 ]];then
+#  source "${0%/*}"/542.Creacion-mensaje-del-dia.sh
+#fi
+#
+#ls /var/local/usuaries
+#if [[ $? != 0 ]];then
+#  source "${0%/*}"/544.Creacion-usuaries.sh
+#fi
+#
+#sed 's/######/ /g' /var/local/saludo > $DIR$FILE
+#cat /var/local/motd | cowsay -f tux >> $DIR$FILE
+#echo '_________________________________________________
+#' >> $DIR$FILE
+#vrms | fold -s -w 64 >> $DIR$FILE
+#echo '_________________________________________________
+#' >> $DIR$FILE
+#echo " En línea desde: $(uptime -s)" >> $DIR$FILE
+#echo '_________________________________________________
+#' >> $DIR$FILE
+#cat /var/local/usuaries >> $DIR$FILE
+#echo '~' >> $DIR$FILE
 
-ls /var/local/motd
-if [[ $? != 0 ]];then
-  source "${0%/*}"/542.Creacion-mensaje-del-dia.sh
-fi
+cat <<EOF > $DIR$FILE
+=./_cartel.md
+$DIV
+=./_eslogan.md
+$DIV
+=./_motd.md
+$DIV
+=./_saludo.md
+$DIV
+=./_licencia.md
+$DIV
+=./_pie.md
+=./_vrms.md
+EOF
 
-ls /var/local/usuaries
-if [[ $? != 0 ]];then
-  source "${0%/*}"/544.Creacion-usuaries.sh
-fi
-
-sed 's/######/ /g' /var/local/saludo > $DIR$FILE
-cat /var/local/motd | cowsay -f tux >> $DIR$FILE
-echo '_________________________________________________
-' >> $DIR$FILE
-vrms | fold -s -w 64 >> $DIR$FILE
-echo '_________________________________________________
-' >> $DIR$FILE
-echo " En línea desde: $(uptime -s)" >> $DIR$FILE
-echo '_________________________________________________
-' >> $DIR$FILE
-cat /var/local/usuaries >> $DIR$FILE
-echo '~' >> $DIR$FILE
-
-logger "Gophermap modificado por $USER"
+logger "$FILE modificado por $USER"
 
 if [ $UID == 0 ]; then
   chown root:staff $DIR$FILE

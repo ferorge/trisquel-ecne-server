@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Creación de saludo
+# Creación de textos
 
 ## __Autoría y licencia__
-###### Creación de saludo © 2024 por \~ferorge
+###### Creación de textos © 2024 por \~ferorge
 ###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
 ###### Licenciado bajo GNU Public License version 3.
 ###### Para ver una copia de esta licencia, visite:
@@ -23,7 +23,7 @@ YEAR=$(date +%Y)
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
-DIR='/var/local/'
+DIR='/var/gopher/'
 #FILE="*.md"
 #cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
@@ -48,38 +48,42 @@ EOF
 
 toilet -f ivrit -k "    $HOST" > $DIR'_cartel.md'
 
+cat <<EOF > $DIR'_eslogan.md'
+  
+Servidor + Publico | Libre > Pubnix
+  
+Pubnix | Auto alojado > Soberano
+EOF
+
 fortune rms2 > $DIR'_motd.md'
 
 toilet -f mini -k '  Usuaries' > $DIR'_usuaries.md'
 
-echo "$HOST | Pubnix soberano" > $DIR'_pie.md'
-
-cat <<EOF > /var/gopher/gophermap
-$(cat $DIR'_meta.md')
-title: $(head -n1 $DIR'_saludo.md')
-
-$(cat $DIR'_saludo.md')
-$DIV
-$(cat $DIR'_cartel.md')
-$DIV
-$(cat $DIR'_motd.md' | cowsay -f tux | sed 's/^/          /g')
-$DIV
-$(cat $DIR'_usuaries.md')
-$DIV
-$(cat $DIR'_pie.md')
-$DIV
+cat <<EOF > $DIR'_licencia.md'
+  
+Autoría y licencia
+------------------
+Documento © 2024 por \~ferorge  
+[ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).  
+  
+!["Licenciado bajo Creative Commons Attribution - Share Alike 4.0 International."][image]
+[image]: https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png "CC BY-SA 4.0 International" height=15px width=44px   
+  
+Para ver una copia de esta licencia, visite [CC BY-SA 4.0].
+[CC BY-SA 4.0]:https://creativecommons.org/licenses/by-sa/4.0/deed.es  
 EOF
 
+cat <<EOF > $DIR'_pie.md'
+$HOST | Pubnix soberano | __En línea desde: $(uptime -s)__
+EOF
 
-#
-####### Servidor + Publico | Libre > Pubnix
-#
-####### Pubnix | Auto alojado > Soberano
-#_______________________________________________' >> $DIR$FILE
+#vrms |fold -w 64 | sed "2,$ s/^/>  /g" >> $DIR'_vrms.md'
+vrms |fold -w 64 | sed "2,$ s/^/>  /g" > $DIR'_vrms.md'
 
-logger "$FILE modificado por $USER"
+logger "$textos modificados por $USER"
 
 if [ $UID == 0 ]; then
-  chown root:staff $DIR$FILE
-  chmod 0664 $DIR$FILE
+  chown root:staff /var/gopher/_*.md
+  chmod 0664 /var/gopher/_*.md
 fi
+
