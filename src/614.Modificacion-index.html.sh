@@ -21,55 +21,46 @@ timestamp=$(date +%F_%H.%M.%S)
 
 ## __Generación de requisitos previos__
 echo -e "$cian Generando requisitos previos $default"
-ls /var/local/saludo > /dev/null
-if [[ $? != 0 ]];then
-  source "${0%/*}"/540.Creacion-saludo.sh
-fi
-
-ls /var/local/motd > /dev/null
-if [[ $? != 0 ]];then
-  source "${0%/*}"/542.Creacion-mensaje-del-dia.sh
-fi
-
-ls /var/local/usuaries > /dev/null
-if [[ $? != 0 ]];then
-  source "${0%/*}"/544.Creacion-usuaries.sh
-fi
+source "${0%/*}"/540.Creacion-textos.sh
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
 DIR='/var/www/html/public/'
 FILE='index.html'
-MD='/tmp/index.md'
+META='/var/gopher/_meta.md'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
 DIV='_______________________________________________'
 
-sed 's/###### /##### __/g' /var/local/saludo > $MD
-sed -i "1,6 s/^/      /g" $MD
-sed -i "9 s/$/__/g ; 11 s/$/__/g" $MD
-cat /var/local/motd | cowsay -f tux | sed 's/^/          /g'  >> $MD
-echo $DIV >> $MD
-vrms |fold -w 64 | sed "2,$ s/^/>  /g" >> $MD
-echo $DIV >> $MD
-echo "
-##### __En línea desde: $(uptime -s)__" >> $MD
-echo $DIV >> $MD
-sed 's/^/      /g' /var/local/usuaries >> $MD
-echo $DIV >> $MD
+echo "Title: $(head -n1 /var/gopher/_saludo.md)" >> $META
+multimarkdown --nolabels -o $DIR$FILE $META
 
-USERS=$(grep :100: /etc/passwd | grep -v systemd | cut -d : -f 1)
-
-for USER in $USERS
-do
-  echo "[~$USER](https://sobnix.dynv6.net/~$USER)  " >> $MD
-done
-echo '' >> $MD
-echo $DIV >> $MD
-
-multimarkdown --nolabels -o $DIR$FILE $MD
+#$(multimarkdown --nolabels /var/gopher/_nav.md)
+cat <<EOF > $DIR$FILE
+$(sed -n "0,/<body>/p" $DIR$FILE)
+<header>
+$(multimarkdown --nolabels /var/gopher/_saludo.md)
+$(sed -e "s/^/    /g" /var/gopher/_cartel.md | multimarkdown --nolabels )
+$(sed -e "\$a $DIV" -e "1a $DIV" /var/gopher/_eslogan.md | multimarkdown --nolabels )
+</header>
+<nav>
+</nav>
+<aside>
+$(sed -e "\$a $DIV" /var/gopher/_aside.md | multimarkdown --nolabels )
+</aside>
+<main>
+<section>
+$(multimarkdown --nolabels /var/gopher/_motd.md)
+</section>
+</main>
+<footer>
+$(sed -e "\$a $DIV" -e "1a $DIV \n" -e 's/__Autoría/##### __Autoría/' /var/gopher/_licencia.md | multimarkdown --nolabels )
+$(multimarkdown --nolabels /var/gopher/{_pie.md,_vrms.md})
+</footer>
+$(sed -n "/<\/body>/,$ p" $DIR$FILE)
+EOF
 
 logger "$FILE modificado por $USER"
 

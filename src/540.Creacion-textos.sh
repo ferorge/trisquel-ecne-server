@@ -61,9 +61,9 @@ toilet -f mini -k '  Usuaries' > $DIR'_usuaries.md'
 
 cat <<EOF > $DIR'_licencia.md'
   
-Autoría y licencia
-------------------
-Documento © 2024 por \~ferorge  
+__Autoría y licencia__
+
+Documento © 2024 por \~ferorge 
 [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).  
   
 !["Licenciado bajo Creative Commons Attribution - Share Alike 4.0 International."][image]
