@@ -22,6 +22,8 @@ timestamp=$(date +%F_%H.%M.%S)
 ## __Generación de requisitos previos__
 echo -e "$cian Generando requisitos previos $default"
 source "${0%/*}"/540.Creacion-textos.sh
+source "${0%/*}"/616.Modificacion-nav.sh
+source "${0%/*}"/618.Modificacion-aside.sh
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
@@ -37,7 +39,6 @@ DIV='_______________________________________________'
 echo "Title: $(head -n1 /var/gopher/_saludo.md)" >> $META
 multimarkdown --nolabels -o $DIR$FILE $META
 
-#$(multimarkdown --nolabels /var/gopher/_nav.md)
 cat <<EOF > $DIR$FILE
 $(sed -n "0,/<body>/p" $DIR$FILE)
 <header>
@@ -46,6 +47,7 @@ $(sed -e "s/^/    /g" /var/gopher/_cartel.md | multimarkdown --nolabels )
 $(sed -e "\$a $DIV" -e "1a $DIV" /var/gopher/_eslogan.md | multimarkdown --nolabels )
 </header>
 <nav>
+$(sed -e "\$a $DIV" /var/gopher/_nav.md | multimarkdown --nolabels )
 </nav>
 <aside>
 $(sed -e "\$a $DIV" /var/gopher/_aside.md | multimarkdown --nolabels )
