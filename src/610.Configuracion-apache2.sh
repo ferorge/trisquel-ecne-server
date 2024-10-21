@@ -134,6 +134,7 @@ source "${0%/*}"/612.Configuracion-VirtualHost.sh
 
 ## __Configuración de index.html__
 source "${0%/*}"/614.Modificacion-index.html.sh
+ln -s "${0%/*}"/614.Modificacion-index.html.sh /etc/cron.hourly/Modificar-index.html
 
 ## __Modificación de esqueleto__
 source "${0%/*}"/107.1_01_skel-http.sh
