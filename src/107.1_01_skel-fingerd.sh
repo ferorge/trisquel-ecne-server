@@ -65,7 +65,7 @@ cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando configuración $default"
-cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow '<>' > $DIR$FILE
+cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow '<>' | sed -n '6,$p' > $DIR$FILE
 chmod 0644 $DIR$FILE
 
 touch /etc/skel/.fingerlog
