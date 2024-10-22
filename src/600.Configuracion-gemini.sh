@@ -91,7 +91,7 @@ done
 source "${0%/*}"/602.Modificacion-index.gmi.sh
 
 ## __Modificación de esqueleto__
-source "${0%/*}"/107.1_01_skel-gemini.sh
+source "${0%/*}"/107.1_01.skel-gemini.sh
 
 ## __Endurecimiento de servicio__
 source "${0%/*}"/endurecimiento/BOOT-5264_molly-brown.sh

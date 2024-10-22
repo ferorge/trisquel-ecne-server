@@ -137,7 +137,7 @@ source "${0%/*}"/614.Modificacion-index.html.sh
 ln -s "${0%/*}"/614.Modificacion-index.html.sh /etc/cron.hourly/Modificar-index.html
 
 ## __Modificación de esqueleto__
-source "${0%/*}"/107.1_01_skel-http.sh
+source "${0%/*}"/107.1_01.skel-http.sh
 
 ## __Endurecimiento de servicio__
 source "${0%/*}"/endurecimiento/BOOT-5264_apache2.sh

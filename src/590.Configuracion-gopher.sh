@@ -45,7 +45,7 @@ chmod 0755 $VAR_DIR
 source "${0%/*}"/592.Modificacion-gophermap.sh
 
 ## __Modificación de esqueleto__
-source "${0%/*}"/107.1_01_skel-gopher.sh
+source "${0%/*}"/107.1_01.skel-gopher.sh
 
 ## __Endurecimiento de servicio__
 source "${0%/*}"/endurecimiento/BOOT-5264_gophernicus.sh

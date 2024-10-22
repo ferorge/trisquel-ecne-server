@@ -48,7 +48,7 @@ source "${0%/*}"/581.Modificacion-top-finger.sh
 source "${0%/*}"/582.Modificacion-bottom-finger.sh
 
 ## __Modificación de esqueleto__
-source "${0%/*}"/107.1_01_skel-fingerd.sh
+source "${0%/*}"/107.1_01.skel-finger.sh
 
 ## __Endurecimiento de servicio__
 source "${0%/*}"/endurecimiento/BOOT-5264_inetutils-inetd.sh
