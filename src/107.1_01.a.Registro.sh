@@ -10,7 +10,7 @@
 ###### [GPLv3]:(https://www.gnu.org/licenses/gpl.txt)
 
 ## __Fuente__
-###### [fuente]:(enlace)
+###### [fuente]:(https://learning.lpi.org/es/learning-materials/102-500/107/107.1/107.1_01/)
 
 ## __Importación de colores__
 source "${0%/*}"/000.Colores.sh
