@@ -25,7 +25,7 @@ timestamp=$(date +%F_%H.%M.%S)
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
 DIR='/var/gopher/'
-FILE="plantilla.md"
+FILE="_plantilla.md"
 #cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
