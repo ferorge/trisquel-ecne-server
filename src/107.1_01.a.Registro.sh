@@ -49,7 +49,7 @@ password=$(openssl rand -hex $(( 7 * $LENGTH)) | fold -w 7 | shuf -n 1)
 echo -e "$verde
 Hola!
 Tu peticion de registro fue realizada satisfactoriamente y sera procesada a la brevedad.
-Por favor escriba la contraseña temporal de abajo para iniciar sesion por primera vez:"
+Por favor escriba la contraseña temporal marcada en otro color para iniciar sesion por primera vez:"
 
 echo -e "
 $magenta$HEAD
