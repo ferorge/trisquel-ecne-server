@@ -34,7 +34,7 @@ echo "
 ########################
 # Editado por ~ferorge #
 ########################
-"${0%/*}"/107.1_01.b.Crear-usuario-pendiente.sh" >> $DIR$FILE
+"${0%/*}"/107.1_01.b.Creacion-usuario-pendiente.sh" >> $DIR$FILE
 fi
 
 ## __Crea una carpeta temporal__
@@ -52,7 +52,7 @@ chown registro:registro /home/$USER/registro.sh
 echo $USER:'Ahora!' | chpasswd
 
 ## __Genera el cron para que elimine usuarios no confirmados.__
-ln -s ""${0%/*}"/107.1_01.c.Elimiar-usuario-pendiente.sh" /etc/cron.daily/Eliminar-usuario-pendiente
+ln -s ""${0%/*}"/107.1_01.c.Eliminacion-usuario-pendiente.sh" /etc/cron.daily/Eliminar-usuario-pendiente
 
 ## __Elimina la carpeta temporal__
 rmdir $TMP_DIR
