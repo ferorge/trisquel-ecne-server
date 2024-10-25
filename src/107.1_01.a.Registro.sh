@@ -18,6 +18,9 @@ source "${0%/*}"/000.Colores.sh
 ## __Configuración de variables__
 timestamp=$(date +%F_%H.%M.%S)
 CHK_USER='algo'
+LENGTH=$(shuf -i 1-4 -n 1)
+HEAD=$(openssl rand -hex $(( 7 * $LENGTH)) | fold -w 7)
+FOOT=$(openssl rand -hex $(( 7 * $LENGTH)) | fold -w 7)
 
 while [[ -n $CHK_USER ]]
 do
@@ -42,20 +45,17 @@ echo -e "$verde"
 read -p "Ingrese el numero de su hogar (opcional): " home
 echo -e "$rojo"
 read -p "Ingrese su correo electronico (opcional): " Email
-password=$(openssl rand -hex 3)
-
-echo -e "$cian
+password=$(openssl rand -hex $(( 7 * $LENGTH)) | fold -w 7 | shuf -n 1)
+echo -e "$verde
 Hola!
 Tu peticion de registro fue realizada satisfactoriamente y sera procesada a la brevedad.
-Por favor escriba la contraseña temporal de abajo para iniciar sesion por primera vez:
-$default"
+Por favor escriba la contraseña temporal de abajo para iniciar sesion por primera vez:"
 
-echo -e "$amarillo"
-cowthink $password
-
-echo -e "$verde"
-cowsay 'Buena semana'.
-
-echo -e "$default"
+echo -e "
+$magenta$HEAD
+$amarillo$password
+$magenta$FOOT
+$default
+EOF"
 
 echo $username:$password:$name,$room,$work,$home,$Email >> ~/pendientes.txt
