@@ -40,7 +40,7 @@ echo "
 ########################
 # Editado por ~ferorge #
 ########################
-$WD/107.1_01.b.Creacion-usuario-pendiente.sh" >> $DIR$FILE
+$WD/107.1_01.b.Confirmacion-usuario-pendiente.sh" >> $DIR$FILE
 fi
 
 ## __Crea usuario para crear usuarios mediante ssh__
