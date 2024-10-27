@@ -60,8 +60,8 @@ fi
 ## __Copia el shell del usuario.__
 cp $WD/107.1_01.a.Registro.sh /home/$USER/registro.sh
 chown registro:registro /home/$USER/registro.sh
-cp $WD/000.colores.sh /home/$USER/000.colores.sh
-chown registro:registro /home/$USER/000.colores.sh
+cp $WD/000.colores.sh /home/$USER/000.Colores.sh
+chown registro:registro /home/$USER/000.Colores.sh
 
 ## __Genera el cron para que elimine usuarios no confirmados.__
 unlink /etc/cron.daily/Eliminar-usuario-pendiente
