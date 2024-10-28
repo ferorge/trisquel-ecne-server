@@ -65,9 +65,9 @@ chown registro:registro /home/$USER/000.Colores.sh
 
 ## __Genera el cron para que confirme usuarios confirmados.__
 unlink /etc/cron.hourly/Confirmar-usuario-pendiente
-ln -s "$WD/107.1_01.b.Confirmacion-usuario-pendiente.sh" /etc/cron.hourly/Confirmar-usuario-pendiente
+ln -s "$WD/107.1_01.d.Confirmacion-usuario-pendiente.sh" /etc/cron.hourly/Confirmar-usuario-pendiente
 
 ## __Genera el cron para que elimine usuarios no confirmados.__
 unlink /etc/cron.daily/Eliminar-usuario-pendiente
-ln -s "$WD/107.1_01.c.Eliminacion-usuario-pendiente.sh" /etc/cron.daily/Eliminar-usuario-pendiente
+ln -s "$WD/107.1_01.e.Eliminacion-usuario-pendiente.sh" /etc/cron.daily/Eliminar-usuario-pendiente
 
