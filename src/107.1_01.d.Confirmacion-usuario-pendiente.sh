@@ -15,10 +15,6 @@
 ## __Importación de colores__
 source "${0%/*}"/000.Colores.sh
 
-## Instalación de paquetes
-echo -e "$cian Instalando paquetes $default"
-###### apt install -y 'package'
-
 ## __Configuración de variables__
 exp_acc=$(date -d "$(date -I) 730 days" -I)
 USERS=$(grep '0:7:3:3' /etc/shadow | cut -d: -f1)

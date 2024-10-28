@@ -40,7 +40,7 @@ echo "
 ########################
 # Editado por ~ferorge #
 ########################
-$WD/107.1_01.b.Confirmacion-usuario-pendiente.sh" >> $DIR$FILE
+$WD/107.1_01.b.Creacion-usuario-pendiente.sh" >> $DIR$FILE
 fi
 
 ## __Crea usuario para crear usuarios mediante ssh__
@@ -62,6 +62,10 @@ cp $WD/107.1_01.a.Registro.sh /home/$USER/registro.sh
 chown registro:registro /home/$USER/registro.sh
 cp $WD/000.Colores.sh /home/$USER/000.Colores.sh
 chown registro:registro /home/$USER/000.Colores.sh
+
+## __Genera el cron para que confirme usuarios confirmados.__
+unlink /etc/cron.hourly/Confirmar-usuario-pendiente
+ln -s "$WD/107.1_01.b.Confirmacion-usuario-pendiente.sh" /etc/cron.hourly/Confirmar-usuario-pendiente
 
 ## __Genera el cron para que elimine usuarios no confirmados.__
 unlink /etc/cron.daily/Eliminar-usuario-pendiente
