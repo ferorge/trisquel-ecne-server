@@ -36,4 +36,4 @@ echo -e "$cian Modificando configuración $default"
 ###### ' >> $DIR$FILE
 #fi
 
-ln -s /var/local/ubuntu-noble-server/src/540.Crear-textos.sh /etc/cron.hourly/Crear-textos
+ln -s /var/local/ubuntu-noble-server/src/540.Creacion-textos.sh /etc/cron.hourly/Crear-textos
