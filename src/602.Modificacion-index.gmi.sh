@@ -21,20 +21,7 @@ timestamp=$(date +%F_%H.%M.%S)
 
 ## __Configuración de requisitos previos__
 echo -e "$cian Configurando requisitos previos $default"
-ls /var/local/saludo > /dev/null
-if [[ $? != 0 ]];then
-  source "${0%/*}"/540.Creacion-saludo.sh
-fi
-
-ls /var/local/motd > /dev/null
-if [[ $? != 0 ]];then
-  source "${0%/*}"/542.Creacion-mensaje-del-dia.sh
-fi
-
-ls /var/local/usuaries > /dev/null
-if [[ $? != 0 ]];then
-  source "${0%/*}"/544.Creacion-usuaries.sh
-fi
+source "${0%/*}"/540.Creacion-textos.sh
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
@@ -47,18 +34,22 @@ echo -e "$cian Modificando configuración $default"
 
 DIV='_______________________________________________'
 
-sed 's/######/ /g' /var/local/saludo > $DIR$FILE
-cat /var/local/motd | cowsay -f tux | sed 's/^/### /g'  >> $DIR$FILE
+sed 's/######/ /g' /var/gopher/_saludo.md > $DIR$FILE
+cat /var/gopher/_motd.md | cowsay -f tux | sed 's/^/### /g'  >> $DIR$FILE
 echo $DIV >> $DIR$FILE
-vrms |fold -w 64 | sed 's/^/### /g' >> $DIR$FILE
+#vrms |fold -w 64 | sed 's/^/### /g' >> $DIR$FILE
+vrms |fold -w 64 >> $DIR$FILE
 echo $DIV >> $DIR$FILE
 echo "
-### En línea desde: $(uptime -s)" >> $DIR$FILE
+En línea desde: $(uptime -s)" >> $DIR$FILE
 echo $DIV >> $DIR$FILE
-sed "1,4 s/^/### /g" /var/local/usuaries >> $DIR$FILE
+sed "1,4 s/^/### /g" /var/gopher/_usuaries.md >> $DIR$FILE
 echo $DIV >> $DIR$FILE
-sed -i "1,6 s/^/# /g" $DIR$FILE
-sed -i "8,11 s/^/###/g" $DIR$FILE
+echo '' >> $DIR$FILE
+#sed -i "1,7 s/^/# /g" $DIR$FILE
+sed -i "1 s/^/# /g" $DIR$FILE
+sed -i "2 s/^/==/g" $DIR$FILE
+#sed -i "8,11 s/^/###/g" $DIR$FILE
 sed -i "s/$DIV/## $DIV/g" $DIR$FILE
 
 USERS_DIR='../users/'
@@ -69,6 +60,7 @@ do
   echo '=> ~'$USER$'\t''~'$USER >> $DIR$FILE
 done
 echo '' >> $DIR$FILE
+echo 'EOF' >> $DIR$FILE
 
 logger "$FILE modificado por $USER"
 
