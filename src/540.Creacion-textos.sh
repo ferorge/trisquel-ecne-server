@@ -55,7 +55,7 @@ Servidor + Publico | Libre > Pubnix
 Pubnix | Auto alojado > Soberano
 EOF
 
-fortune rms2 > $DIR'_motd.md'
+/usr/games/fortune rms2 > $DIR'_motd.md'
 
 toilet -f mini -k '  Usuaries' > $DIR'_usuaries.md'
 
@@ -80,7 +80,7 @@ EOF
 #vrms |fold -w 64 | sed "2,$ s/^/>  /g" >> $DIR'_vrms.md'
 vrms |fold -w 64 | sed "2,$ s/^/>  /g" > $DIR'_vrms.md'
 
-logger "$textos modificados por $USER"
+logger "textos modificados por $USER"
 
 if [ $UID == 0 ]; then
   chown root:staff /var/gopher/_*.md

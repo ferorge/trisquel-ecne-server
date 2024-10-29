@@ -35,7 +35,7 @@ echo -e "$cian Modificando configuración $default"
 DIV='_______________________________________________'
 
 sed 's/######/ /g' /var/gopher/_saludo.md > $DIR$FILE
-cat /var/gopher/_motd.md | cowsay -f tux | sed 's/^/### /g'  >> $DIR$FILE
+cat /var/gopher/_motd.md | /usr/games/cowsay -f tux | sed 's/^/### /g'  >> $DIR$FILE
 echo $DIV >> $DIR$FILE
 #vrms |fold -w 64 | sed 's/^/### /g' >> $DIR$FILE
 vrms |fold -w 64 >> $DIR$FILE
