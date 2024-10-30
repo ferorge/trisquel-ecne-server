@@ -29,4 +29,6 @@ echo -e "$cian Modificando configuración $default"
 for USER in $USERS
 do
   deluser -q --remove-home $USER
+  rm -fR /var/www/users/$USER
+  rm -fR /var/gemini/users/$USER
 done
