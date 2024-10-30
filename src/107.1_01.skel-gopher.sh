@@ -37,7 +37,9 @@ mkdir -p $DIR
 chmod 0755 $DIR
 
 cowsay -f pocho 'Bienvenide a mi hoyo gopher libre, público y soberano.' > $DIR$FILE
-echo '0Markdown       markdown.md' >> $DIR$FILE
+sed -i -e '1,2 s/__/_ /g' -e '3,4 s/--/- /g' $DIR$FILE
+echo '' >> $DIR$FILE
+echo -e "0Markdown\tmarkdown.md" >> $DIR$FILE
 chmod 0644 $DIR$FILE
 
 FILE='markdown.md'
