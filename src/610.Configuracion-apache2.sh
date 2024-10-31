@@ -80,6 +80,32 @@ fi
 
 ## __Respaldo de configuración__
 echo -e "$cian Respaldando configuración $default"
+DIR='/etc/apache2/conf-available/'
+FILE='cgi-enabled.conf'
+cp $DIR$FILE /var/local/backups/$FILE.$timestamp
+
+## __Modificación de configuración__
+echo -e "$cian Modificando configuración $default"
+grep ferorge $DIR$FILE
+if [[ $? != 0 ]];then
+echo "
+########################
+# Editado por ~ferorge #
+########################
+<Directory $VAR_DIR/html/public>
+    Options +ExecCGI
+    AddHandler cgi-script .cgi .py
+</Directory>
+
+<Directory /home/*/public_html>
+    Options +ExecCGI
+    AddHandler cgi-script .cgi .py
+</Directory>
+" >> $DIR$FILE
+fi
+
+## __Respaldo de configuración__
+echo -e "$cian Respaldando configuración $default"
 DIR='/etc/apache2/'
 FILE='apache2.conf'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
@@ -99,10 +125,11 @@ fi
 
 ### Creación de directorios.
 mkdir -p $VAR_DIR/{html,log,users}
+mkdir -p $VAR_DIR/html/public/
 chmod -R 0755 $VAR_DIR
 
 ### Adición de ico y css.
-cp "${0%/*}"/html/{favicon.ico,lynx.css} $DIR
+cp "${0%/*}"/html/{favicon.ico,lynx.css} $VAR_DIR/html/public/
 
 ### Adición de logs.
 touch $VAR_DIR/log/{access,error}.log
@@ -125,7 +152,6 @@ do
     mkdir -p $USERS_DIR$user
   fi
   chown -R $user:$USER $USERS_DIR$user
-#  chmod 0755 $USERS_DIR$user
   ln -s $USERS_DIR$user /home/$user/public_html
 done
 
@@ -153,6 +179,10 @@ a2enmod ssl
 ## __Configuracion de UserDir__
 echo -e "$cian Configurando userdir $default"
 a2enmod userdir
+
+## __Configuracion de cgid__
+echo -e "$cian Configurando cgid $default"
+a2enmod cgid
 
 ## __Endurecimiento de servicio__
 sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
