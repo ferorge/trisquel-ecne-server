@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# Actualización de paquetes
+
+## __Autoría y licencia__
+###### Actualización de paquetes © 2024 por \~ferorge
+###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
+###### Licenciado bajo GNU Public License version 3.
+###### Para ver una copia de esta licencia, visite:
+###### [GPLv3]:(https://www.gnu.org/licenses/gpl.txt)
+
+## __Fuente__
+###### [fuente]:(enlace)
+
+## __Importación de colores__
+source "${0%/*}"/000.Colores.sh
+
+## Instalación de paquetes
+echo -e "$cian Instalando paquetes $default"
+###### apt install -y 'package'
+
+## __Configuración de variables__
+UNIT=''
+SERVICE="/lib/systemd/system/$UNIT.service"
+FQDN=$(hostname -f)
+USER=''
+VAR_DIR=''
+RUN=''
+timestamp=$(date +%F_%H.%M.%S)
+
+## Creación de usuario
+id $USER
+if [[ $? != 0 ]];then
+  useradd --system --user-group --groups ssl-cert --comment $USER-daemon --home-dir $VAR_DIR --shell /usr/sbin/nologin $USER
+fi
+
+## __Respaldo de configuración__
+echo -e "$cian Respaldando configuración $default"
+DIR=''
+FILE=''
+###### cp $DIR$FILE /var/local/backups/$FILE.$timestamp
+
+## __Modificación de configuración__
+echo -e "$cian Modificando configuración $default"
+grep ferorge $DIR$FILE
+if [[ $? != 0 ]];then
+###### echo '
+########################
+# Editado por ~ferorge #
+########################
+###### ' >> $DIR$FILE
+fi
+
+## __Endurecimiento de servicio__
+sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
+sed -i "s/__USER__/$USER/g" $SERVICE
+sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
+sed -i -r "s#__RUN__#$RUN#g" $SERVICE
+
+## __Configuración de firewall__
+echo -e "$cian Configurando firewall $default"
+###### ufw allow 'puerto'/'protocolo' comment $UNIT
+
+## __Activación de servicio__
+echo -e "$cian Activando servicio $default"
+###### systemctl enable $UNIT
+
+## __Reinicio de servicio__
+echo -e "$cian Reiniciando servicio $default"
+###### systemctl restart $UNIT
+
+## __Verificación de servicio__
+echo -e "$cian Verificando servicio $default"
+###### systemctl status $UNIT
+
+## __Verificación de configuración__
+echo -e "$cian Verificando configuración $default"
+#!/bin/bash
+apt-get -qq update
+apt-get -qq -y upgrade
+apt-get -qq -y full-upgrade
+apt-get -qq -y dist-upgrade
+apt-get -qq -y clean
+apt-get -qq -y autoclean
+apt-get -qq -y autoremove
+
+#pip3 install --upgrade jupyterhub-nativeauthenticator voila jupyterlab import-ipynb ipycanvas ipywidgets ipyevents
+src/109.2_01.b.Configuracion-nombres-red.sh:###### [LPI 109.2_01]:(https://learning.lpi.org/en/learning-materials/102-500/109/109.2/109.2_01/)
