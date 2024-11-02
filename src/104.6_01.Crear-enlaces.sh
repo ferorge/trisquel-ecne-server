@@ -36,4 +36,7 @@ echo -e "$cian Modificando configuración $default"
 ###### ' >> $DIR$FILE
 #fi
 
+ln -s /var/local/ubuntu-noble-server/src/000.Colores.sh /etc/cron.hourly/000.Colores.sh
+ln -s /var/local/ubuntu-noble-server/src/000.Colores.sh /etc/cron.daily/000.Colores.sh
 ln -s /var/local/ubuntu-noble-server/src/540.Creacion-textos.sh /etc/cron.hourly/Crear-textos
+ln -s /var/local/ubuntu-noble-server/src/102.4_01.a.Actualizacion-paquetes.sh /etc/cron.daily/Actualizar-paquetes

@@ -1,0 +1,103 @@
+#!/bin/bash
+
+# Instalación de paquetes
+
+## __Autoría y licencia__
+###### Instalación de paquetes © 2024 por \~ferorge
+###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
+###### Licenciado bajo GNU Public License version 3.
+###### Para ver una copia de esta licencia, visite:
+###### [GPLv3]:(https://www.gnu.org/licenses/gpl.txt)
+
+## __Fuente__
+###### [fuente]:(enlace)
+
+## __Importación de colores__
+source "${0%/*}"/000.Colores.sh
+
+## Instalación de paquetes
+echo -e "$cian Instalando paquetes $default"
+###### apt install -y 'package'
+
+## __Configuración de variables__
+UNIT=''
+SERVICE="/lib/systemd/system/$UNIT.service"
+FQDN=$(hostname -f)
+USER=''
+VAR_DIR=''
+RUN=''
+timestamp=$(date +%F_%H.%M.%S)
+
+## Creación de usuario
+id $USER
+if [[ $? != 0 ]];then
+  useradd --system --user-group --groups ssl-cert --comment $USER-daemon --home-dir $VAR_DIR --shell /usr/sbin/nologin $USER
+fi
+
+## __Respaldo de configuración__
+echo -e "$cian Respaldando configuración $default"
+DIR=''
+FILE=''
+###### cp $DIR$FILE /var/local/backups/$FILE.$timestamp
+
+## __Modificación de configuración__
+echo -e "$cian Modificando configuración $default"
+grep ferorge $DIR$FILE
+if [[ $? != 0 ]];then
+###### echo '
+########################
+# Editado por ~ferorge #
+########################
+###### ' >> $DIR$FILE
+fi
+
+## __Endurecimiento de servicio__
+sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
+sed -i "s/__USER__/$USER/g" $SERVICE
+sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
+sed -i -r "s#__RUN__#$RUN#g" $SERVICE
+
+## __Configuración de firewall__
+echo -e "$cian Configurando firewall $default"
+###### ufw allow 'puerto'/'protocolo' comment $UNIT
+
+## __Activación de servicio__
+echo -e "$cian Activando servicio $default"
+###### systemctl enable $UNIT
+
+## __Reinicio de servicio__
+echo -e "$cian Reiniciando servicio $default"
+###### systemctl restart $UNIT
+
+## __Verificación de servicio__
+echo -e "$cian Verificando servicio $default"
+###### systemctl status $UNIT
+
+## __Verificación de configuración__
+echo -e "$cian Verificando configuración $default"
+#!/bin/bash
+
+source /opt/000.Colores.sh
+
+# Actualizacion de repositorios
+echo -e "$cian Actualizando repositorios $default"
+apt update
+
+# Actualizacion de paquetes
+echo -e "$cian Actualizando paquetes $default"
+apt -y upgrade
+apt -y full-upgrade
+apt -y dist-upgrade
+
+# Instalacion de paquetes
+echo -e "$cian Instalando paquetes $default"
+apt install -y aptitude screen mc htop iotop ncdu curl nmap
+### Endurecimiento
+apt install -y  acct sysstat auditd audispd-plugins libpam-cracklib haveged debian-goodies debsecan libpam-tmpdir apt-listbugs apt-listchanges needrestart fail2ban aide aide-common ufw clamav arpwatch arpon debsums apt-show-versions unattended-upgrades cfengine3 puppet
+
+# Limpieza de paquetes
+echo -e "$cian Limpiando paquetes $default"
+apt -y clean
+apt -y autoclean
+apt -y autoremove
+###### [LPI 109.2_01]:(https://learning.lpi.org/en/learning-materials/101-500/102/102.4/102.4_01/)
