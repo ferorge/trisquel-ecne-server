@@ -13,7 +13,7 @@
 ###### [fuente]:(enlace)
 
 ## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
+#source "${0%/*}"/000.Colores.sh
 
 ## __Configuración de variables__
 HOST=$(hostname -s)
@@ -22,13 +22,13 @@ DATE=$(date +%F)
 YEAR=$(date +%Y)
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+#echo -e "$cian Respaldando configuración $default"
 DIR='/var/gopher/'
 #FILE="*.md"
 #cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+#echo -e "$cian Modificando configuración $default"
 
 DIV='_______________________________________________'
 
