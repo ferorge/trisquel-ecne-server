@@ -30,3 +30,11 @@ echo -e "$cian Limpiando paquetes $default"
 apt -y clean
 apt -y autoclean
 apt -y autoremove
+
+## __Búsqueda de fichero__
+echo -e "$cian Buscando fichero en los paquetes instalados $default"
+dpkg -S iotop
+
+## __Lista de ficheros__
+echo -e "$cian Listando ficheros instalados por un paquete $default"
+dpkg -L iotop
