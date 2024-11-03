@@ -15,7 +15,7 @@
 ## __Importación de colores__
 source "${0%/*}"/000.Colores.sh
 
-## Instalación de paquetes
+## __Instalación de paquetes__
 echo -e "$cian Instalando paquetes $default"
 ###### apt install -y 'package'
 
