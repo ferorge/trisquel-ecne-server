@@ -37,15 +37,7 @@ JSON=$(curl -s \
 
 ZONE_IP=$(echo $JSON | grep $FQDN | grep -o '"ipv4address":"[^"]*' | grep -o '[^"]*$')
 
-## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
-DIR=''
-FILE=''
-#cp $DIR$FILE /var/local/backups/$FILE.$timestamp
-
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
-
 if [[ $CURRENT_IP != $ZONE_IP ]]; then
   source $WD/109.2_01.a.Configuracion-nombre-hospedador.sh
   source $WD/109.2_01.b.Configuracion-nombres-red.sh
@@ -59,11 +51,8 @@ else
   logger "$HOST equal current IP: $CURRENT_IP"
 fi
 
-## __Verificacion de configuración__
-echo -e "$cian Verificando configuración $default"
-
 ## __Verificacion de periodicidad__
-echo -e "$cian Verificando periodicidad $default"
+logger "Verificando periodicidad"
 ###### Busca todos los enlaces simbólicos dentro de los directorios cron  
 ###### y lo filtra con el nombre de este guion.
 find /etc/cron.* -type l -ls | grep $(basename $0)
