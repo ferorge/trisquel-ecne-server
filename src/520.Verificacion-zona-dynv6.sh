@@ -55,7 +55,7 @@ fi
 logger "Verificando periodicidad"
 ###### Busca todos los enlaces simbólicos dentro de los directorios cron  
 ###### y lo filtra con el nombre de este guion.
-find /etc/cron.* -type l -ls | grep $(basename $0)
+find /etc/cron.* -type l -ls | grep $(basename $0) > /dev/null
 if [[ $? != 0 ]];then
   logger 'Revisión periódica desactivada.'
 fi
