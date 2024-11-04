@@ -20,7 +20,7 @@ apt update
 
 ## __Instalación de paquetes__
 echo -e "$cian Instalando paquetes $default"
-apt install -y aptitude screen mc htop iotop ncdu curl nmap
+apt install -y aptitude screen mc htop iotop ncdu curl nmap lolcat aewan cowsay jp2a linuxlogo neofetch screenfetch fortune pv cmatrix cbonsai scrot sl libaa-bin oneko espeak toilet toilet-fonts rig amfora gopher lynx finger exa tmux moc nano vim emacs ed micro joe lftp
 
 ##### Endurecimiento
 #apt install -y  acct sysstat auditd audispd-plugins libpam-cracklib haveged debian-goodies debsecan libpam-tmpdir apt-listbugs apt-listchanges needrestart fail2ban aide aide-common ufw clamav arpwatch arpon debsums apt-show-versions unattended-upgrades cfengine3 puppet
