@@ -40,3 +40,4 @@ ln -s /var/local/ubuntu-noble-server/src/000.Colores.sh /etc/cron.hourly/000.Col
 ln -s /var/local/ubuntu-noble-server/src/000.Colores.sh /etc/cron.daily/000.Colores.sh
 ln -s /var/local/ubuntu-noble-server/src/540.Creacion-textos.sh /etc/cron.hourly/Crear-textos
 ln -s /var/local/ubuntu-noble-server/src/102.4_01.a.Actualizacion-paquetes.sh /etc/cron.daily/Actualizar-paquetes
+ln -s /var/local/ubuntu-noble-server/src/542.Creacion-plantilla-md.sh /etc/cron.daily/Crear-plantilla
