@@ -43,6 +43,7 @@ Nuevo artículo en $HOST.
 $DIV
 
 $(cat $DIR'_licencia.md')
+$(echo EOF)
 EOF
 
 sed -i 's/Documento/Plantilla/g' $DIR$FILE
