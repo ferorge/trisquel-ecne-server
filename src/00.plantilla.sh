@@ -12,13 +12,6 @@
 ## __Fuente__
 ###### [fuente]:(enlace)
 
-## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
-
-## __Instalación de paquetes__
-echo -e "$cian Instalando paquetes $default"
-###### apt install -y 'package'
-
 ## __Configuración de variables__
 UNIT=''
 SERVICE="/lib/systemd/system/$UNIT.service"
@@ -27,6 +20,10 @@ USER=''
 VAR_DIR=''
 RUN=''
 timestamp=$(date +%F_%H.%M.%S)
+
+## __Instalación de paquetes__
+echo -e "$cian Instalando paquetes $default"
+###### apt install -y 'package'
 
 ## Creación de usuario
 id $USER
