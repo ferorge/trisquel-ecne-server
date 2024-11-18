@@ -20,7 +20,7 @@ cd $WD
 source $WD/000.Colores.sh
 
 ## __Instalación de paquetes__
-logger "$cian Instalando paquetes $default"
+logger "$CYAN Instalando paquetes $DEFAULT"
 
 ##### Actualización de repositorio local
 apt-get -qq update

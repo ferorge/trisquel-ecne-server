@@ -20,13 +20,13 @@ FQDN=$(hostname -f)
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/skel/'
 FILE='.plan'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 ###### echo '
 ########################
 # Editado por ~ferorge #
@@ -39,13 +39,13 @@ cowsay "Mi plan para la comunidad $FQDN" > $DIR$FILE
 chmod 0644 $DIR$FILE
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/skel/'
 FILE='.project'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 ###### echo '
 ########################
 # Editado por ~ferorge #
@@ -58,13 +58,13 @@ cowsay "Mi proyecto para la comunidad $FQDN" > $DIR$FILE
 chmod 0644 $DIR$FILE
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/skel/'
 FILE='.xface'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow '<>' | sed -n '6,$p' > $DIR$FILE
 chmod 0644 $DIR$FILE
 

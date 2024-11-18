@@ -19,13 +19,13 @@ source "${0%/*}"/000.Colores.sh
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/skel/public_gemini/'
 FILE='.mollyhead'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 ###### echo '
 ########################
 # Editado por ~ferorge #

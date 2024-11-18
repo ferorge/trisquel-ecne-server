@@ -16,7 +16,7 @@
 source "${0%/*}"/000.Colores.sh
 
 ## Instalación de paquetes
-echo -e "$cian Instalando paquetes $default"
+echo -e "$CYAN Instalando paquetes $DEFAULT"
 
 ##### Descargar codigo fuente.
 mkdir /opt/mmd6

@@ -21,19 +21,19 @@ FQDN=$(hostname -f)
 CURRENT_IP=$(curl -s ifconfig.me)
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuracion $default"
+echo -e "$CYAN Respaldando configuracion $DEFAULT"
 DIR='/etc/'
 FILE='hosts'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuracion $default"
+echo -e "$CYAN Modificando configuracion $DEFAULT"
 
 sed -i "/$FQDN/d" $DIR$FILE
 echo "$CURRENT_IP	$FQDN $HOST" >> $DIR$FILE
 
 ## __Verificacion de configuracion__
-echo -e "$cian Verificando configuracion $default"
+echo -e "$CYAN Verificando configuracion $DEFAULT"
 read ip fqdn host <<< `grep $HOST $DIR$FILE`
 logger "IP: $ip"
 logger "FQDN: $fqdn"

@@ -22,16 +22,16 @@ CURRENT_IP=$(curl -s ifconfig.me)
 UPDATE=$(curl -s "http://ipv4.dynv6.com/api/update?zone=$FQDN&ipv4=auto&token=$TOKEN")
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuracion $default"
+echo -e "$CYAN Respaldando configuracion $DEFAULT"
 DIR=''
 FILE=''
 #cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuracion $default"
+echo -e "$CYAN Modificando configuracion $DEFAULT"
 
 ## __Verificacion de configuración__
-echo -e "$cian Verificando configuracion $default"
+echo -e "$CYAN Verificando configuracion $DEFAULT"
 
 logger $UPDATE
 logger $HOST $FQDN $CURRENT_IP $ZONE_IP $UPDATE

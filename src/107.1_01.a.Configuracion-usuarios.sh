@@ -6,11 +6,11 @@ source "${0%/*}"/000.Colores.sh
 sed -i 's/init -t1 S/init S/g' /etc/init.d/single
 
 ## __Eliminacion de usuarios__
-echo -e "$cian Eliminando usuarios $default"
+echo -e "$CYAN Eliminando usuarios $DEFAULT"
 deluser --remove-home odroid
 
 ## __Adicion de usuarios__
-echo -e "$cian Adicionando usuarios $default"
+echo -e "$CYAN Adicionando usuarios $DEFAULT"
 adduser fernando
 
 ## __Modificacion de id__

@@ -13,7 +13,7 @@
 source "${0%/*}"/000.Colores.sh
 
 ## Instalación de paquetes
-echo -e "$cian Instalando paquetes $default"
+echo -e "$CYAN Instalando paquetes $DEFAULT"
 apt install -y ntpsec
 
 ## Configuración de variables
@@ -29,16 +29,16 @@ CFG="$UNIT"
 timestamp=$(date +%F_%H.%M.%S)
 
 ## Creación de usuario
-echo -e "$cian Creando usuario $default"
+echo -e "$CYAN Creando usuario $DEFAULT"
 mkdir -p $VAR_DIR
 ###### useradd --system --user-group --groups ssl-cert --comment $USER-daemon --home-dir $VAR_DIR --shell /usr/sbin/nologin $USER
 
 ## Respaldo de configuración
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 ##### #cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## Modificación de configuración
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 ###### echo "
 ##########################
 ### Editado por ~ferorge #
@@ -55,21 +55,21 @@ sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
 sed -i "s/__CFG__/$CFG/g" $SERVICE
 
 ## Configuracion de firewall
-echo -e "$cian Configurando firewall $default"
+echo -e "$CYAN Configurando firewall $DEFAULT"
 ufw allow 123/tcp comment $UNIT
 
 ## Activación de servicio
-echo -e "$cian Activando servicio $default"
+echo -e "$CYAN Activando servicio $DEFAULT"
 systemctl enable $UNIT
 
 ## Reinicio de servicio
-echo -e "$cian Reiniciando servicio $default"
+echo -e "$CYAN Reiniciando servicio $DEFAULT"
 systemctl restart $UNIT
 
 ## Verificación de servicio
-echo -e "$cian Verificando servicio $default"
+echo -e "$CYAN Verificando servicio $DEFAULT"
 systemctl status $UNIT
 
 ## Verificación de configuración
-echo -e "$cian Verificando configuración $default"
+echo -e "$CYAN Verificando configuración $DEFAULT"
 ntpq -p

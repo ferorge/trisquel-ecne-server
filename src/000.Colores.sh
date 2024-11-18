@@ -12,6 +12,6 @@ cian="\e[36m"
 gris="\e[37m"
 default="\e[39m"
 
-#echo -e "$verde Texto verde $default"
+#echo -e "$GREEN Texto verde $DEFAULT"
 #echo -e " Texto default"
 

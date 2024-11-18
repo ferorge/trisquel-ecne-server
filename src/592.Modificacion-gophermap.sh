@@ -21,13 +21,13 @@ timestamp=$(date +%F_%H.%M.%S)
 DIV='_________________________________________________'
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/var/gopher/'
 FILE='gophermap'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 #ls /var/local/saludo
 #if [[ $? != 0 ]];then
 #  source "${0%/*}"/540.Creacion-saludo.sh

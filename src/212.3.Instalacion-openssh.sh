@@ -16,7 +16,7 @@
 source "${0%/*}"/000.Colores.sh
 
 ## Instalación de paquetes
-echo -e "$cian Instalando paquetes $default"
+echo -e "$CYAN Instalando paquetes $DEFAULT"
 apt install -y openssh-server
 
 ## __Configuración de variables__
@@ -24,13 +24,13 @@ UNIT='ssh'
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/ssh/'
 FILE='sshd_config'
 ###### cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 ###### echo '
 ########################
 # Editado por ~ferorge #
@@ -42,20 +42,20 @@ source "${0%/*}"/endurecimiento/SSH-7408.sh
 source "${0%/*}"/endurecimiento/BOOT-5264_sshd.sh
 
 ## __Configuración de firewall__
-echo -e "$cian Configurando firewall $default"
+echo -e "$CYAN Configurando firewall $DEFAULT"
 ufw allow 30022/tcp comment $UNIT
 
 ## __Activación de servicio__
-echo -e "$cian Activando servicio $default"
+echo -e "$CYAN Activando servicio $DEFAULT"
 systemctl enable $UNIT
 
 ## __Reinicio de servicio__
-echo -e "$cian Reiniciando servicio $default"
+echo -e "$CYAN Reiniciando servicio $DEFAULT"
 systemctl restart $UNIT
 
 ## __Verificación de servicio__
-echo -e "$cian Verificando servicio $default"
+echo -e "$CYAN Verificando servicio $DEFAULT"
 systemctl status $UNIT
 
 ## __Verificacion de configuración__
-echo -e "$cian Verificando configuración $default"
+echo -e "$CYAN Verificando configuración $DEFAULT"

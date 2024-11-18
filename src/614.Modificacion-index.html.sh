@@ -20,20 +20,20 @@ FQDN=$(hostname -f)
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Generación de requisitos previos__
-echo -e "$cian Generando requisitos previos $default"
+echo -e "$CYAN Generando requisitos previos $DEFAULT"
 source "${0%/*}"/540.Creacion-textos.sh
 source "${0%/*}"/616.Modificacion-nav.sh
 source "${0%/*}"/618.Modificacion-aside.sh
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/var/www/html/public/'
 FILE='index.html'
 META='/var/gopher/_meta.md'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 DIV='_______________________________________________'
 
 echo "Title: $(head -n1 /var/gopher/_saludo.md)" >> $META

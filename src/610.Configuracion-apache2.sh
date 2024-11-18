@@ -16,7 +16,7 @@
 source "${0%/*}"/000.Colores.sh
 
 ## Instalación de paquetes
-echo -e "$cian Instalando paquetes $default"
+echo -e "$CYAN Instalando paquetes $DEFAULT"
 apt -y install apache2 curl certbot
 
 ## __Configuración de variables__
@@ -39,13 +39,13 @@ if [[ $? != 0 ]];then
 fi
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/apache2/conf-enabled/'
 FILE='security.conf'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 grep ferorge $DIR$FILE
 if [[ $? != 0 ]];then
 echo '
@@ -59,13 +59,13 @@ TraceEnable Off
 fi
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/apache2/mods-enabled/'
 FILE='dir.conf'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 grep ferorge $DIR$FILE
 if [[ $? != 0 ]];then
 echo '
@@ -79,13 +79,13 @@ echo '
 fi
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/apache2/conf-available/'
 FILE='cgi-enabled.conf'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 grep ferorge $DIR$FILE
 if [[ $? != 0 ]];then
 echo "
@@ -105,13 +105,13 @@ echo "
 fi
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/apache2/'
 FILE='apache2.conf'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 grep ferorge $DIR$FILE
 if [[ $? != 0 ]];then
 echo '
@@ -173,15 +173,15 @@ a2dissite 000-default
 a2dissite default-ssl
 
 ## __Configuración de SSL/TLS__
-echo -e "$cian Configurando SSL/TLS $default"
+echo -e "$CYAN Configurando SSL/TLS $DEFAULT"
 a2enmod ssl
 
 ## __Configuracion de UserDir__
-echo -e "$cian Configurando userdir $default"
+echo -e "$CYAN Configurando userdir $DEFAULT"
 a2enmod userdir
 
 ## __Configuracion de cgid__
-echo -e "$cian Configurando cgid $default"
+echo -e "$CYAN Configurando cgid $DEFAULT"
 a2enmod cgid
 
 ## __Endurecimiento de servicio__
@@ -191,29 +191,29 @@ sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
 sed -i -r "s#__RUN__#$RUN#g" $SERVICE
 
 ## __Configuración de firewall__
-echo -e "$cian Configurando firewall $default"
+echo -e "$CYAN Configurando firewall $DEFAULT"
 ufw allow 80/tcp comment HTTP
 ufw allow 443/tcp comment HTTPS
 
 ## __Activación de servicio__
-echo -e "$cian Activando servicio $default"
+echo -e "$CYAN Activando servicio $DEFAULT"
 systemctl enable $UNIT
 
 ## __Reinicio de servicio__
-echo -e "$cian Reiniciando servicio $default"
+echo -e "$CYAN Reiniciando servicio $DEFAULT"
 systemctl restart $UNIT
 
 ## __Verificación de servicio__
-echo -e "$cian Verificando servicio $default"
+echo -e "$CYAN Verificando servicio $DEFAULT"
 systemctl status $UNIT
 
 ## __Verificación de configuración__
-echo -e "$cian Verificando configuración $default"
-echo -e "$cian Verificando sitio HTTP $default"
+echo -e "$CYAN Verificando configuración $DEFAULT"
+echo -e "$CYAN Verificando sitio HTTP $DEFAULT"
 curl http://$FQDN
-echo -e "$cian Verificando sitio HTTPS $default"
+echo -e "$CYAN Verificando sitio HTTPS $DEFAULT"
 curl https://$FQDN
-echo -e "$cian Verificando UserDir HTTP $default"
+echo -e "$CYAN Verificando UserDir HTTP $DEFAULT"
 curl http://$FQDN/~$user/
-echo -e "$cian Verificando UserDir HTTPS $default"
+echo -e "$CYAN Verificando UserDir HTTPS $DEFAULT"
 curl https://$FQDN/~$user/

@@ -25,7 +25,7 @@ cd $WD
 source $WD/000.Colores.sh
 
 ## __Modificación de configuración__
-logger "$cian Eliminando usuarios pendientes $default"
+logger "$CYAN Eliminando usuarios pendientes $DEFAULT"
 for USER in $USERS
 do
   deluser -q --remove-home $USER

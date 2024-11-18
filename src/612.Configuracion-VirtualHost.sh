@@ -23,13 +23,13 @@ VAR_DIR='/var/www/html/'
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/apache2/sites-available/'
 FILE="$FQDN.conf"
 ###### cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 grep ferorge $DIR$FILE
 if [[ $? != 0 ]];then
 echo "
@@ -82,13 +82,13 @@ chown -R $USER:$USER $VAR_DIR
 chmod -R 0444 $VAR_DIR/public
 
 ## __Reinicio de servicio__
-echo -e "$cian Reiniciando servicio $default"
+echo -e "$CYAN Reiniciando servicio $DEFAULT"
 systemctl restart $UNIT
 
 ## __Verificación de servicio__
-echo -e "$cian Verificando servicio $default"
+echo -e "$CYAN Verificando servicio $DEFAULT"
 systemctl status $UNIT
 
 ## __Verificación de configuración__
-echo -e "$cian Verificando configuración $default"
+echo -e "$CYAN Verificando configuración $DEFAULT"
 

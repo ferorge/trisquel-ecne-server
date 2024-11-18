@@ -19,13 +19,13 @@ source "${0%/*}"/000.Colores.sh
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/netplan/'
 FILE='01-netcfg.yaml'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 echo '
 ########################
 # Editado por ~ferorge #
@@ -56,7 +56,7 @@ network:
 netplan apply
 
 ## __Verificacion de configuración__
-echo -e "$cian Verificando configuración $default"
+echo -e "$CYAN Verificando configuración $DEFAULT"
 sleep 15
 ip a
 

@@ -26,7 +26,7 @@ VERSION=0.4.8.13
 source "${0%/*}"/000.Colores.sh
 
 ## __Instalación de paquetes__
-echo -e "$cian Instalando paquetes $default"
+echo -e "$CYAN Instalando paquetes $DEFAULT"
 apt install -y libevent openssl zlib libevent-dev
 
 ## __Compilación de tor__
@@ -45,13 +45,13 @@ if [[ $? != 0 ]];then
 fi
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR=''
 FILE=''
 ###### cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 grep ferorge $DIR$FILE
 if [[ $? != 0 ]];then
 ###### echo '
@@ -68,24 +68,24 @@ sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
 sed -i -r "s#__RUN__#$RUN#g" $SERVICE
 
 ## __Configuración de firewall__
-echo -e "$cian Configurando firewall $default"
+echo -e "$CYAN Configurando firewall $DEFAULT"
 ufw allow 9050/tcp comment $UNIT
 ufw allow 9051/tcp comment torrc
 
 ## __Activación de servicio__
-echo -e "$cian Activando servicio $default"
+echo -e "$CYAN Activando servicio $DEFAULT"
 ###### systemctl enable $UNIT
 
 ## __Reinicio de servicio__
-echo -e "$cian Reiniciando servicio $default"
+echo -e "$CYAN Reiniciando servicio $DEFAULT"
 ###### systemctl restart $UNIT
 
 ## __Verificación de servicio__
-echo -e "$cian Verificando servicio $default"
+echo -e "$CYAN Verificando servicio $DEFAULT"
 ###### systemctl status $UNIT
 
 ## __Verificación de configuración__
-echo -e "$cian Verificando configuración $default"
+echo -e "$CYAN Verificando configuración $DEFAULT"
 #wget -qO - https://check.torproject.org | grep Sorry
 #torsocks wget -qO - https://check.torproject.org | grep Congratulations
 
@@ -93,7 +93,7 @@ echo -e "$cian Verificando configuración $default"
 #wget -qO - https://api.ipify.org; echo
 #torsocks wget -qO - https://api.ipify.org; echo
 
-#echo -e "$rojo Ejecutar como usuario lo siguiente: $default"
+#echo -e "$RED Ejecutar como usuario lo siguiente: $DEFAULT"
 #echo -e "torpass=$(tor --hash-password "3834t,T;0010")"
 # No ejecutar como root
 # torpass=$(tor --hash-password "3834t,T;0010")

@@ -19,7 +19,7 @@ source "${0%/*}"/000.Colores.sh
 apt update
 
 ## __Instalación de paquetes__
-echo -e "$cian Instalando paquetes $default"
+echo -e "$CYAN Instalando paquetes $DEFAULT"
 apt install -y aptitude screen mc htop iotop ncdu curl nmap lolcat aewan cowsay\
 jp2a linuxlogo neofetch screenfetch fortune pv cmatrix cbonsai scrot sl  oneko \
 libaa-bin espeak toilet toilet-fonts rig amfora gopher lynx finger exa tmux moc\
@@ -29,15 +29,15 @@ nano vim emacs elpa-markdown-mode ed micro joe lftp
 #apt install -y  acct sysstat auditd audispd-plugins libpam-cracklib haveged debian-goodies debsecan libpam-tmpdir apt-listbugs apt-listchanges needrestart fail2ban aide aide-common ufw clamav arpwatch arpon debsums apt-show-versions unattended-upgrades cfengine3 puppet
 
 ## __Limpieza de paquetes__
-echo -e "$cian Limpiando paquetes $default"
+echo -e "$CYAN Limpiando paquetes $DEFAULT"
 apt -y clean
 apt -y autoclean
 apt -y autoremove
 
 ## __Búsqueda de fichero__
-echo -e "$cian Buscando fichero en los paquetes instalados $default"
+echo -e "$CYAN Buscando fichero en los paquetes instalados $DEFAULT"
 dpkg -S iotop
 
 ## __Lista de ficheros__
-echo -e "$cian Listando ficheros instalados por un paquete $default"
+echo -e "$CYAN Listando ficheros instalados por un paquete $DEFAULT"
 dpkg -L iotop

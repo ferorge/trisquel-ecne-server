@@ -27,13 +27,13 @@ cd $WD
 source $WD/000.Colores.sh
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/'
 FILE='rc.local'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 grep ferorge $DIR$FILE > /dev/null
 if [[ $? != 0 ]];then
 echo "

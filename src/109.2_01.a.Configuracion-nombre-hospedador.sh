@@ -19,7 +19,7 @@ source "${0%/*}"/000.Colores.sh
 HOST='sobnix.dynv6.net'
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuracion $default"
+echo -e "$CYAN Respaldando configuracion $DEFAULT"
 DIR='/etc/'
 FILE='hostname'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
@@ -27,7 +27,7 @@ FILE='machine-info'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuracion $default"
+echo -e "$CYAN Modificando configuracion $DEFAULT"
 hostnamectl --pretty hostname "Sobnix | Pubnix soberano"
 hostnamectl --transient hostname $FQDN
 hostnamectl --static hostname $HOST
@@ -36,6 +36,6 @@ hostnamectl deployment production
 hostnamectl location "Lanús, Argentina"
 
 ## __Verificacion de configuracion__
-echo -e "$cian Verificando configuracion $default"
+echo -e "$CYAN Verificando configuracion $DEFAULT"
 hostnamectl status
 logger "hostname: $(hostname -s)"

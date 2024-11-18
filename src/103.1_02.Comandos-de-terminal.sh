@@ -13,34 +13,34 @@
 source "${0%/*}"/000.Colores.sh
 
 ## Ver las variables de entorno
-echo -e "\n $cian $(apropos -e env) $default"
-echo -e "\$ $rojo env $default"
+echo -e "\n $CYAN $(apropos -e env) $DEFAULT"
+echo -e "\$ $RED env $DEFAULT"
 
 ## Ver una linea de texto
-echo -e "\n $cian $(apropos echo | head -n1) $default"
-echo -e "\$ $rojo echo GNU is not UNIX  $default"
+echo -e "\n $CYAN $(apropos echo | head -n1) $DEFAULT"
+echo -e "\$ $RED echo GNU is not UNIX  $DEFAULT"
 
 ## Establecer variable
-echo -e "\n $cian set a variable $default"
-echo -e "\$ $rojo myvar=hello  $default"
+echo -e "\n $CYAN set a variable $DEFAULT"
+echo -e "\$ $RED myvar=hello  $DEFAULT"
 
 ## Ver variable
-echo -e "\n $cian display a variable $default"
-echo -e "\$ $rojo echo \$myvar  $default"
+echo -e "\n $CYAN display a variable $DEFAULT"
+echo -e "\$ $RED echo \$myvar  $DEFAULT"
 
 ## Desestablecer variable
-echo -e "\n $cian unset a variable $default"
-echo -e "\$ $rojo unset myvar  $default"
+echo -e "\n $CYAN unset a variable $DEFAULT"
+echo -e "\$ $RED unset myvar  $DEFAULT"
 
 ## Estableces valores de shell
-echo -e "\n $cian $(set --help | grep options | head -n1)  $default"
-echo -e "\$ $rojo set myvar  $default"
+echo -e "\n $CYAN $(set --help | grep options | head -n1)  $DEFAULT"
+echo -e "\$ $RED set myvar  $DEFAULT"
 
 ## Crear fichero
-echo -e "\n $cian $(apropos touch | tail -n1)  $default"
-echo -e "\$ $rojo touch file  $default"
+echo -e "\n $CYAN $(apropos touch | tail -n1)  $DEFAULT"
+echo -e "\$ $RED touch file  $DEFAULT"
 
 ## Eliminar fichero
-echo -e "\n $cian $(apropos rm | grep -e 'remove files')  $default"
-echo -e "\$ $rojo rm file  $default"
+echo -e "\n $CYAN $(apropos rm | grep -e 'remove files')  $DEFAULT"
+echo -e "\$ $RED rm file  $DEFAULT"
 

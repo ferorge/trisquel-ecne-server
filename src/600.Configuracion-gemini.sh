@@ -16,7 +16,7 @@
 source "${0%/*}"/000.Colores.sh
 
 ## Instalación de paquetes
-echo -e "$cian Instalando paquetes $default"
+echo -e "$CYAN Instalando paquetes $DEFAULT"
 apt install -y molly-brown amfora
 
 ## __Configuración de variables__
@@ -37,13 +37,13 @@ if [[ $? != 0 ]];then
 fi
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/molly-brown/'
 FILE="$FQDN.conf"
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 grep -q ferorge $DIR$FILE
 if [[ $? != 0 ]];then
 echo "
@@ -97,20 +97,20 @@ source "${0%/*}"/107.1_01.skel-gemini.sh
 source "${0%/*}"/endurecimiento/BOOT-5264_molly-brown.sh
 
 ## __Configuración de firewall__
-echo -e "$cian Configurando firewall $default"
+echo -e "$CYAN Configurando firewall $DEFAULT"
 ufw allow 1965/tcp comment $UNIT
 
 ## __Activación de servicio__
-echo -e "$cian Activando servicio $default"
+echo -e "$CYAN Activando servicio $DEFAULT"
 systemctl enable $UNIT
 
 ## __Reinicio de servicio__
-echo -e "$cian Reiniciando servicio $default"
+echo -e "$CYAN Reiniciando servicio $DEFAULT"
 systemctl restart $UNIT
 
 ## __Verificación de servicio__
-echo -e "$cian Verificando servicio $default"
+echo -e "$CYAN Verificando servicio $DEFAULT"
 systemctl status $UNIT
 
 ## __Verificación de configuración__
-echo -e "$cian Verificando configuración $default"
+echo -e "$CYAN Verificando configuración $DEFAULT"

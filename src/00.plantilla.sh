@@ -22,7 +22,7 @@ RUN=''
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Instalación de paquetes__
-echo -e "$cian Instalando paquetes $default"
+echo -e "$CYAN Instalando paquetes $DEFAULT"
 ###### apt install -y 'package'
 
 ## Creación de usuario
@@ -32,13 +32,13 @@ if [[ $? != 0 ]];then
 fi
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR=''
 FILE=''
 ###### cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 grep ferorge $DIR$FILE
 if [[ $? != 0 ]];then
 ###### echo '
@@ -55,20 +55,20 @@ sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
 sed -i -r "s#__RUN__#$RUN#g" $SERVICE
 
 ## __Configuración de firewall__
-echo -e "$cian Configurando firewall $default"
+echo -e "$CYAN Configurando firewall $DEFAULT"
 ###### ufw allow 'puerto'/'protocolo' comment $UNIT
 
 ## __Activación de servicio__
-echo -e "$cian Activando servicio $default"
+echo -e "$CYAN Activando servicio $DEFAULT"
 ###### systemctl enable $UNIT
 
 ## __Reinicio de servicio__
-echo -e "$cian Reiniciando servicio $default"
+echo -e "$CYAN Reiniciando servicio $DEFAULT"
 ###### systemctl restart $UNIT
 
 ## __Verificación de servicio__
-echo -e "$cian Verificando servicio $default"
+echo -e "$CYAN Verificando servicio $DEFAULT"
 ###### systemctl status $UNIT
 
 ## __Verificación de configuración__
-echo -e "$cian Verificando configuración $default"
+echo -e "$CYAN Verificando configuración $DEFAULT"

@@ -24,38 +24,38 @@ FOOT=$(openssl rand -hex $(( 7 * $LENGTH)) | fold -w 7)
 
 while [[ -n $CHK_USER ]]
 do
-  echo -e "$verde"
+  echo -e "$GREEN"
   read -p "Ingrese el nombre de usuario: " username
   CHK_USER=$(cut -d ':' -f 1 /etc/passwd | grep $username)
   if [[ -n $CHK_USER ]];
   then
-    echo -e "$rojo"
+    echo -e "$RED"
     cowsay 'El nombre de usuario no está disponible, por favor elige otro'
     echo ''
   fi
 done
 
-echo -e "$rojo"
+echo -e "$RED"
 read -p "Ingrese el nombre real (opcional): " name
-echo -e "$verde"
+echo -e "$GREEN"
 read -p "Ingrese el numero de habitacion (opcional): " room
-echo -e "$rojo"
+echo -e "$RED"
 read -p "Ingrese el numero del trabajo (opcional): " work
-echo -e "$verde"
+echo -e "$GREEN"
 read -p "Ingrese el numero de su hogar (opcional): " home
-echo -e "$rojo"
+echo -e "$RED"
 read -p "Ingrese su correo electronico (opcional): " Email
 password=$(openssl rand -hex $(( 7 * $LENGTH)) | fold -w 7 | shuf -n 1)
-echo -e "$verde
+echo -e "$GREEN
 Hola!
 Tu peticion de registro fue realizada satisfactoriamente y sera procesada a la brevedad.
 Por favor escriba la contraseña temporal marcada en otro color para iniciar sesion por primera vez:"
 
 echo -e "
-$magenta$HEAD
-$amarillo$password
-$magenta$FOOT
-$default
+$MAGENTA$HEAD
+$YELLOW$password
+$MAGENTA$FOOT
+$DEFAULT
 EOF"
 
 echo $username:$password:$name,$room,$work,$home,$Email >> ~/pendientes.txt

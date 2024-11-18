@@ -20,13 +20,13 @@ timestamp=$(date +%F_%H.%M.%S)
 MD='/tmp/user_index.md'
 
 ## __Respaldo de configuración__
-echo -e "$cian Respaldando configuración $default"
+echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/skel/public_html/'
 FILE='index.html'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$cian Modificando configuración $default"
+echo -e "$CYAN Modificando configuración $DEFAULT"
 ###### echo '
 ########################
 # Editado por ~ferorge #

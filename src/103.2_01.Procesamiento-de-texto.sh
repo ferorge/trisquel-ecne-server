@@ -13,98 +13,98 @@
 source "${0%/*}"/000.Colores.sh
 
 ## Ver o combinar ficheros
-echo -e "\n $cian $(apropos -e cat | head -n1) $default"
-echo -e "\$ $rojo cat file.txt $default"
+echo -e "\n $CYAN $(apropos -e cat | head -n1) $DEFAULT"
+echo -e "\$ $RED cat file.txt $DEFAULT"
 
 ## Ver 
-echo -e "\n $cian $(apropos -e bzcat) $default"
-echo -e "\$ $rojo bzcat file   $default"
+echo -e "\n $CYAN $(apropos -e bzcat) $DEFAULT"
+echo -e "\$ $RED bzcat file   $DEFAULT"
 
 ## Ver 
-echo -e "\n $cian $(apropos -e xzcat) $default"
-echo -e "\$ $rojo xzcat file  $default"
+echo -e "\n $CYAN $(apropos -e xzcat) $DEFAULT"
+echo -e "\$ $RED xzcat file  $DEFAULT"
 
 ## Ver 
-echo -e "\n $cian $(apropos -e zcat) $default"
-echo -e "\$ $rojo zcat file  $default"
+echo -e "\n $CYAN $(apropos -e zcat) $DEFAULT"
+echo -e "\$ $RED zcat file  $DEFAULT"
 
 ## Paginador
-echo -e "\n $cian $(apropos -e more | grep viewing) $default"
-echo -e "\$ $rojo more file  $default"
+echo -e "\n $CYAN $(apropos -e more | grep viewing) $DEFAULT"
+echo -e "\$ $RED more file  $DEFAULT"
 
 ## Paginador
-echo -e "\n $cian $(apropos less | grep opposite) $default"
-echo -e "\$ $rojo less file  $default"
+echo -e "\n $CYAN $(apropos less | grep opposite) $DEFAULT"
+echo -e "\$ $RED less file  $DEFAULT"
 
 ## Ver 
-echo -e "\n $cian $(apropos bzless) $default"
-echo -e "\$ $rojo bzless file  $default"
+echo -e "\n $CYAN $(apropos bzless) $DEFAULT"
+echo -e "\$ $RED bzless file  $DEFAULT"
 
 ## Ver 
-echo -e "\n $cian $(apropos xzless) $default"
-echo -e "\$ $rojo xzless file  $default"
+echo -e "\n $CYAN $(apropos xzless) $DEFAULT"
+echo -e "\$ $RED xzless file  $DEFAULT"
 
 ## Ver 
-echo -e "\n $cian $(apropos zless | tail -n1) $default"
-echo -e "\$ $rojo zless file  $default"
+echo -e "\n $CYAN $(apropos zless | tail -n1) $DEFAULT"
+echo -e "\$ $RED zless file  $DEFAULT"
 
 ## Ver primera parte de fichero
-echo -e "\n $cian $(apropos -e head | grep first) $default"
-echo -e "\$ $rojo head file  $default"
+echo -e "\n $CYAN $(apropos -e head | grep first) $DEFAULT"
+echo -e "\$ $RED head file  $DEFAULT"
 
 ## Ver última parte del fichero
-echo -e "\n $cian $(apropos -e tail | grep last) $default"
-echo -e "\$ $rojo tail file  $default"
+echo -e "\n $CYAN $(apropos -e tail | grep last) $DEFAULT"
+echo -e "\$ $RED tail file  $DEFAULT"
 
 ## Contar lineas de un fichero
-echo -e "\n $cian $(apropos -e wc) $default"
-echo -e "\$ $rojo wc file  $default"
+echo -e "\n $CYAN $(apropos -e wc) $DEFAULT"
+echo -e "\$ $RED wc file  $DEFAULT"
 
 ## Ordenar palabras de un texto.
-echo -e "\n $cian $(apropos -e sort | grep text) $default"
-echo -e "\$ $rojo sort file $default"
+echo -e "\n $CYAN $(apropos -e sort | grep text) $DEFAULT"
+echo -e "\$ $RED sort file $DEFAULT"
 
 ## Ver lineas repetidas de un fichero.
-echo -e "\n $cian $(apropos -e uniq) $default"
-echo -e "\$ $rojo uniq file $default"
+echo -e "\n $CYAN $(apropos -e uniq) $DEFAULT"
+echo -e "\$ $RED uniq file $DEFAULT"
 
 ## Ver un fichero en notación octal.
-echo -e "\n $cian $(apropos -e od) $default"
-echo -e "\$ $rojo od file $default"
+echo -e "\n $CYAN $(apropos -e od) $DEFAULT"
+echo -e "\$ $RED od file $DEFAULT"
 
 ## Ver número de lineas de un fichero.
-echo -e "\n $cian $(apropos -e nl) $default"
-echo -e "\$ $rojo nl file $default"
+echo -e "\n $CYAN $(apropos -e nl) $DEFAULT"
+echo -e "\$ $RED nl file $DEFAULT"
 
 ## Ver traducción de un fichero
-echo -e "\n $cian $(apropos -e tr) $default"
-echo -e "\$ $rojo tr file  $default"
+echo -e "\n $CYAN $(apropos -e tr) $DEFAULT"
+echo -e "\$ $RED tr file  $DEFAULT"
 
 ## Cortar texto usando delimitadores
-echo -e "\n $cian $(apropos -e cut | head -n1) $default"
-echo -e "\$ $rojo cut string $default"
+echo -e "\n $CYAN $(apropos -e cut | head -n1) $DEFAULT"
+echo -e "\$ $RED cut string $DEFAULT"
 
 ## Cortar fichero en piezas.
-echo -e "\n $cian $(apropos -e split | grep pieces) $default"
-echo -e "\$ $rojo split file  $default"
+echo -e "\n $CYAN $(apropos -e split | grep pieces) $DEFAULT"
+echo -e "\$ $RED split file  $DEFAULT"
 
 ## Ver 
-echo -e "\n $cian $() $default"
-echo -e "\$ $rojo   $default"
+echo -e "\n $CYAN $() $DEFAULT"
+echo -e "\$ $RED   $DEFAULT"
 
 ## Ver 
-echo -e "\n $cian $() $default"
-echo -e "\$ $rojo   $default"
+echo -e "\n $CYAN $() $DEFAULT"
+echo -e "\$ $RED   $DEFAULT"
 
 ## Ver 
-echo -e "\n $cian $() $default"
-echo -e "\$ $rojo   $default"
+echo -e "\n $CYAN $() $DEFAULT"
+echo -e "\$ $RED   $DEFAULT"
 
 ## Ver 
-echo -e "\n $cian $() $default"
-echo -e "\$ $rojo   $default"
+echo -e "\n $CYAN $() $DEFAULT"
+echo -e "\$ $RED   $DEFAULT"
 
 ## Ver 
-echo -e "\n $cian $() $default"
-echo -e "\$ $rojo   $default"
+echo -e "\n $CYAN $() $DEFAULT"
+echo -e "\$ $RED   $DEFAULT"
 
