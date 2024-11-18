@@ -39,7 +39,7 @@ FILE=''
 
 ## __Modificación de configuración__
 echo -e "$CYAN Modificando configuración $DEFAULT"
-grep ferorge $DIR$FILE
+grep ferorge $DIR$FILE > /dev/null
 if [[ $? != 0 ]];then
 ###### echo '
 ########################
