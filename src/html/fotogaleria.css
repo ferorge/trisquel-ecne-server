@@ -29,7 +29,7 @@ html {
 
 /* Content */
 body {
-  background-color: #000000;
+  background-color: rgba(128, 128, 128, 0.5);
   color: #e5e5e5;
 }
 
@@ -321,6 +321,10 @@ p > audio,
 p > img,
 p > video {
   margin: 0;
+}
+
+figure {
+    border: 5px solid black;
 }
 
 /* Horizontal rule */
