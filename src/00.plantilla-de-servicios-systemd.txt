@@ -12,6 +12,7 @@ ReadWritePaths=/tmp
 AmbientCapabilities=
 CapabilityBoundingSet=
 ### DeviceAllow=
+DynamicUser=false
 ### IPAddressDeny=any
 LockPersonality=true
 MemoryDenyWriteExecute=true
