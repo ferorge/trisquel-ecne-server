@@ -22,6 +22,12 @@ SERVICE="/lib/systemd/system/$UNIT.service"
 USER='molly-brown'
 VAR_DIR='/var/gemini/'
 RUN=''
+CBS='~CAP_MAC_* CAP_SYS_CHROOT CAP_NET_RAW CAP_NET_BROADCAST CAP_NET_BIND_SERVICE
+CAP_NET_ADMIN CAP_SYS_TTY_CONFIG CAP_SYS_RESOURCE CAP_SYS_NICE CAP_SYS_PACCT 
+CAP_SYS_BOOT CAP_SYS_PTRACE CAP_SYS_RAWIO CAP_SYS_ADMIN CAP_BLOCK_SUSPEND 
+CAP_IPC_LOCK CAP_LINUX_IMMUTABLE CAP_LEASE CAP_KILL CAP_BPF CAP_SETFCAP 
+CAP_FSETID CAP_CHOWN CAP_IPC_OWNER CAP_FOWNER CAP_DAC_* CAP_SETPCAP CAP_SETGID 
+CAP_SETUID CAP_AUDIT_*'
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
@@ -33,10 +39,11 @@ grep -q Endurecido $SERVICE
 if [[ $? != 0 ]];then
   sed -i "/\[Service\]/r ${0%/*}/../00.plantilla-de-servicios-systemd.txt" $SERVICE
   sed -i "0,/User/s/User=/User=$USER/" $SERVICE
-  sed -i "s/Group=/Group=ssl-cert/g" $SERVICE
+  sed -i "s/Group=/Group=ssl-cert/" $SERVICE
   sed -i "s,/tmp,$VAR_DIR,g" $SERVICE
-#  sed -i 's/CapabilityBoundingSet=/\#CapabilityBoundingSet=/g' $SERVICE
-  sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
+  sed -i "s/CapabilityBoundingSet=/CapabilityBoundingSet=$CBS/g" $SERVICE
+  sed -i 's/PrivateNetwork=true/PrivateNetwork=FALSE/g' $SERVICE
+  sed -i 's/ProtectHome=true/ProtectHome=read-only/g' $SERVICE
   sed -i 's/RestrictAddressFamilies=/RestrictAddressFamilies=AF_INET/g' $SERVICE
 fi
 
