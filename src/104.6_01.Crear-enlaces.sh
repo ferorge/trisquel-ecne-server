@@ -12,9 +12,6 @@
 ## __Fuente__
 ###### [fuente]:(https://learning.lpi.org/es/learning-materials/101-500/104/104.6/104.6_01/)
 
-## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
-
 ## __Configuración de variables__
 FQDN=$(hostname -f)
 timestamp=$(date +%F_%H.%M.%S)
@@ -36,8 +33,6 @@ echo -e "$CYAN Modificando configuración $DEFAULT"
 ###### ' >> $DIR$FILE
 #fi
 
-ln -s /var/local/ubuntu-noble-server/src/000.Colores.sh /etc/cron.hourly/000.Colores.sh
-ln -s /var/local/ubuntu-noble-server/src/000.Colores.sh /etc/cron.daily/000.Colores.sh
 ln -s /var/local/ubuntu-noble-server/src/540.Creacion-textos.sh /etc/cron.hourly/Crear-textos
 ln -s /var/local/ubuntu-noble-server/src/102.4_01.a.Actualizacion-paquetes.sh /etc/cron.daily/Actualizar-paquetes
 ln -s /var/local/ubuntu-noble-server/src/542.Creacion-plantilla-md.sh /etc/cron.daily/Crear-plantilla
