@@ -12,12 +12,6 @@
 ## __Fuente__
 ###### [fuente]:(enlace)
 
-## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
-
-## __Generación de requisitos previos__
-source "${0%/*}"/540.Creacion-textos.sh
-
 ## __Configuración de variables__
 HOST=$(hostname -s)
 timestamp=$(date +%F_%H.%M.%S)
