@@ -12,9 +12,6 @@
 ## __Fuente__
 ###### [LPI 109.2_01]:(https://learning.lpi.org/en/learning-materials/102-500/109/109.2/109.2_01/)
 
-## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
-
 ## __Configuración de variables__
 HOST='sobnix.dynv6.net'
 
