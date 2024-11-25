@@ -23,9 +23,6 @@ WD='/var/local/ubuntu-noble-server/src'
 ###### simbólico en cron.
 cd $WD
 
-## __Importación de colores__
-source $WD/000.Colores.sh
-
 ###### Token HTTP de la cuenta en dynv6.com
 TOKEN=$(cat /var/local/dynv6_token.txt)
 
