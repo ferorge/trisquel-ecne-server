@@ -12,13 +12,6 @@
 ## __Fuente__
 ###### [LPI 109.2_01]:(https://learning.lpi.org/en/learning-materials/101-500/102/102.4/102.4_01/)
 
-## __Definición de variables__
-WD='/var/local/ubuntu-noble-server/src'
-
-## __Importación de colores__
-cd $WD
-source $WD/000.Colores.sh
-
 ## __Instalación de paquetes__
 logger "$CYAN Instalando paquetes $DEFAULT"
 
