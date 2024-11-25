@@ -24,14 +24,7 @@ cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 ## __Modificación de configuración__
 echo -e "$CYAN Modificando configuración $DEFAULT"
 
-cat <<EOF | convert -font Liberation-Mono-Bold -density 72 -pointsize 12 -background black -fill green -page 5x7+10 -rotate "-90>" text:- -bordercolor white -border 4 $DIR$FILE
-
-
-$(cat /var/gopher/_cartel.md)
-_________________________________________________
-$(cat /var/gopher/_eslogan.md)
-_________________________________________________
-EOF
+cat /var/gopher/_cartel.md | convert -font Liberation-Mono-Bold -background black -fill red -extent 468x60-40+52 text:- -bordercolor white -border 2 $DIR$FILE
 
 chown fernando:staff $DIR$FILE
 chmod 0664 $DIR$FILE
