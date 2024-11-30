@@ -12,14 +12,11 @@
 ## __Fuente__
 ###### [fuente]:(enlace)
 
-## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
-
 ## __Configuración de variables__
 DIR='/var/gopher/'
 FILE=$DIR'_aside.md'
 FQDN=$(hostname -f)
-DR='/var/www/html/public/'
+DR='/var/local/ubuntu-noble-server/doc/site/'
 SUB_DIR=''
 timestamp=$(date +%F_%H.%M.%S)
 
@@ -36,20 +33,21 @@ echo -e "$CYAN Modificando configuración $DEFAULT"
 echo '' > $DIR$FILE
 
 # Recorre el document root buscando sitios y generando enlaces
-SITES=$(find $DR -name "*.html" | grep -v -e index -e users)
+SITES=$(find $DR -name "*.md" | sort)
 for SITE in $SITES
 do
-  NAME_SITE=$(echo $SITE | cut -d'/' -f 7- | rev | cut -d'.' -f 2 | rev)
+#  NAME_SITE=$(echo $SITE | cut -d'/' -f 8 | sort)
+  NAME_SITE=$(echo $SITE | cut -d'/' -f 8 | sort | cut -d '.' -f 2)
 # Verifica que NAME_SITE no esté vacío
   if [ ! -z "$NAME_SITE" ]
   then
-    DIR_NAME=$(echo $SITE | cut -d'/' -f 6)
+    DIR_NAME=$(echo $SITE | cut -d'/' -f 7)
     if [[ $SUB_DIR != $DIR_NAME ]]
     then
     SUB_DIR=$DIR_NAME
     echo "- ${SUB_DIR^}" >> $DIR$FILE
     fi
-    LINK=$(echo $SITE | sed "s/\/var\/www\/html\/public\//https:\/\/$FQDN\//" )
+    LINK=$(printf "https://$FQDN/$SUB_DIR/$NAME_SITE.html")
     echo "    - [$NAME_SITE]($LINK)" >> $DIR$FILE
   fi
 done

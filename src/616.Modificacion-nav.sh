@@ -12,12 +12,9 @@
 ## __Fuente__
 ###### [fuente]:(enlace)
 
-## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
-
 ## __Configuración de variables__
 FQDN=$(hostname -f)
-DR='/var/www/html/public/'
+DR='/var/local/ubuntu-noble-server/doc/site/'
 SUB_DIR=''
 timestamp=$(date +%F_%H.%M.%S)
 
@@ -34,14 +31,14 @@ echo -e "$CYAN Modificando configuración $DEFAULT"
 echo '' > $DIR$FILE
 
 # Recorre el document root buscando sitios y generando enlaces
-SITES=$(find $DR -name "*.html" | sort ) #| grep -v -e index -e users)
+SITES=$(find $DR -name "*0*.md" | sort ) #| grep -v -e index -e users)
 for SITE in $SITES
 do
-  NAME_SITE=$(echo $SITE | cut -d'/' -f 6 | grep html | cut -d '.' -f 1)
-# Verifica que NAME_SITE no esté vacío
+  NAME_SITE=$(echo $SITE | cut -d'/' -f 7 | cut -d '.' -f 2)
+  # Verifica que NAME_SITE no esté vacío
   if [ ! -z "$NAME_SITE" ]
   then
-    LINK=$(echo $SITE | sed "s/\/var\/www\/html\/public\//https:\/\/$FQDN\//" )
+    LINK=$(printf "https://$FQDN/$NAME_SITE.html")
     echo "- [${NAME_SITE^}]($LINK)" >> $DIR$FILE
   fi
 done
