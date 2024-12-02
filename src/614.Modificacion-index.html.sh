@@ -12,9 +12,6 @@
 ## __Fuente__
 ###### [fuente]:(enlace)
 
-## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
-
 ## __Configuración de variables__
 FQDN=$(hostname -f)
 timestamp=$(date +%F_%H.%M.%S)
@@ -30,19 +27,19 @@ echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/var/www/html/public/'
 FILE='index.html'
 META='/var/gopher/_meta.md'
+HOME='/var/local/ubuntu-noble-server/doc/site/10.Inicio.md'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$CYAN Modificando configuración $DEFAULT"
 DIV='_______________________________________________'
 
-echo "Title: $(head -n1 /var/gopher/_saludo.md)" >> $META
-multimarkdown --nolabels -o $DIR$FILE $META
+multimarkdown --nolabels -o $DIR$FILE $HOME
 
 cat <<EOF > $DIR$FILE
 $(sed -n "0,/<body>/p" $DIR$FILE)
 <header>
-$(multimarkdown --nolabels /var/gopher/_saludo.md)
+$(sed -n '/<h1>/p' $DIR$FILE )
 $(sed -e "s/^/    /g" /var/gopher/_cartel.md | multimarkdown --nolabels )
 $(sed -e "\$a $DIV" -e "1a $DIV" /var/gopher/_eslogan.md | multimarkdown --nolabels )
 </header>
@@ -54,11 +51,11 @@ $(sed -e "\$a $DIV" /var/gopher/_aside.md | multimarkdown --nolabels )
 </aside>
 <main>
 <section>
-$(multimarkdown --nolabels /var/gopher/_motd.md)
+$(sed '1,/<hr/d;/<h6/,$d' $DIR$FILE)
 </section>
 </main>
 <footer>
-$(sed -e "\$a $DIV" -e "1a $DIV \n" -e 's/__Autoría/##### __Autoría/' /var/gopher/_licencia.md | multimarkdown --nolabels )
+$(sed -n "/<h6>/,$ p" $DIR$FILE | sed -n '/<\/body>/q;p')
 $(multimarkdown --nolabels /var/gopher/{_pie.md,_vrms.md})
 </footer>
 $(sed -n "/<\/body>/,$ p" $DIR$FILE)
