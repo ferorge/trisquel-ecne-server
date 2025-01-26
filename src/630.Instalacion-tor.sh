@@ -10,62 +10,92 @@
 ###### [GPLv3]:(https://www.gnu.org/licenses/gpl.txt)
 
 ## __Fuente__
-###### [fuente]:(enlace)
+###### [Servicio cebolla]:(https://community.torproject.org/onion-services/setup/)
 
 ## __Configuración de variables__
 UNIT='tor'
 SERVICE="/lib/systemd/system/$UNIT.service"
 FQDN=$(hostname -f)
-USER=''
-VAR_DIR=''
+USER='debian-tor'
+VAR_DIR='/var/tor/'
 RUN=''
 timestamp=$(date +%F_%H.%M.%S)
 VERSION=0.4.8.13
 
-## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
-
 ## __Instalación de paquetes__
 echo -e "$CYAN Instalando paquetes $DEFAULT"
-apt install -y libevent openssl zlib libevent-dev
+#apt install -y libevent openssl zlib libevent-dev
 
 ## __Compilación de tor__
-cd /opt/
-wget https://dist.torproject.org/tor-$VERSION.tar.gz
-tar xzf tor-$VERSION.tar.gz 
-cd tor-$VERSION
-./configure
-make
-make install
+#cd /opt/
+#wget https://dist.torproject.org/tor-$VERSION.tar.gz
+#tar xzf tor-$VERSION.tar.gz 
+#cd tor-$VERSION
+#./configure
+#make
+#make install
 
-## Creación de usuario
-id $USER
+## __Creación de usuario__
+id $USER > /dev/null
 if [[ $? != 0 ]];then
   useradd --system --user-group --groups ssl-cert --comment $USER-daemon --home-dir $VAR_DIR --shell /usr/sbin/nologin $USER
 fi
 
 ## __Respaldo de configuración__
 echo -e "$CYAN Respaldando configuración $DEFAULT"
-DIR=''
-FILE=''
-###### cp $DIR$FILE /var/local/backups/$FILE.$timestamp
+DIR='/usr/local/etc/tor/'
+FILE='torrc'
+cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$CYAN Modificando configuración $DEFAULT"
-grep ferorge $DIR$FILE
+grep ferorge $DIR$FILE > /dev/null
 if [[ $? != 0 ]];then
-###### echo '
+echo '
 ########################
 # Editado por ~ferorge #
 ########################
-###### ' >> $DIR$FILE
+HiddenServiceDir /var/tor/
+HiddenServicePort 80 unix:/var/run/tor/my-website.sock
+' >> $DIR$FILE
 fi
 
+mkdir -p $VAR_DIR
+chown debian-tor:debian-tor $VAR_DIR
+mkdir -p /usr/local/var/tor
+chown debian-tor:debian-tor /usr/local/var/tor
+mkdir -p /var/run/tor/
+chown debian-tor:debian-tor /var/run/tor
+
+cat <<EOF > /etc/apache2/sites-available/onion.conf
+     <VirtualHost *:80>
+       ServerName $(cat /var/tor/hostname)
+       DocumentRoot /var/www/html/public
+       ErrorLog /var/log/apache2/onion.log
+     </VirtualHost>
+EOF
+
+a2ensite onion
+
+## __Modificación de esqueleto__
+#source "${0%/*}"/107.1_01.skel-finger.sh
+
+## __Creación de servicio__
+cat <<EOF > $SERVICE
+[Unit]
+Description=tor onion service
+After=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/tor
+
+[Install]
+WantedBy=multi-user.target
+EOF
+chmod 0644 $SERVICE
+
 ## __Endurecimiento de servicio__
-sed "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
-sed -i "s/__USER__/$USER/g" $SERVICE
-sed -i -r "s#__PATH__#$VAR_DIR#g" $SERVICE
-sed -i -r "s#__RUN__#$RUN#g" $SERVICE
+source "${0%/*}"/endurecimiento/BOOT-5264_tor.sh
 
 ## __Configuración de firewall__
 echo -e "$CYAN Configurando firewall $DEFAULT"
@@ -74,18 +104,20 @@ ufw allow 9051/tcp comment torrc
 
 ## __Activación de servicio__
 echo -e "$CYAN Activando servicio $DEFAULT"
-###### systemctl enable $UNIT
+systemctl enable $UNIT
 
 ## __Reinicio de servicio__
 echo -e "$CYAN Reiniciando servicio $DEFAULT"
-###### systemctl restart $UNIT
+systemctl restart $UNIT
 
 ## __Verificación de servicio__
 echo -e "$CYAN Verificando servicio $DEFAULT"
-###### systemctl status $UNIT
+systemctl status $UNIT
 
 ## __Verificación de configuración__
 echo -e "$CYAN Verificando configuración $DEFAULT"
+
+
 #wget -qO - https://check.torproject.org | grep Sorry
 #torsocks wget -qO - https://check.torproject.org | grep Congratulations
 
