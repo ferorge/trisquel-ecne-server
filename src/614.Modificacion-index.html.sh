@@ -46,7 +46,7 @@ $(sed -e "\$a $DIV" -e "1a $DIV" /var/gopher/_eslogan.md | multimarkdown --nolab
 <nav>
 $(sed -e "\$a $DIV" /var/gopher/_nav.md | multimarkdown --nolabels )
 </nav>
-<aside>
+nnnnn<aside>
 $(sed -e "\$a $DIV" /var/gopher/_aside.md | multimarkdown --nolabels )
 </aside>
 <main>

@@ -23,13 +23,13 @@ timestamp=$(date +%F_%H.%M.%S)
 ## __Respaldo de configuración__
 echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/var/gopher/'
-FILE='_aside.md'
+FILE='.30-aside.md'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$CYAN Modificando configuración $DEFAULT"
 
-# Borra el contenido de _aside.mmd
+# Borra el contenido de .30-aside.md
 echo '' > $DIR$FILE
 
 # Recorre el document root buscando sitios y generando enlaces

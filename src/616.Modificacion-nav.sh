@@ -21,13 +21,13 @@ timestamp=$(date +%F_%H.%M.%S)
 ## __Respaldo de configuración__
 echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/var/gopher/'
-FILE='_nav.md'
+FILE='.20-nav.md'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$CYAN Modificando configuración $DEFAULT"
 
-# Borra el contenido de _nav.md
+# Borra el contenido de .20-nav.md
 echo '' > $DIR$FILE
 
 # Recorre el document root buscando sitios y generando enlaces

@@ -17,28 +17,45 @@ HOST=$(hostname -s)
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
-echo -e "$CYAN Respaldando configuración $DEFAULT"
+#echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/var/gopher/'
 FILE="_plantilla.md"
 #cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
-## __Modificación de configuración__
-echo -e "$CYAN Modificando configuración $DEFAULT"
+### __Modificación de configuración__
+#echo -e "$CYAN Modificando configuración $DEFAULT"
 
 DIV='_______________________________________________'
 
 cat <<EOF > $DIR$FILE
-$(cat $DIR'_meta.md')
+$(cat $DIR'.00-meta.md')
 Title: Plantilla
 
-$DIV
+<noscript>Tu navegador no soporta JavaScript, por suerte en este sitio no lo necesitas.</noscript>
+<header>
+{{./.10-header.md}}
+</header>
+<nav>
+{{./.20-nav.md}}
+</nav>
+<aside>
+{{./.30-aside.md}}
+</aside>
+<main>
+{{./.40-main.md}}
+</main>
+<footer>
+{{./.70-footer.md}}
+</footer>
 
-Nuevo artículo en $HOST.
-$DIV
-
-$(cat $DIR'_licencia.md')
-$(echo EOF)
 EOF
+#$DIV
+
+#Nuevo artículo en $HOST.
+#$DIV
+
+#$(cat $DIR'_licencia.md')
+#$(echo EOF)
 
 sed -i 's/Documento/Plantilla/g' $DIR$FILE
 
