@@ -47,9 +47,6 @@ EOF
 
 cat <<EOF > $DIR'.10-header.md'
 
-{{./.11-saludo.md}}
-___
-
 {{./.12-cartel.md}}
 ___
 
@@ -60,12 +57,12 @@ EOF
 
 cat <<EOF > $DIR'.11-saludo.md'
 
-Bienvenide a sobnix
-===================
+Bienvenide
+==========
 
 EOF
 
-toilet -f ivrit -k "    $HOST" > $DIR'.12-cartel.md'
+toilet -f ivrit -k "       $HOST" > $DIR'.12-cartel.md'
 
 cat <<EOF > $DIR'.13-eslogan.md'
   
@@ -73,10 +70,6 @@ Servidor + Publico | Libre > Pubnix
   
 Pubnix | Auto alojado > Soberano
 EOF
-
-/usr/games/fortune rms2 > $DIR'_motd.md'
-
-toilet -f mini -k '  Usuaries' > $DIR'_usuaries.md'
 
 cat <<EOF > $DIR'.40-main.md'
 
@@ -88,8 +81,6 @@ EOF
 
 cat <<EOF > $DIR'.50-section.md'
 
-## Sección
-
 {{./.60-article.md}}
 
 EOF
@@ -98,6 +89,14 @@ cat <<EOF > $DIR'.60-article.md'
 
 ### Artículo
 
+EOF
+
+/usr/games/fortune rms2 > $DIR'.61-motd.md'
+
+toilet -f mini -k '    Usuaries' > $DIR'.62-usuaries.md'
+
+cat <<EOF > $DIR'.63-userlist.md'
+$(grep ':100:' /etc/passwd | grep -v ':x:100:' | cut -d ':' -f 1 | sort | xargs printf "\\~%s  \n")
 EOF
 
 cat <<EOF > $DIR'.70-footer.md'
@@ -111,6 +110,7 @@ ___
 {{./.73-vrms.md}}
 ___
 
+$(echo EOF)
 EOF
 
 cat <<EOF > $DIR'.71-licencia.md'
@@ -136,7 +136,7 @@ vrms |fold -w 64 | sed "2,$ s/^/>  /g" > $DIR'.73-vrms.md'
 logger "textos modificados por $USER"
 
 if [ $UID == 0 ]; then
-  chown root:staff /var/gopher/_*.md
-  chmod 0664 /var/gopher/_*.md
+  chown root:staff /var/gopher/.*.md
+  chmod 0664 /var/gopher/.*.md
 fi
 
