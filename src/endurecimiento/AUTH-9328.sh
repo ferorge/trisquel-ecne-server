@@ -33,6 +33,7 @@ cp $DIR$FILE /var/backups/$FILE.$timestamp
 ## __Modificación de configuración__
 echo -e "$cian Modificando $DIR$FILE $default"
 mkdir -p $DIR
+sed -i "s/UMASK\t\t022/\#UMASK\t\t022/g" $DIR$FILE
 echo "
 ########################
 # Editado por ~ferorge #
