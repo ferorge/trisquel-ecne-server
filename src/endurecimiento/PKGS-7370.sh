@@ -25,23 +25,27 @@ PKG='debsums'
 apt install -y $PKG
 
 ## __Respaldo de configuración__
-# DIR=''
-# FILE=''
-# echo -e "$cian Respaldando $DIR$FILE $default"
-# cp $DIR$FILE /var/backups/$FILE.$timestamp
+DIR='/etc/default/'
+FILE='debsums'
+echo -e "$cian Respaldando $DIR$FILE $default"
+cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-# echo -e "$cian Modificando $DIR$FILE $default"
-# mkdir -p $DIR
-# echo "
-# ########################
-# # Editado por ~ferorge #
-# ########################
-# #
-# # $TEST
-# #
-# ########################
-# " >> $DIR$FILE
+echo -e "$cian Modificando $DIR$FILE $default"
+mkdir -p $DIR
+
+sed -i '/CRON_CHECK/d' /etc/default/debsums
+
+echo "
+########################
+# Editado por ~ferorge #
+########################
+#
+# $TEST
+#
+CRON_CHECK=weekly
+########################
+" >> $DIR$FILE
 
 ## __Activación de servicio__
 # echo -e "$cian Activando servicio $default"
