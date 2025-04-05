@@ -10,7 +10,7 @@
 ###### [GPLv3]:(https://www.gnu.org/licenses/gpl.txt)
 
 ## __Fuente__
-###### [STRG-1846]:(https://linux-audit.com/configure-the-minimum-password-length-on-linux-systems/)
+###### [STRG-1846]:(https://cisofy.com/lynis/controls/STRG-1846/)
 
 ## __Importación de colores__
 source "${0%/*}"/../000.Colores.sh
