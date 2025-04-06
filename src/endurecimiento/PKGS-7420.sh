@@ -1,22 +1,22 @@
 #!/bin/bash
 
-# Endurecimiento AUTH-9262
+# Endurecimiento PKGS-7420
 
 ## __Autoría y licencia__
-###### Endurecimiento AUTH-9262 © 2025 por \~ferorge
+###### Endurecimiento PKGS-7420 © 2025 por \~ferorge
 ###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
 ###### Licenciado bajo GNU Public License version 3.
 ###### Para ver una copia de esta licencia, visite:
 ###### [GPLv3]:(https://www.gnu.org/licenses/gpl.txt)
 
 ## __Fuente__
-###### [AUTH-9262]:(https://linux-audit.com/configure-the-minimum-password-length-on-linux-systems/)
+###### [PKGS-7420]:(https://cisofy.com/lynis/controls/PKGS-7420/)
 
 ## __Importación de colores__
 source "${0%/*}"/../000.Colores.sh
 
 ## __Configuración de variables__
-TEST='AUTH-9262'
+TEST='PKGS-7420'
 UNIT=''
 timestamp=$(date +%F_%H.%M.%S)
 
