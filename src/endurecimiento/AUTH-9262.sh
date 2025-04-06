@@ -18,15 +18,15 @@ source "${0%/*}"/../000.Colores.sh
 ## __Configuración de variables__
 TEST='AUTH-9262'
 UNIT=''
-PKG='libpam-pwquality'
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Instalación de paquetes__
+PKG='libpam-pwquality'
 apt install -y $PKG
 
 ## __Respaldo de configuración__
-DIR=''
-FILE=''
+# DIR=''
+# FILE=''
 # echo -e "$cian Respaldando $DIR$FILE $default"
 # cp $DIR$FILE /var/backups/$FILE.$timestamp
 
