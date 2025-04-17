@@ -36,17 +36,31 @@ sed -i "s/User=/\#User=/g" $SERVICE
 sed -i "s/Group=/Group=_ssh/g" $SERVICE
 ###### sed -i -r "s#__RUN__#$RUN#g" $SERVICE
 ###### sed -i -r "s#__JAIL__#$VAR_DIR#g" $SERVICE
-sed -i 's/CapabilityBoundingSet=/CapabilityBoundingSet=~CAP_AUDIT_* CAP_FOWNER CAP_IPC_OWNER CAP_DAC_* CAP_BPF CAP_KILL CAP_FSETID CAP_SETFCAP CAP_LEASE CAP_LINUX_IMMUTABLE CAP_IPC_LOCK CAP_BLOCK_SUSPEND CAP_SYS_ADMIN CAP_SYS_RAWIO CAP_SYS_PTRACE CAP_SYS_BOOT CAP_SYS_PACCT CAP_SYS_NICE CAP_SYS_RESOURCE CAP_SYS_TTY_CONFIG CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_BROADCAST CAP_NET_RAW CAP_SETPCAP/g' $SERVICE
-sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
-sed -i 's/PrivateUsers=true/PrivateUsers=false/g' $SERVICE
-sed -i 's/RestrictAddressFamilies=/RestrictAddressFamilies=AF_INET AF_UNIX/g' $SERVICE
-sed -i 's/SystemCallFilter=@system-service/SystemCallFilter=~@clock @cpu-emulation @debug @module @obsolete @raw-io @reboot @swap/g' $SERVICE
+sed -i 's/CapabilityBoundingSet=/CapabilityBoundingSet=~CAP_AUDIT_* CAP_IPC_OWNER CAP_DAC_* CAP_BPF CAP_KILL CAP_FSETID CAP_SETFCAP CAP_LEASE CAP_LINUX_IMMUTABLE CAP_IPC_LOCK CAP_BLOCK_SUSPEND CAP_SYS_ADMIN CAP_SYS_RAWIO CAP_SYS_BOOT CAP_SYS_PACCT CAP_SYS_NICE CAP_SYS_RESOURCE CAP_SYS_TTY_CONFIG CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_BROADCAST CAP_NET_RAW CAP_SETPCAP/g' $SERVICE
+
 ###### Permite elevar a permisos de root.
 sed -i 's/NoNewPrivileges=true/NoNewPrivileges=false/g' $SERVICE
-###### Permite acceder a /tmp
+
+###### Permite conectarse.
+sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
+
+###### Permite acceder a /tmp.
 sed -i 's/PrivateTmp=true/PrivateTmp=false/g' $SERVICE
-###### Permite acceder a /home
+
+###### Permite conectarse.
+sed -i 's/PrivateUsers=true/PrivateUsers=false/g' $SERVICE
+
+###### Permite acceder a los procesos.
+sed -i 's/ProcSubset=pid/ProcSubset=/g' $SERVICE
+
+###### Permite acceder a /home.
 sed -i 's/ProtectHome=true/ProtectHome=false/g' $SERVICE
+
+###### Permite escritura de sistema de ficheros.
+sed -i 's/ProtectSystem=strict/ProtectSystem=/g' $SERVICE
+
+###### Permite conectarse.
+sed -i 's/SystemCallFilter=@system-service/SystemCallFilter=~@clock @cpu-emulation @debug @module @obsolete @raw-io @reboot @swap/g' $SERVICE
 
 ## __Recarga de servicio__
 echo -e "$cian Recargando servicio $default"
