@@ -17,16 +17,79 @@ source "${0%/*}"/../000.Colores.sh
 
 ## __Configuración de variables__
 TEST='KRNL-6000'
-UNIT=''
+UNIT=$TEST
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Instalación de paquetes__
 # PKG=''
 # apt install -y $PKG
 
+## __Método I __
+##### Instalación para ejecución de sysctl trae errores y advertencias durante el boot.
+
+# ## __Respaldo de configuración__
+# DIR='/usr/lib/sysctl.d/'
+# FILE='999-KRNL-6000.conf'
+# echo -e "$cian Respaldando $DIR$FILE $default"
+# cp $DIR$FILE /var/backups/$FILE.$timestamp
+
+# ## __Modificación de configuración__
+# echo -e "$cian Modificando $DIR$FILE $default"
+# mkdir -p $DIR
+# echo "
+# ########################
+# # Editado por ~ferorge #
+# ########################
+# #
+# # $TEST
+# #
+# dev.tty.ldisc_autoload=0
+# fs.protected_fifos=2
+# fs.protected_hardlinks=1
+# fs.protected_regular=2
+# fs.protected_symlinks=1
+# fs.suid_dumpable=0
+# kernel.core_uses_pid=1
+# kernel.ctrl-alt-del=0
+# kernel.dmesg_restrict=1
+# kernel.kptr_restrict=2
+# kernel.modules_disabled=1
+# # kernel.perf_event_paranoid=2 3 4
+# kernel.randomize_va_space=2
+# kernel.sysrq=0
+# kernel.unprivileged_bpf_disabled=1
+# kernel.yama.ptrace_scope=1
+# net.core.bpf_jit_harden=2
+# net.ipv4.conf.all.accept_redirects=0
+# net.ipv4.conf.all.accept_source_route=0
+# net.ipv4.conf.all.bootp_relay=0
+# net.ipv4.conf.all.forwarding=0
+# net.ipv4.conf.all.log_martians=1
+# # net.ipv4.conf.all.mc_forwarding=0
+# net.ipv4.conf.all.proxy_arp=0
+# net.ipv4.conf.all.rp_filter=1 
+# net.ipv4.conf.all.send_redirects=0
+# net.ipv4.conf.default.accept_redirects=0
+# net.ipv4.conf.default.accept_source_route=0 
+# net.ipv4.conf.default.log_martians=1
+# net.ipv4.icmp_echo_ignore_broadcasts=1 
+# net.ipv4.icmp_ignore_bogus_error_responses=1 
+# net.ipv4.tcp_syncookies=1
+# # net.ipv4.tcp_timestamps=0 1
+# net.ipv6.conf.all.accept_redirects=0
+# net.ipv6.conf.all.accept_source_route=0
+# net.ipv6.conf.default.accept_redirects=0
+# net.ipv6.conf.default.accept_source_route=0
+# ########################
+# " >> $DIR$FILE
+
+## __Método II__
+##### Creación de un servicio que se ejecuta al terminar el boot.
+##### No genera errores y adevertencias.
+
 ## __Respaldo de configuración__
-DIR='/usr/lib/sysctl.d/'
-FILE='999-KRNL-6000.conf'
+DIR='/etc/systemd/system/'
+FILE="$TEST.service"
 echo -e "$cian Respaldando $DIR$FILE $default"
 cp $DIR$FILE /var/backups/$FILE.$timestamp
 
@@ -40,59 +103,94 @@ echo "
 #
 # $TEST
 #
-dev.tty.ldisc_autoload=0
-fs.protected_fifos=2
-fs.protected_hardlinks=1
-fs.protected_regular=2
-fs.protected_symlinks=1
-fs.suid_dumpable=0
-kernel.core_uses_pid=1
-kernel.ctrl-alt-del=0
-kernel.dmesg_restrict=1
-kernel.kptr_restrict=2
-kernel.modules_disabled=1
-#kernel.perf_event_paranoid=2 3 4
-kernel.randomize_va_space=2
-kernel.sysrq=0
-kernel.unprivileged_bpf_disabled=1
-kernel.yama.ptrace_scope=1
-net.core.bpf_jit_harden=2
-net.ipv4.conf.all.accept_redirects=0
-net.ipv4.conf.all.accept_source_route=0
-net.ipv4.conf.all.bootp_relay=0
-net.ipv4.conf.all.forwarding=0
-net.ipv4.conf.all.log_martians=1
-#net.ipv4.conf.all.mc_forwarding=0
-net.ipv4.conf.all.proxy_arp=0
-net.ipv4.conf.all.rp_filter=1 
-net.ipv4.conf.all.send_redirects=0
-net.ipv4.conf.default.accept_redirects=0
-net.ipv4.conf.default.accept_source_route=0 
-net.ipv4.conf.default.log_martians=1
-net.ipv4.icmp_echo_ignore_broadcasts=1 
-net.ipv4.icmp_ignore_bogus_error_responses=1 
-net.ipv4.tcp_syncookies=1
-#net.ipv4.tcp_timestamps=0 1
-net.ipv6.conf.all.accept_redirects=0
-net.ipv6.conf.all.accept_source_route=0
-net.ipv6.conf.default.accept_redirects=0
-net.ipv6.conf.default.accept_source_route=0
+[Unit]
+Wants=multi-user.target
+After=multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/$TEST.sh
+
+[Install]
+WantedBy=multi-user.target
 ########################
 " >> $DIR$FILE
 
-sysctl --system
+## __Respaldo de configuración__
+DIR='/usr/local/bin/'
+FILE="$TEST.sh"
+echo -e "$cian Respaldando $DIR$FILE $default"
+cp $DIR$FILE /var/backups/$FILE.$timestamp
+
+## __Modificación de configuración__
+echo -e "$cian Modificando $DIR$FILE $default"
+mkdir -p $DIR
+echo "#!/usr/bin/bash
+
+########################
+# Editado por ~ferorge #
+########################
+#
+# $TEST
+#
+sysctl -w dev.tty.ldisc_autoload=0
+sysctl -w fs.protected_fifos=2
+sysctl -w fs.protected_hardlinks=1
+sysctl -w fs.protected_regular=2
+sysctl -w fs.protected_symlinks=1
+sysctl -w fs.suid_dumpable=0
+sysctl -w kernel.core_uses_pid=1
+sysctl -w kernel.ctrl-alt-del=0
+sysctl -w kernel.dmesg_restrict=1
+sysctl -w kernel.kptr_restrict=2
+sysctl -w kernel.modules_disabled=1
+# sysctl -w  kernel.perf_event_paranoid=2 3 4
+sysctl -w kernel.randomize_va_space=2
+sysctl -w kernel.sysrq=0
+sysctl -w kernel.unprivileged_bpf_disabled=1
+sysctl -w kernel.yama.ptrace_scope=1
+sysctl -w net.core.bpf_jit_harden=2
+sysctl -w net.ipv4.conf.all.accept_redirects=0
+sysctl -w net.ipv4.conf.all.accept_source_route=0
+sysctl -w net.ipv4.conf.all.bootp_relay=0
+sysctl -w net.ipv4.conf.all.forwarding=0
+sysctl -w net.ipv4.conf.all.log_martians=1
+# sysctl -w net.ipv4.conf.all.mc_forwarding=0
+sysctl -w net.ipv4.conf.all.proxy_arp=0
+sysctl -w net.ipv4.conf.all.rp_filter=1
+sysctl -w net.ipv4.conf.all.send_redirects=0
+sysctl -w net.ipv4.conf.default.accept_redirects=0
+sysctl -w net.ipv4.conf.default.accept_source_route=0
+sysctl -w net.ipv4.conf.default.log_martians=1
+sysctl -w net.ipv4.icmp_echo_ignore_broadcasts=1
+sysctl -w net.ipv4.icmp_ignore_bogus_error_responses=1
+sysctl -w net.ipv4.tcp_syncookies=1
+# sysctl -w net.ipv4.tcp_timestamps=0 1
+sysctl -w net.ipv6.conf.all.accept_redirects=0
+sysctl -w net.ipv6.conf.all.accept_source_route=0
+sysctl -w net.ipv6.conf.default.accept_redirects=0
+sysctl -w net.ipv6.conf.default.accept_source_route=0
+########################
+" >> $DIR$FILE
+
+chmod 0750 $DIR$FILE
+
+## __Recarga de servicio__
+echo -e "$cian Recargando servicio $default"
+systemctl daemon-reload
 
 ## __Activación de servicio__
-# echo -e "$cian Activando servicio $default"
-# systemctl enable $UNIT
+echo -e "$cian Activando servicio $default"
+systemctl enable $UNIT
 
 ## __Reinicio de servicio__
-# echo -e "$cian Reiniciando servicio $default"
-# systemctl restart $UNIT
+echo -e "$cian Reiniciando servicio $default"
+systemctl restart $UNIT
 
 ## __Verificación de servicio__
-# echo -e "$cian Verificando servicio $default"
-# systemctl status $UNIT
+echo -e "$cian Verificando servicio $default"
+systemctl status $UNIT
 
 ## __Verificacion de configuración__
 # echo -e "$cian Verificando configuración $default"
