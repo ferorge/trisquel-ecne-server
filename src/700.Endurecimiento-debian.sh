@@ -14,6 +14,9 @@
 
 ## __Modificación de configuración__
 
+###### Activación de registro remoto.
+source "${0%/*}"/endurecimiento/LOGG-2154.sh
+
 ###### Instalación de paquetes nuevos.
 source "${0%/*}"/endurecimiento/AUTH-9262.sh
 source "${0%/*}"/endurecimiento/HRDN-7230.sh
