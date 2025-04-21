@@ -50,13 +50,10 @@ source "${0%/*}"/endurecimiento/USB-1000.sh
 
 # source "${0%/*}"/endurecimiento/BOOT-5264_apache2.sh
 # source "${0%/*}"/endurecimiento/BOOT-5264_CAP_test.sh
-# source "${0%/*}"/endurecimiento/BOOT-5264_cron.sh
-# source "${0%/*}"/endurecimiento/BOOT-5264_dbus.sh
 # source "${0%/*}"/endurecimiento/BOOT-5264_exim4.sh
 # source "${0%/*}"/endurecimiento/BOOT-5264_gophernicus.sh
 # source "${0%/*}"/endurecimiento/BOOT-5264_inetutils-inetd.sh
 # source "${0%/*}"/endurecimiento/BOOT-5264_molly-brown.sh
-# source "${0%/*}"/endurecimiento/BOOT-5264_systemd-udevd.sh
 # source "${0%/*}"/endurecimiento/BOOT-5264_tor.sh
 
 ###### Purga de paquetes.
@@ -79,6 +76,11 @@ source "${0%/*}"/endurecimiento/BOOT-5264_auditd.sh
 source "${0%/*}"/endurecimiento/FINT-4350.sh
 source "${0%/*}"/endurecimiento/FINT-4402.sh
 source "${0%/*}"/endurecimiento/FINT-4316.sh
+
+###### Endurecimiento de servicios.
+source "${0%/*}"/endurecimiento/BOOT-5264_cron.sh
+source "${0%/*}"/endurecimiento/BOOT-5264_dbus.sh
+source "${0%/*}"/endurecimiento/BOOT-5264_systemd-udevd.sh
 
 ###### Configuración de contraseña de grub2.
 # source "${0%/*}"/endurecimiento/BOOT-5122.sh
