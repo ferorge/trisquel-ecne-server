@@ -16,6 +16,7 @@
 
 ###### Activación de registro remoto.
 source "${0%/*}"/endurecimiento/LOGG-2154.sh
+source "${0%/*}"/endurecimiento/BOOT-5264_rsyslog.sh
 
 ###### Instalación de paquetes nuevos.
 source "${0%/*}"/endurecimiento/AUTH-9262.sh
