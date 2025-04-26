@@ -18,6 +18,7 @@ source "${0%/*}"/../000.Colores.sh
 ## __Configuración de variables__
 UNIT='ifup@'
 SERVICE="/lib/systemd/system/$UNIT.service"
+Iface=$(netstat -i | grep -v -e lo -e Iface -e Kernel | cut -d ' ' -f 1)
 USER=''
 VAR_DIR=''
 RUN=''
@@ -47,9 +48,11 @@ systemctl daemon-reload
 
 ## __Reinicio de servicio__
 echo -e "$cian Reiniciando servicio $default"
-systemctl restart $UNIT
+systemctl restart $UNIT$Iface
 
 ## __Verificación de servicio__
 echo -e "$cian Verificando servicio $default"
-systemctl status $UNIT
+systemctl status $UNIT$Iface
+
+
 
