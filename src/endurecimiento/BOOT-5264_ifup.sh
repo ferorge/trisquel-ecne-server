@@ -40,7 +40,7 @@ sed -i 's/NoNewPrivileges=true/NoNewPrivileges=false/g' $SERVICE
 sed -i 's/PrivateMounts=true/PrivateMounts=false/g' $SERVICE
 sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
 sed -i 's/PrivateUsers=true/PrivateUsers=false/g' $SERVICE
-sed -i 's/ProtectSystem=strict/ProtectSystem=/g' $SERVICE
+sed -i 's/ProtectSystem=strict/ProtectSystem=true/g' $SERVICE
 
 ## __Recarga de servicio__
 echo -e "$cian Recargando servicio $default"
