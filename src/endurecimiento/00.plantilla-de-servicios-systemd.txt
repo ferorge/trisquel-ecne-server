@@ -4,8 +4,8 @@
 Type=simple
 Restart=always
 #ExecStart=__RUN__
-User=
-Group=
+User=root
+Group=root
 ### DynamicUser ####
 DynamicUser=false
 #StateDirectory=
