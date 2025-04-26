@@ -32,20 +32,24 @@ cp $SERVICE /var/backups/$UNIT.service.$timestamp
 
 ## __Endurecimiento de servicio__
 sed -i "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
+sed -i 's/Type=simple/#Type=simple/g' $SERVICE
+sed -i 's/Restart=always/#Restart=always/g' $SERVICE
 sed -i 's/CapabilityBoundingSet=/CapabilityBoundingSet=~CAP_SYS_ADMIN CAP_SYS_PTRACE CAP_SETUID CAP_SETGID CAP_SETPCAP/g' $SERVICE
-sed -i 's/RestrictAddressFamilies=/RestrictAddressFamilies=none/g' $SERVICE
+sed -i 's/NoNewPrivileges=true/NoNewPrivileges=false/g' $SERVICE
+sed -i 's/PrivateMounts=true/PrivateMounts=false/g' $SERVICE
+sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
+sed -i 's/PrivateUsers=true/PrivateUsers=false/g' $SERVICE
+sed -i 's/ProtectSystem=strict/ProtectSystem=/g' $SERVICE
 
 ## __Recarga de servicio__
 echo -e "$cian Recargando servicio $default"
 systemctl daemon-reload
 
-### Servicio inactivo ###
-
 ## __Reinicio de servicio__
 echo -e "$cian Reiniciando servicio $default"
-# systemctl restart $UNIT
+systemctl restart $UNIT
 
 ## __Verificación de servicio__
 echo -e "$cian Verificando servicio $default"
-# systemctl status $UNIT
+systemctl status $UNIT
 
