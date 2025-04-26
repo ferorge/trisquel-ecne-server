@@ -32,12 +32,10 @@ cp $SERVICE /var/backups/$UNIT.service.$timestamp
 
 ## __Endurecimiento de servicio__
 sed -i "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
-sed -i "s/User=/\#User=/g" $SERVICE
-sed -i "s/Group=/\#Group=/g" $SERVICE
 sed -i 's/CapabilityBoundingSet=/\#CapabilityBoundingSet=/g' $SERVICE
 sed -i 's/PrivateUsers=true/PrivateUsers=false/g' $SERVICE
 sed -i 's/RestrictAddressFamilies=/RestrictAddressFamilies=AF_NETLINK/g' $SERVICE
-sed -i 's/ProtectSystem=strict/ProtectSystem=/g' $SERVICE
+sed -i 's/ProtectSystem=strict/ProtectSystem=full/g' $SERVICE
 
 ## __Recarga de servicio__
 echo -e "$cian Recargando servicio $default"
