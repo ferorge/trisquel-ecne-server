@@ -3,17 +3,27 @@
 ###########################
 Type=simple
 Restart=always
+#ExecStart=__RUN__
 User=
 Group=
-#ExecStart=__RUN__
+### DynamicUser ####
+DynamicUser=false
+#StateDirectory=
+#CacheDirectory=
+#LogsDirectory=
+####################
 ReadWritePaths=/tmp
 #ConfigurationDirectory=__CFG__
 #RootDirectory=__JAIL__
 AmbientCapabilities=
 CapabilityBoundingSet=
-### DeviceAllow=
-DynamicUser=false
-### IPAddressDeny=any
+####################
+# DeviceAllow=
+DevicePolicy=auto
+####################
+# IPAddressAllow=
+# IPAddressDeny=any
+####################
 LockPersonality=true
 MemoryDenyWriteExecute=true
 NoNewPrivileges=true
