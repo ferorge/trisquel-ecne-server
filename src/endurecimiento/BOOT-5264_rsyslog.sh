@@ -34,10 +34,13 @@ cp $SERVICE /var/backups/$UNIT.service.$timestamp
 sed -i "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
 sed -i "s/User=/\#User=/g" $SERVICE
 sed -i "s/Group=/\#Group=/g" $SERVICE
-sed -i 's/CapabilityBoundingSet=/CapabilityBoundingSet=~CAP_SYS_ADMIN CAP_SYS_PTRACE/g' $SERVICE
+sed -i 's/CapabilityBoundingSet=/CapabilityBoundingSet=~CAP_MAC_* CAP_SYS_CHROOT CAP_NET_RAW CAP_NET_BROADCAST CAP_NET_BIND_SERVICE CAP_NET_ADMIN CAP_SYS_TTY_CONFIG CAP_SYS_RESOURCE CAP_SYS_NICE CAP_SYS_PACCT CAP_SYS_BOOT CAP_SYS_PTRACE CAP_SYS_RAWIO CAP_SYS_ADMIN CAP_BLOCK_SUSPEND CAP_IPC_LOCK CAP_LINUX_IMMUTABLE CAP_LEASE CAP_KILL CAP_BPF CAP_SETFCAP CAP_FSETID CAP_CHOWN CAP_IPC_OWNER CAP_FOWNER CAP_DAC_* CAP_SETPCAP CAP_SETGID CAP_SETUID CAP_AUDIT_*/g' $SERVICE
 sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
-sed -i 's/ProcSubset=pid/ProcSubset=/g' $SERVICE
-sed -i 's/ProtectSystem=strict/ProtectSystem=/g' $SERVICE
+sed -i 's/PrivateUsers=true/PrivateUsers=false/g' $SERVICE
+sed -i 's/ProcSubset=pid/ProcSubset=all/g' $SERVICE
+sed -i 's/ProtectKernelLogs=true/ProtectKernelLogs=false/g' $SERVICE
+sed -i 's/ProtectSystem=strict/ProtectSystem=full/g' $SERVICE
+sed -i 's/RestrictAddressFamilies=/RestrictAddressFamilies=AF_UNIX AF_INET/g' $SERVICE
 
 ## __Recarga de servicio__
 echo -e "$cian Recargando servicio $default"
