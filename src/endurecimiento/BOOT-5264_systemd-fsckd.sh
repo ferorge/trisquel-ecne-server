@@ -32,8 +32,9 @@ cp $SERVICE /var/backups/$UNIT.service.$timestamp
 
 ## __Endurecimiento de servicio__
 sed -i "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
+sed -i 's/Type=simple/#Type=simple/g' $SERVICE
+sed -i 's/Restart=always/#Restart=always/g' $SERVICE
 sed -i 's/CapabilityBoundingSet=/CapabilityBoundingSet=~CAP_SYS_ADMIN CAP_SYS_PTRACE CAP_SETUID CAP_SETGID CAP_SETPCAP/g' $SERVICE
-# sed -i 's///g' $SERVICE
 
 ## __Recarga de servicio__
 echo -e "$cian Recargando servicio $default"
