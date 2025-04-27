@@ -4,34 +4,46 @@
 Type=simple
 Restart=always
 #ExecStart=__RUN__
+
+##### Rootless #######
 User=root
 Group=root
-### DynamicUser ####
+##### Nobody user ####
+PrivateUsers=false
+##### DynamicUser ####
 DynamicUser=false
 #StateDirectory=
 #CacheDirectory=
 #LogsDirectory=
-####################
+######################
+
 ReadWritePaths=/tmp
 #ConfigurationDirectory=__CFG__
 #RootDirectory=__JAIL__
 AmbientCapabilities=
 CapabilityBoundingSet=
+
 ####################
 # DeviceAllow=
 DevicePolicy=auto
 ####################
-# IPAddressAllow=
-# IPAddressDeny=any
-####################
+
 LockPersonality=true
 MemoryDenyWriteExecute=true
 NoNewPrivileges=true
 PrivateDevices=true
 PrivateMounts=true
+
+##### Networking ########
 PrivateNetwork=true
+RestrictAddressFamilies=
+#########################
+# IPAddressAllow=
+# IPAddressDeny=any
+
+#########################
+
 PrivateTmp=true
-PrivateUsers=true
 ProcSubset=pid
 ProtectClock=true
 ProtectControlGroups=true
@@ -43,7 +55,6 @@ ProtectKernelTunables=true
 ProtectProc=invisible
 ProtectSystem=strict
 RemoveIPC=true
-RestrictAddressFamilies=
 RestrictNamespaces=true
 RestrictRealtime=true
 RestrictSUIDSGID=true
