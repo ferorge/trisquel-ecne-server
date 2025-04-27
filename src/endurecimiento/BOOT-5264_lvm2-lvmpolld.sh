@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Endurecimiento BOOT-5264 systemd-udevd
+# Endurecimiento BOOT-5264 lvm2-lvmpolld
 
 ## __Autoría y licencia__
-###### Endurecimiento BOOT-5264 systemd-udevd © 2025 por \~ferorge
+###### Endurecimiento BOOT-5264 lvm2-lvmpolld © 2025 por \~ferorge
 ###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
 ###### Licenciado bajo GNU Public License version 3.
 ###### Para ver una copia de esta licencia, visite:
@@ -16,7 +16,7 @@
 source "${0%/*}"/../000.Colores.sh
 
 ## __Configuración de variables__
-UNIT='systemd-udevd'
+UNIT='lvm2-lvmpolld'
 SERVICE="/lib/systemd/system/$UNIT.service"
 USER=''
 VAR_DIR=''
