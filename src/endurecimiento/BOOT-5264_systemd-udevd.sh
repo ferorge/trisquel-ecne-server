@@ -42,6 +42,7 @@ sed -i 's/PrivateTmp=true/PrivateTmp=false/g' $SERVICE
 sed -i 's/PrivateUsers=true/PrivateUsers=false/g' $SERVICE
 sed -i 's/ProcSubset=pid/ProcSubset=all/g' $SERVICE
 sed -i 's/ProtectHome=true/ProtectHome=false/g' $SERVICE
+sed -i 's/ProtectSystem=strict/ProtectSystem=false/g' $SERVICE
 sed -i 's/SystemCallFilter=@system-service/SystemCallFilter=@system-service @module @raw-io bpf/g' $SERVICE
 sed -i 's/RestrictAddressFamilies=/RestrictAddressFamilies=AF_UNIX AF_NETLINK AF_INET AF_INET6/g' $SERVICE
 
