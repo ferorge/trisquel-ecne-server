@@ -57,7 +57,7 @@ cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando $DIR$FILE $default"
-sed -e '/$title/,/${CLASS} /s/${CLASS} /${CLASS} --unrestricted /' -e '/$os/,/${CLASS} /s/${CLASS} /${CLASS} --user "" /' $DIR$FILE
+sed -i -e '/$title/,/${CLASS} /s/${CLASS} /${CLASS} --user \"\" /' -e '/$os/,/${CLASS} /s/${CLASS} /${CLASS} --unrestricted /' $DIR$FILE
 
 update-grub2
 
