@@ -49,6 +49,16 @@ EOF
 ########################
 " >> $DIR$FILE
 
+## __Respaldo de configuración__
+DIR='/etc/grub.d/'
+FILE='10_linux'
+echo -e "$cian Respaldando $DIR$FILE $default"
+cp $DIR$FILE /var/backups/$FILE.$timestamp
+
+## __Modificación de configuración__
+echo -e "$cian Modificando $DIR$FILE $default"
+sed -e '/$title/,/${CLASS} /s/${CLASS} /${CLASS} --unrestricted /' -e '/$os/,/${CLASS} /s/${CLASS} /${CLASS} --user "" /' $DIR$FILE
+
 update-grub2
 
 ## __Activación de servicio__
