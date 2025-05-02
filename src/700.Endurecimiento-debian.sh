@@ -31,15 +31,6 @@ source "${0%/*}"/endurecimiento/KRNL-5820.sh
 source "${0%/*}"/endurecimiento/PKGS-7420.sh
 source "${0%/*}"/endurecimiento/BOOT-5264_unattended-upgrades.sh
 
-###### Modificación de configuraciones.
-source "${0%/*}"/endurecimiento/BANN-7126.sh
-source "${0%/*}"/endurecimiento/BANN-7130.sh
-source "${0%/*}"/endurecimiento/FILE-7524.sh
-source "${0%/*}"/endurecimiento/AUTH-9230.sh
-source "${0%/*}"/endurecimiento/AUTH-9286.sh
-source "${0%/*}"/endurecimiento/AUTH-9328.sh
-source "${0%/*}"/endurecimiento/AUTH-9282.sh
-
 ###### Configuracion de ssh.
 source "${0%/*}"/endurecimiento/SSH-7408.sh
 source "${0%/*}"/endurecimiento/BOOT-5264_sshd.sh
@@ -84,4 +75,14 @@ source "${0%/*}"/endurecimiento/BOOT-5264_dbus.sh
 source "${0%/*}"/endurecimiento/BOOT-5264_systemd-udevd.sh
 
 ###### Configuración de contraseña de grub2.
-# source "${0%/*}"/endurecimiento/BOOT-5122.sh
+source "${0%/*}"/endurecimiento/BOOT-5122.sh
+
+###### Modificación de configuraciones.
+source "${0%/*}"/endurecimiento/BANN-7126.sh
+source "${0%/*}"/endurecimiento/BANN-7130.sh
+source "${0%/*}"/endurecimiento/FILE-7524.sh
+source "${0%/*}"/endurecimiento/AUTH-9230.sh
+source "${0%/*}"/endurecimiento/AUTH-9286.sh
+source "${0%/*}"/endurecimiento/AUTH-9328.sh
+source "${0%/*}"/endurecimiento/AUTH-9282.sh
+

@@ -1,9 +1,13 @@
 ###########################
 # Endurecido por ~ferorge #
 ###########################
-Type=simple
-Restart=always
-#ExecStart=__RUN__
+
+##### New units ######
+# Type=simple
+# Restart=always
+# ExecStart=__RUN__
+# ReadWritePaths=/tmp
+######################
 
 ##### Rootless #######
 User=root
@@ -12,18 +16,17 @@ Group=root
 PrivateUsers=false
 ##### DynamicUser ####
 DynamicUser=false
-#StateDirectory=
-#CacheDirectory=
-#LogsDirectory=
+# StateDirectory=
+# CacheDirectory=
+# LogsDirectory=
+# ConfigurationDirectory=
+# RootDirectory=
 ######################
 
-ReadWritePaths=/tmp
-#ConfigurationDirectory=__CFG__
-#RootDirectory=__JAIL__
 AmbientCapabilities=
 CapabilityBoundingSet=
 
-####################
+##### Devices ######
 # DeviceAllow=
 DevicePolicy=auto
 ####################
@@ -40,20 +43,22 @@ RestrictAddressFamilies=
 #########################
 # IPAddressAllow=
 # IPAddressDeny=any
-
 #########################
 
+##### File system  ######
 PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+#########################
+
 ProcSubset=pid
 ProtectClock=true
 ProtectControlGroups=true
-ProtectHome=true
 ProtectHostname=true
 ProtectKernelLogs=true
 ProtectKernelModules=true
 ProtectKernelTunables=true
 ProtectProc=invisible
-ProtectSystem=strict
 RemoveIPC=true
 RestrictNamespaces=true
 RestrictRealtime=true
@@ -62,4 +67,3 @@ SystemCallArchitectures=native
 SystemCallFilter=@system-service
 UMask=077
 ###########################
-
