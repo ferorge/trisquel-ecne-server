@@ -3,7 +3,7 @@
 # Endurecimiento BOOT-5264 dbus
 
 ## __Autoría y licencia__
-###### Endurecimiento BOOT-5264 dbus © 2024 por \~ferorge
+###### Endurecimiento BOOT-5264 dbus © 2025 por \~ferorge
 ###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
 ###### Licenciado bajo GNU Public License version 3.
 ###### Para ver una copia de esta licencia, visite:
