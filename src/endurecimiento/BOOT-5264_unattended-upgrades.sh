@@ -32,13 +32,10 @@ cp $SERVICE /var/backups/$UNIT.service.$timestamp
 
 ## __Endurecimiento de servicio__
 sed -i "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
-sed -i "s/User=/\#User=/g" $SERVICE
-sed -i "s/Group=/\#Group=/g" $SERVICE
 ###### sed -i -r "s#__RUN__#$RUN#g" $SERVICE
 ###### sed -i -r "s#__JAIL__#$VAR_DIR#g" $SERVICE
 sed -i 's/CapabilityBoundingSet=/\#CapabilityBoundingSet=/g' $SERVICE
 sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
-# sed -i 's/PrivateUsers=true/PrivateUsers=false/g' $SERVICE
 sed -i 's/RestrictAddressFamilies=/RestrictAddressFamilies=AF_INET AF_UNIX/g' $SERVICE
 # sed -i 's/SystemCallFilter=@system-service/SystemCallFilter=/g' $SERVICE
 sed -i 's/ProtectSystem=/\#ProtectSystem=/g' $SERVICE
