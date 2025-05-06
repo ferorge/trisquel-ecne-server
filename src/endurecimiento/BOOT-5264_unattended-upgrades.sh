@@ -32,6 +32,8 @@ cp $SERVICE /var/backups/$UNIT.service.$timestamp
 
 ## __Endurecimiento de servicio__
 sed -i "/\[Service\]/r ${0%/*}/00.plantilla-de-servicios-systemd.txt" $SERVICE
+sed -i 's/Type=simple/#Type=simple/g' $SERVICE
+sed -i 's/Restart=always/#Restart=always/g' $SERVICE
 ###### sed -i -r "s#__RUN__#$RUN#g" $SERVICE
 ###### sed -i -r "s#__JAIL__#$VAR_DIR#g" $SERVICE
 sed -i 's/CapabilityBoundingSet=/\#CapabilityBoundingSet=/g' $SERVICE
