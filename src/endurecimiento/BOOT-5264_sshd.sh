@@ -46,7 +46,7 @@ sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
 sed -i 's/PrivateTmp=true/PrivateTmp=false/g' $SERVICE
 
 ###### Permite acceder a los procesos.
-sed -i 's/ProcSubset=pid/ProcSubset=/g' $SERVICE
+sed -i 's/ProcSubset=pid/ProcSubset=all/g' $SERVICE
 
 ###### Permite acceder a /home.
 sed -i 's/ProtectHome=true/ProtectHome=false/g' $SERVICE
