@@ -43,6 +43,25 @@ umask 027
 ########################
 " >> $DIR$FILE
 
+# __Respaldo de configuración__
+DIR='/etc/'
+FILE='bash.bashrc'
+echo -e "$cian Respaldando $DIR$FILE $default"
+cp $DIR$FILE /var/backups/$FILE.$timestamp
+
+# __Modificacion de configuración__
+echo -e "$cian Modificando $DIR$FILE $default"
+echo "
+########################
+# Editado por ~ferorge #
+########################
+#
+# $TEST
+#
+umask 027
+########################
+" >> $DIR$FILE
+
 ## __Activación de servicio__
 # echo -e "$cian Activando servicio $default"
 # systemctl enable $UNIT
