@@ -42,11 +42,13 @@ echo "
 # <file system>                           <mount point>   <type>  <options>       <dump>  <pass>
 $(grep '/boot' /etc/fstab | grep defaults | sed 's/defaults/defaults,nodev,nosuid,noexec/g')
 $(grep '/home' /etc/fstab | grep defaults | sed 's/defaults/defaults,nodev,nosuid/g')
+$(grep '/tmp' /etc/fstab | grep defaults | sed 's/defaults/defaults,nodev,nosuid,noexec/g')
 ########################
 " >> $DIR$FILE
 
 sed -i '/boot.*defaults /d' /etc/fstab
 sed -i '/home.*defaults /d' /etc/fstab
+sed -i '/tmp.*defaults /d' /etc/fstab
 
 ## __Activación de servicio__
 # echo -e "$cian Activando servicio $default"
