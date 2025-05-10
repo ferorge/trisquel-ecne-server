@@ -44,6 +44,7 @@ $(grep '/boot' /etc/fstab | grep defaults | sed 's/defaults/defaults,nodev,nosui
 $(grep '/tmp' /etc/fstab | grep defaults | sed 's/defaults/defaults,nodev,nosuid,noexec/g')
 $(grep '/home' /etc/fstab | grep defaults | sed 's/defaults/defaults,nodev,nosuid/g')
 $(grep '/var' /etc/fstab | grep defaults | sed 's/defaults/defaults,nodev,nosuid/g')
+tmpfs   /dev/shm        tmpfs   defaults,nodev,nosuid,noexec    0       0
 ########################
 " >> $DIR$FILE
 
