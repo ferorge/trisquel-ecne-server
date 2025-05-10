@@ -35,7 +35,7 @@ source "${0%/*}"/endurecimiento/BOOT-5264_unattended-upgrades.sh
 
 ###### Configuracion de ssh.
 source "${0%/*}"/endurecimiento/SSH-7408.sh
-source "${0%/*}"/endurecimiento/BOOT-5264_sshd.sh
+# source "${0%/*}"/endurecimiento/BOOT-5264_sshd.sh
 
 ###### Bloqueo de módulos de kernel.
 source "${0%/*}"/endurecimiento/NETW-3200.sh
@@ -74,6 +74,14 @@ source "${0%/*}"/endurecimiento/FINT-4316.sh
 ###### Endurecimiento de servicios.
 source "${0%/*}"/endurecimiento/BOOT-5264_cron.sh
 source "${0%/*}"/endurecimiento/BOOT-5264_dbus.sh
+source "${0%/*}"/endurecimiento/BOOT-5264_dm-event.sh
+source "${0%/*}"/endurecimiento/BOOT-5264_ifup.sh
+source "${0%/*}"/endurecimiento/BOOT-5264_lvm2-lvmpolld.sh
+source "${0%/*}"/endurecimiento/BOOT-5264_rc-local.sh
+source "${0%/*}"/endurecimiento/BOOT-5264_systemd-ask-password-console.sh
+source "${0%/*}"/endurecimiento/BOOT-5264_systemd-ask-password-wall.sh
+source "${0%/*}"/endurecimiento/BOOT-5264_systemd-fsckd.sh
+source "${0%/*}"/endurecimiento/BOOT-5264_systemd-initctl.sh
 source "${0%/*}"/endurecimiento/BOOT-5264_systemd-udevd.sh
 
 ###### Configuración de contraseña de grub2.
@@ -90,3 +98,4 @@ source "${0%/*}"/endurecimiento/AUTH-9230.sh
 source "${0%/*}"/endurecimiento/AUTH-9286.sh
 source "${0%/*}"/endurecimiento/AUTH-9328.sh
 source "${0%/*}"/endurecimiento/AUTH-9282.sh
+source "${0%/*}"/endurecimiento/LOGG-2190.sh
