@@ -40,13 +40,11 @@ sed -i 's/CapabilityBoundingSet=/\#CapabilityBoundingSet=/g' $SERVICE
 sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
 sed -i 's/RestrictAddressFamilies=/RestrictAddressFamilies=AF_INET AF_UNIX/g' $SERVICE
 # sed -i 's/SystemCallFilter=@system-service/SystemCallFilter=/g' $SERVICE
-sed -i 's/ProtectSystem=/\#ProtectSystem=/g' $SERVICE
-###### Permite elevar a permisos de root.
-# sed -i 's/NoNewPrivileges=true/NoNewPrivileges=false/g' $SERVICE
+sed -i 's/ProtectSystem=/ProtectSystem=false/g' $SERVICE
 ###### Permite acceder a /tmp
 sed -i 's/PrivateTmp=true/PrivateTmp=false/g' $SERVICE
-###### Permite acceder a /home
-# sed -i 's/ProtectHome=true/ProtectHome=false/g' $SERVICE
+###### Permite escribir en memoria
+sed -i 's/MemoryDenyWriteExecute=true/MemoryDenyWriteExecute=false/g' $SERVICE
 
 ## __Recarga de servicio__
 echo -e "$cian Recargando servicio $default"
