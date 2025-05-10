@@ -40,6 +40,7 @@ echo "
 # $TEST
 #
 # <file system>                           <mount point>   <type>  <options>                     <dump>  <pass>
+$(grep '/ ' /etc/fstab | grep remount-ro | sed 's/errors=remount-ro/defaults/g')
 $(grep '/boot' /etc/fstab | grep defaults | sed 's/defaults/defaults,nodev,nosuid,noexec/g')
 $(grep '/tmp' /etc/fstab | grep defaults | sed 's/defaults/defaults,nodev,nosuid,noexec/g')
 $(grep '/home' /etc/fstab | grep defaults | sed 's/defaults/defaults,nodev,nosuid/g')
@@ -49,6 +50,7 @@ udev	                                  /dev		  devtmpfs defaults,nosuid,noexec	0
 ########################
 " >> $DIR$FILE
 
+sed -i '/ .*remount-ro/d' /etc/fstab
 sed -i '/boot.*defaults /d' /etc/fstab
 sed -i '/tmp.*defaults /d' /etc/fstab
 sed -i '/home.*defaults /d' /etc/fstab
