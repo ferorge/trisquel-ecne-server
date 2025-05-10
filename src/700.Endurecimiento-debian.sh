@@ -20,6 +20,7 @@ source "${0%/*}"/endurecimiento/BOOT-5264_rsyslog.sh
 
 ###### Instalación de paquetes nuevos.
 source "${0%/*}"/endurecimiento/AUTH-9262.sh
+source "${0%/*}"/endurecimiento/CRYP-8005.sh
 source "${0%/*}"/endurecimiento/HRDN-7230.sh
 source "${0%/*}"/endurecimiento/PKGS-7392.sh
 source "${0%/*}"/endurecimiento/PKGS-7370.sh
@@ -81,9 +82,11 @@ source "${0%/*}"/endurecimiento/BOOT-5122.sh
 ###### Modificación de configuraciones.
 source "${0%/*}"/endurecimiento/BANN-7126.sh
 source "${0%/*}"/endurecimiento/BANN-7130.sh
+source "${0%/*}"/endurecimiento/SHLL-6230.sh
+source "${0%/*}"/endurecimiento/FILE-6344.sh
+source "${0%/*}"/endurecimiento/FILE-6374.sh
 source "${0%/*}"/endurecimiento/FILE-7524.sh
 source "${0%/*}"/endurecimiento/AUTH-9230.sh
 source "${0%/*}"/endurecimiento/AUTH-9286.sh
 source "${0%/*}"/endurecimiento/AUTH-9328.sh
 source "${0%/*}"/endurecimiento/AUTH-9282.sh
-
