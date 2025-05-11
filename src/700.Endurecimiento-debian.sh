@@ -29,6 +29,8 @@ source "${0%/*}"/endurecimiento/PKGS-7392.sh
 source "${0%/*}"/endurecimiento/PKGS-7370.sh
 source "${0%/*}"/endurecimiento/PKGS-7394.sh
 source "${0%/*}"/endurecimiento/TOOL-5002.sh
+source "${0%/*}"/endurecimiento/TOOL-5120.sh
+source "${0%/*}"/endurecimiento/TOOL-5130.sh
 source "${0%/*}"/endurecimiento/KRNL-5820.sh
 source "${0%/*}"/endurecimiento/SHLL-6220.sh
 
