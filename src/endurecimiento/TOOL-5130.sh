@@ -31,7 +31,9 @@ apt install -y $PKG
 # cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-# echo -e "$cian Modificando $DIR$FILE $default"
+echo -e "$cian Modificando $DIR$FILE $default"
+suricata-update -o /etc/suricata/rules
+
 # mkdir -p $DIR
 # echo "
 # ########################
