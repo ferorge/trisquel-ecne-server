@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Endurecimiento CRYP-8005
+# Endurecimiento TOOL-5120
 
 ## __Autoría y licencia__
 ###### Endurecimiento TOOL-5120 © 2025 por \~ferorge
@@ -42,7 +42,6 @@ apt install -y $PKG
 # #
 # ########################
 # " >> $DIR$FILE
-# sed -i 's/^[^#]*32bit_api/#&/' $DIR$FILE
 
 ## __Activación de servicio__
 # echo -e "$cian Activando servicio $default"
