@@ -14,6 +14,9 @@
 
 ## __Modificación de configuración__
 
+###### Instalación de paquetes.
+apt install -y screen mc btop htop iotop ncdu git man bind9-dnsutils
+
 ###### Activación de registro remoto.
 source "${0%/*}"/endurecimiento/LOGG-2154.sh
 source "${0%/*}"/endurecimiento/BOOT-5264_rsyslog.sh
