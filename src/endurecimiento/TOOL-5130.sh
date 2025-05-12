@@ -32,6 +32,7 @@ apt install -y $PKG
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando $DIR$FILE $default"
+sed -i 's/# disable-promisc: no/disable-promisc: yes/g' /etc/suricata/suricata.yaml
 suricata-update -o /etc/suricata/rules
 
 # mkdir -p $DIR
