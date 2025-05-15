@@ -22,6 +22,8 @@ source "${0%/*}"/endurecimiento/LOGG-2154.sh
 source "${0%/*}"/endurecimiento/BOOT-5264_rsyslog.sh
 
 ###### Instalación de paquetes nuevos.
+source "${0%/*}"/endurecimiento/AUTH-9250.sh
+source "${0%/*}"/endurecimiento/AUTH-9252.sh
 source "${0%/*}"/endurecimiento/AUTH-9262.sh
 source "${0%/*}"/endurecimiento/CRYP-8005.sh
 source "${0%/*}"/endurecimiento/HRDN-7230.sh
