@@ -25,6 +25,7 @@ source "${0%/*}"/endurecimiento/BOOT-5264_rsyslog.sh
 source "${0%/*}"/endurecimiento/DEB-0280.sh
 source "${0%/*}"/endurecimiento/DEB-0810.sh
 source "${0%/*}"/endurecimiento/DEB-0811.sh
+source "${0%/*}"/endurecimiento/DEB-0831.sh
 source "${0%/*}"/endurecimiento/DEB-0880.sh
 source "${0%/*}"/endurecimiento/AUTH-9250.sh
 source "${0%/*}"/endurecimiento/AUTH-9252.sh
