@@ -15,13 +15,17 @@
 ## __Modificación de configuración__
 
 ###### Instalación de paquetes.
-apt install -y screen mc btop htop iotop ncdu git man bind9-dnsutils
+apt install -y screen mc btop htop iotop ncdu git man bind9-dnsutils lynis
 
 ###### Activación de registro remoto.
 source "${0%/*}"/endurecimiento/LOGG-2154.sh
 source "${0%/*}"/endurecimiento/BOOT-5264_rsyslog.sh
 
 ###### Instalación de paquetes nuevos.
+source "${0%/*}"/endurecimiento/DEB-0280.sh
+source "${0%/*}"/endurecimiento/DEB-0810.sh
+source "${0%/*}"/endurecimiento/DEB-0811.sh
+source "${0%/*}"/endurecimiento/DEB-0880.sh
 source "${0%/*}"/endurecimiento/AUTH-9250.sh
 source "${0%/*}"/endurecimiento/AUTH-9252.sh
 source "${0%/*}"/endurecimiento/AUTH-9262.sh
