@@ -31,6 +31,7 @@ source "${0%/*}"/endurecimiento/AUTH-9252.sh
 source "${0%/*}"/endurecimiento/AUTH-9262.sh
 source "${0%/*}"/endurecimiento/CRYP-8005.sh
 source "${0%/*}"/endurecimiento/HRDN-7230.sh
+source "${0%/*}"/endurecimiento/LYNIS.sh
 source "${0%/*}"/endurecimiento/NETW-3032.sh
 source "${0%/*}"/endurecimiento/PKGS-7392.sh
 source "${0%/*}"/endurecimiento/PKGS-7370.sh
