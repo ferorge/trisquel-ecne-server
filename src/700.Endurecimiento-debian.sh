@@ -27,6 +27,7 @@ source "${0%/*}"/endurecimiento/DEB-0810.sh
 source "${0%/*}"/endurecimiento/DEB-0811.sh
 source "${0%/*}"/endurecimiento/DEB-0831.sh
 source "${0%/*}"/endurecimiento/DEB-0880.sh
+source "${0%/*}"/endurecimiento/USB-3000.sh
 source "${0%/*}"/endurecimiento/AUTH-9250.sh
 source "${0%/*}"/endurecimiento/AUTH-9252.sh
 source "${0%/*}"/endurecimiento/AUTH-9262.sh
