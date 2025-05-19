@@ -25,10 +25,10 @@ PKG='fail2ban'
 apt install -y $PKG
 
 ## __Respaldo de configuración__
-# DIR=''
-# FILE=''
-# echo -e "$cian Respaldando $DIR$FILE $default"
-# cp $DIR$FILE /var/backups/$FILE.$timestamp
+DIR='/etc/fail2ban/'
+FILE='jail.local'
+echo -e "$cian Respaldando $DIR$FILE $default"
+cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 # echo -e "$cian Modificando $DIR$FILE $default"
@@ -42,6 +42,7 @@ apt install -y $PKG
 # #
 # ########################
 # " >> $DIR$FILE
+cp $DIR/jail.conf $DIR$FILE
 
 ## __Activación de servicio__
 # echo -e "$cian Activando servicio $default"
