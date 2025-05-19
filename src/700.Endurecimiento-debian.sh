@@ -113,3 +113,6 @@ source "${0%/*}"/endurecimiento/AUTH-9286.sh
 source "${0%/*}"/endurecimiento/AUTH-9328.sh
 source "${0%/*}"/endurecimiento/AUTH-9282.sh
 source "${0%/*}"/endurecimiento/LOGG-2190.sh
+
+###### Reboot
+source "${0%/*}"/endurecimiento/KRNL-5830.sh
