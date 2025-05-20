@@ -25,23 +25,24 @@ PKG='usbguard'
 apt install -y $PKG
 
 ## __Respaldo de configuración__
-# DIR=''
-# FILE=''
-# echo -e "$cian Respaldando $DIR$FILE $default"
-# cp $DIR$FILE /var/backups/$FILE.$timestamp
+DIR='/etc/usbguard/'
+FILE='usbguard-daemon.conf'
+echo -e "$cian Respaldando $DIR$FILE $default"
+cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-# echo -e "$cian Modificando $DIR$FILE $default"
-# mkdir -p $DIR
-# echo "
-# ########################
-# # Editado por ~ferorge #
-# ########################
-# #
-# # $TEST
-# #
-# ########################
-# " >> $DIR$FILE
+echo -e "$cian Modificando $DIR$FILE $default"
+mkdir -p $DIR
+echo "
+########################
+# Editado por ~ferorge #
+########################
+#
+# $TEST
+#
+PresentControllerPolicy=block
+########################
+" >> $DIR$FILE
 
 ## __Activación de servicio__
 # echo -e "$cian Activando servicio $default"
