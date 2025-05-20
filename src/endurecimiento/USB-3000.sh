@@ -33,6 +33,7 @@ cp $DIR$FILE /var/backups/$FILE.$timestamp
 ## __Modificación de configuración__
 echo -e "$cian Modificando $DIR$FILE $default"
 mkdir -p $DIR
+sed -i 's/PresentControllerPolicy/# PresentControllerPolicy/g' $DIR$FILE
 echo "
 ########################
 # Editado por ~ferorge #
