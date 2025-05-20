@@ -18,7 +18,7 @@ source "${0%/*}"/../000.Colores.sh
 ## __Configuración de variables__
 TEST='TOOL-5130'
 Iface=$(netstat -i | grep -v -e lo -e Iface -e Kernel | cut -d ' ' -f 1)
-UNIT="suricata@$Iface"
+UNIT='suricata'
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Instalación de paquetes__
