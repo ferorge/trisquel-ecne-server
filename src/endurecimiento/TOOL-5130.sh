@@ -17,7 +17,8 @@ source "${0%/*}"/../000.Colores.sh
 
 ## __Configuración de variables__
 TEST='TOOL-5130'
-UNIT=''
+Iface=$(netstat -i | grep -v -e lo -e Iface -e Kernel | cut -d ' ' -f 1)
+UNIT="suricata@$Iface"
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Instalación de paquetes__
@@ -25,14 +26,15 @@ PKG='suricata suricata-update'
 apt install -y $PKG
 
 ## __Respaldo de configuración__
-# DIR=''
-# FILE=''
-# echo -e "$cian Respaldando $DIR$FILE $default"
-# cp $DIR$FILE /var/backups/$FILE.$timestamp
+DIR='/etc/suricata/'
+FILE='suricata.yaml'
+echo -e "$cian Respaldando $DIR$FILE $default"
+cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 echo -e "$cian Modificando $DIR$FILE $default"
-sed -i 's/# disable-promisc: no/disable-promisc: yes/g' /etc/suricata/suricata.yaml
+sed -i 's/# disable-promisc: no/disable-promisc: yes/g' $DIR$FILE
+sed -i "s/eth0/$Iface/g" $DIR$FILE
 suricata-update -o /etc/suricata/rules
 
 # mkdir -p $DIR
@@ -47,16 +49,16 @@ suricata-update -o /etc/suricata/rules
 # " >> $DIR$FILE
 
 ## __Activación de servicio__
-# echo -e "$cian Activando servicio $default"
-# systemctl enable $UNIT
+echo -e "$cian Activando servicio $default"
+systemctl enable $UNIT
 
 ## __Reinicio de servicio__
-# echo -e "$cian Reiniciando servicio $default"
-# systemctl restart $UNIT
+echo -e "$cian Reiniciando servicio $default"
+systemctl restart $UNIT
 
 ## __Verificación de servicio__
-# echo -e "$cian Verificando servicio $default"
-# systemctl status $UNIT
+echo -e "$cian Verificando servicio $default"
+systemctl status $UNIT
 
 ## __Verificacion de configuración__
 # echo -e "$cian Verificando configuración $default"
