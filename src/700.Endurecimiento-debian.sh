@@ -108,6 +108,7 @@ source "${0%/*}"/endurecimiento/BANN-7130.sh
 source "${0%/*}"/endurecimiento/SHLL-6230.sh
 source "${0%/*}"/endurecimiento/FILE-6344.sh
 source "${0%/*}"/endurecimiento/FILE-6374.sh
+source "${0%/*}"/endurecimiento/FILE-6430.sh
 source "${0%/*}"/endurecimiento/FILE-7524.sh
 source "${0%/*}"/endurecimiento/AUTH-9230.sh
 source "${0%/*}"/endurecimiento/AUTH-9286.sh
