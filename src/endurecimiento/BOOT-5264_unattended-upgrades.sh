@@ -40,7 +40,7 @@ sed -i 's/CapabilityBoundingSet=/\#CapabilityBoundingSet=/g' $SERVICE
 sed -i 's/PrivateNetwork=true/PrivateNetwork=false/g' $SERVICE
 sed -i 's/RestrictAddressFamilies=/RestrictAddressFamilies=AF_INET AF_UNIX/g' $SERVICE
 # sed -i 's/SystemCallFilter=@system-service/SystemCallFilter=/g' $SERVICE
-sed -i 's/ProtectSystem=/ProtectSystem=false/g' $SERVICE
+sed -i 's/ProtectSystem=strict/ProtectSystem=false/g' $SERVICE
 ###### Permite acceder a /tmp
 sed -i 's/PrivateTmp=true/PrivateTmp=false/g' $SERVICE
 ###### Permite escribir en memoria
