@@ -26,23 +26,26 @@ apt install -y $PKG
 
 ## __Respaldo de configuración__
 DIR='/etc/fail2ban/'
-FILE='jail.local'
+FILE='fail2ban.local'
 echo -e "$cian Respaldando $DIR$FILE $default"
 cp $DIR$FILE /var/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-# echo -e "$cian Modificando $DIR$FILE $default"
-# mkdir -p $DIR
-# echo "
-# ########################
-# # Editado por ~ferorge #
-# ########################
-# #
-# # $TEST
-# #
-# ########################
-# " >> $DIR$FILE
-cp $DIR/jail.conf $DIR$FILE
+echo -e "$cian Modificando $DIR$FILE $default"
+mkdir -p $DIR
+echo "
+########################
+# Editado por ~ferorge #
+########################
+#
+# $TEST
+#
+[DEFAULT]
+allowipv6 = auto
+########################
+" >> $DIR$FILE
+
+touch $DIR/jail.local
 
 ## __Activación de servicio__
 # echo -e "$cian Activando servicio $default"
