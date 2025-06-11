@@ -33,11 +33,10 @@ FILE='sources.list'
 echo -e "$CYAN Modificando configuración $DEFAULT"
 grep ferorge $DIR$FILE > /dev/null
 if [[ $? != 0 ]];then
-###### echo '
+echo '
 ########################
 # Editado por ~ferorge #
 ########################
-######
 
 ## debian10 buster | pureOS 9 amber
 #deb https://repo.pureos.net/pureos amber main
@@ -59,3 +58,4 @@ deb https://repo.pureos.net/pureos landing main
 fi
 
 apt update && apt upgrade && apt full-upgrade && apt dist-upgrade && apt clean && apt autoclean && apt autoremove
+echo 'pureOS_landing' > /etc/hostname
