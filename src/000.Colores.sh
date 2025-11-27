@@ -3,7 +3,7 @@
 # Declaración de colores
 
 ## __Autoría y licencia__
-###### Declaración de colores © 2024 por \~ferorge
+###### Declaración de colores © 2025 por \~ferorge
 ###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
 ###### Licenciado bajo GNU Public License version 3.
 ###### Para ver una copia de esta licencia, visite:
@@ -14,18 +14,21 @@
 
 ## __Configuración de variables__
 timestamp=$(date +%F_%H.%M.%S)
-
-## __Respaldo de configuración__
-echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/etc/'
 FILE='environment'
-cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
-## __Modificación de configuración__
-echo -e "$CYAN Modificando configuración $DEFAULT"
-grep ferorge $DIR$FILE
+###### Modifica el fichero si no fue modificado previamente.
+grep ferorge $DIR$FILE > /dev/null
+
 if [[ $? != 0 ]];then
-echo '
+
+    ## __Respaldo de configuración__
+    logger "Respaldando configuración."
+    cp $DIR$FILE /var/local/backups/$FILE.$timestamp
+
+    ## __Modificación de configuración__
+    logger "Modificando configuración."
+    echo '
 ########################
 # Editado por ~ferorge #
 ########################
