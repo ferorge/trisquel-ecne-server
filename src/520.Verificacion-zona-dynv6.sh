@@ -3,7 +3,7 @@
 # Verificación de zona en dynv6.com
 
 ## __Autoría y licencia__
-###### Verificación de zona en dynv6.com © 2024 por \~ferorge
+###### Verificación de zona en dynv6.com © 2025 por \~ferorge
 ###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
 ###### Licenciado bajo GNU Public License version 3.
 ###### Para ver una copia de esta licencia, visite:
@@ -42,8 +42,8 @@ if [[ $CURRENT_IP != $ZONE_IP ]]; then
   logger $UPDATE
   CURRENT_IP=$(curl -s ifconfig.me)
   ZONE_IP=$(echo $JSON | grep -o '"ipv4address":"[^"]*' | grep -o '[^"]*$')
-  logger 'current IP: ' $CURRENT_IP
-  logger "$HOST IP: " $ZONE_IP
+  logger "$HOST IP: $ZONE_IP to $CURRENT_IP"
+  rndc flush
 else
   logger "$HOST equal current IP: $CURRENT_IP"
 fi
