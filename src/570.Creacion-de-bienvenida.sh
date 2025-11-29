@@ -3,7 +3,7 @@
 # Creación de bienvenida
 
 ## __Autoría y licencia__
-###### Creación de bienvenida © 2024 por \~ferorge
+###### Creación de bienvenida © 2025 por \~ferorge
 ###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
 ###### Licenciado bajo GNU Public License version 3.
 ###### Para ver una copia de esta licencia, visite:
@@ -12,20 +12,18 @@
 ## __Fuente__
 ###### [fuente]:(enlace)
 
-## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
-
 ## __Configuración de variables__
 timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
-echo -e "$CYAN Respaldando configuración $DEFAULT"
+logger '570 | Respaldando configuración.'
 DIR='/var/local/'
 FILE='bienvenide.sh'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$CYAN Modificando configuración $DEFAULT"
+logger '570 | Modificando configuración.'
+
 echo '#!/bin/bash
 
 ########################
@@ -43,9 +41,9 @@ export WIDTH=$(tput cols)
 
 /usr/games/lolcat -f -a -s 200 <<EOF
 $(echo -e \\e[2J\\e[\;H)
-$(cat /var/gopher/_cartel.md)
+$(cat /var/gopher/12-cartel.md)
 _________________________________________________
-$(cat /var/gopher/_eslogan.md)
+$(cat /var/gopher/13-eslogan.md)
 _________________________________________________
 $(cat /var/gopher/_motd.md | /usr/games/cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow)
 _________________________________________________
@@ -56,7 +54,6 @@ Tiempo en linea: $(uptime -p)
 _________________________________________________
 
 Usuarios conectados: $(who -q)
-
 EOF
 ' > $DIR$FILE
 
@@ -67,3 +64,4 @@ if [ $UID == 0 ]; then
   chown root:staff $DIR$FILE
   chmod 0775 $DIR$FILE
 fi
+
