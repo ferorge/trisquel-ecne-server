@@ -45,7 +45,7 @@ $(cat $GOPHER_PATH'12-cartel.md')
 _________________________________________________
 $(cat $GOPHER_PATH'13-eslogan.md')
 _________________________________________________
-$(cat $GOPHER_PATH'_motd.md' | /usr/games/cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow)
+$(cat $GOPHER_PATH'61-motd.md' | /usr/games/cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow)
 _________________________________________________
 $(vrms | fold -s -w 50)
 _________________________________________________
