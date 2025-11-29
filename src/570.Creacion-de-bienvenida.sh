@@ -23,7 +23,7 @@ cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 logger '570 | Modificando configuración.'
-
+GOPHER_PATH='/var/gopher/es/'
 echo '#!/bin/bash
 
 ########################
@@ -41,11 +41,11 @@ export WIDTH=$(tput cols)
 
 /usr/games/lolcat -f -a -s 200 <<EOF
 $(echo -e \\e[2J\\e[\;H)
-$(cat /var/gopher/12-cartel.md)
+$(cat $GOPHER_PATH'12-cartel.md')
 _________________________________________________
-$(cat /var/gopher/13-eslogan.md)
+$(cat $GOPHER_PATH'13-eslogan.md')
 _________________________________________________
-$(cat /var/gopher/_motd.md | /usr/games/cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow)
+$(cat $GOPHER_PATH'_motd.md' | /usr/games/cowsay -W 47 -f /usr/share/cowsay/cows/eyes.cow)
 _________________________________________________
 $(vrms | fold -s -w 50)
 _________________________________________________
