@@ -131,6 +131,6 @@ vrms |fold -w 64 | sed "2,$ s/^/>  /g" > $DIR'73-vrms.md'
 logger "textos modificados por $USER"
 
 if [ $UID == 0 ]; then
-  chown root:staff $DIR"*.md"
-  chmod 0664 $DIR"*.md"
+  chown root:staff $DIR*.md
+  chmod 0664 $DIR*.md
 fi
