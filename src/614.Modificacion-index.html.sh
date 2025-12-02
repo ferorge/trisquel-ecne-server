@@ -26,7 +26,7 @@ source "${0%/*}"/618.Modificacion-aside.sh
 echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/var/www/html/public/'
 FILE='index.html'
-META='/var/gopher/_meta.md'
+META='/var/gopher/es/.01-head.mmd'
 HOME='/var/local/ubuntu-noble-server/doc/site/10.Inicio.md'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 

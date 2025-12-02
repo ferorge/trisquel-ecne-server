@@ -30,7 +30,7 @@ logger '540 | Modificando configuración.'
 
 DIV='_______________________________________________'
 
-cat <<EOF > $DIR'.00-meta.mmd'
+cat <<EOF > $DIR'.01-head.mmd'
 Language: es
 Author: ~ferorge
 Email: ferorge@texto-plano.xyz

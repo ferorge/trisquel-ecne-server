@@ -18,17 +18,15 @@ timestamp=$(date +%F_%H.%M.%S)
 
 ## __Respaldo de configuración__
 logger "542 | Respaldando configuración."
-DIR='/var/gopher/'
-FILE=".template.mmd"
+DIR='/var/gopher/es/'
+FILE=".02-body.mmd"
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
 logger "542 | Modificando configuración."
 
-DIV='_______________________________________________'
-
 cat <<EOF > $DIR$FILE
-$(cat $DIR'.00-meta.mmd')
+$(cat $DIR'.01-head.mmd')
 Title: Plantilla
 
 <noscript>Tu navegador no soporta JavaScript, por suerte en este sitio no lo necesitas.</noscript>
@@ -49,15 +47,6 @@ Title: Plantilla
 </footer>
 
 EOF
-#$DIV
-
-#Nuevo artículo en $HOST.
-#$DIV
-
-#$(cat $DIR'71-licencia.md')
-#$(echo EOF)
-
-sed -i 's/Documento/Plantilla/g' $DIR$FILE
 
 logger "542 | $FILE modificados por $USER"
 
