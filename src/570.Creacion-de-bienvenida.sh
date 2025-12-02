@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Creación de bienvenida
 
@@ -24,7 +24,7 @@ cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 ## __Modificación de configuración__
 logger '570 | Modificando configuración.'
 GOPHER_PATH='/var/gopher/es/'
-echo '#!/bin/bash
+echo '#!/usr/bin/env bash
 
 ########################
 # Editado por ~ferorge #
