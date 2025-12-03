@@ -52,9 +52,10 @@ fi
 LAST_KERNEL=$(ls /boot/vmlinuz* | tail -n 1 | cut -d '-' -f 2-4)
 CURRENT_KERNEL=$(uname -r)
 
-if [ ! "${CURRENT_KERNEL}" = "${LAST_KERNEL}" ]; then
-    reboot
-fi
+## Condicional comentado para incorporar a rc.local
+# if [ ! "${CURRENT_KERNEL}" = "${LAST_KERNEL}" ]; then
+#     reboot
+# fi
 
 ## __Activación de servicio__
 # echo -e "$cian Activando servicio $default"
