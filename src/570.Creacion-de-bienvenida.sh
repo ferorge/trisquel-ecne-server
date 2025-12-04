@@ -54,7 +54,7 @@ _________________________________________________
 Tiempo en linea: $(uptime -p)
 _________________________________________________
 
-Usuarios conectados: $(echo -e $(who -u | cut -d " " -f 1 | uniq | sort))
+Usuarios conectados: $(echo -e $(who -u | cut -d " " -f 1 | sort | uniq))
 EOF
 ' > $DIR$FILE
 
