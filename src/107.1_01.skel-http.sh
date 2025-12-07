@@ -3,7 +3,7 @@
 # Esqueleto para html
 
 ## __Autoría y licencia__
-###### Esqueleto para html © 2024 por \~ferorge
+###### Esqueleto para html © 2025 por \~ferorge
 ###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
 ###### Licenciado bajo GNU Public License version 3.
 ###### Para ver una copia de esta licencia, visite:
@@ -12,21 +12,20 @@
 ## __Fuente__
 ###### [fuente]:(https://learning.lpi.org/es/learning-materials/102-500/107/107.1/107.1_01/)
 
-## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
-
 ## __Configuración de variables__
 timestamp=$(date +%F_%H.%M.%S)
+YEAR=$(date +%Y)
+DATE=$(date +%F)
 MD='/tmp/user_index.md'
 
 ## __Respaldo de configuración__
-echo -e "$CYAN Respaldando configuración $DEFAULT"
+logger 'skel-http | Respaldando configuración.'
 DIR='/etc/skel/public_html/'
 FILE='index.html'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$CYAN Modificando configuración $DEFAULT"
+logger 'skel-http | Modificando configuración.'
 ###### echo '
 ########################
 # Editado por ~ferorge #
@@ -36,7 +35,22 @@ echo -e "$CYAN Modificando configuración $DEFAULT"
 # Agregar directorio y fichero a skel
 mkdir -p $DIR
 chmod 0755 $DIR
-cowsay -f pocho 'Bienvenide a mi sitio web libre, público y soberano.' | sed 's/^/          /g' > $MD
+cat <<EOF > $MD
+Language: es
+Author: sobnix
+Email: root@sobnix.ar
+Affiliation: https://$FQDN
+Date: $DATE
+copyright: $YEAR, sobnix, CC BY-SA 4.0.
+KeyWords: servidor, publico, libre, pubnix, auto alojado, soberano
+css: lynx.css
+Quotes Language: es
+Base Header Level: 1
+Title: Home
+
+EOF
+
+cowsay -f pocho 'Bienvenide a mi sitio web libre, público y soberano.' | sed 's/^/          /g' >> $MD
 echo '' >> $DIR$FILE
 
 multimarkdown --nolabels -o $DIR$FILE $MD
