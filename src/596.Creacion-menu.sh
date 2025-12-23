@@ -50,7 +50,10 @@ do
     echo -e "$item$name\t$path" >> $DIR$FILE
 done
 
-###### Elimina el fichero temporal
+###### Elimina la primer linea vacía del fichero.
+sed -i '1d' $DIR$FILE
+
+###### Elimina el fichero temporal.
 rm $files
 
 logger "$FILE modificado por $(whoami)"
