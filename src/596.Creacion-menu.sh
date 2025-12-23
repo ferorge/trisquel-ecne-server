@@ -40,7 +40,7 @@ dir=' '
 for file in $articles;
 do
     item=0
-    name=$(echo $file | cut -d '.' -f 2)
+    name=$(echo $(echo $file | cut -d '.' -f 2) | sed 's/_/ /g')
     current_dir=$(grep $file $files | rev | cut -d '/' -f 2 | rev)
     path=$(grep $file $files | rev | cut -d '/' -f 1-4 | rev)
     if [ "$current_dir" != "$dir" ] ; then
