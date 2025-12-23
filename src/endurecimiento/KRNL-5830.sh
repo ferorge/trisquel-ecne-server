@@ -52,7 +52,7 @@ fi
 LAST_KERNEL=$(ls /boot/vmlinuz* | tail -n 1 | cut -d '-' -f 2-4)
 CURRENT_KERNEL=$(uname -r)
 
-## Condicional comentado para incorporar a rc.local
+## Condicional comentado para incorporar guión a rc.local
 # if [ ! "${CURRENT_KERNEL}" = "${LAST_KERNEL}" ]; then
 #     reboot
 # fi
