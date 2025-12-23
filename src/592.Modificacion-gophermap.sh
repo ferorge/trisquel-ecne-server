@@ -3,7 +3,7 @@
 # Modificación de gophermap
 
 ## __Autoría y licencia__
-###### Modificación de gophermap © 2024 por \~ferorge
+###### Modificación de gophermap © 2025 por \~ferorge
 ###### [ferorge@texto-plano.xyz](mailto:ferorge@texto-plano.xyz).
 ###### Licenciado bajo GNU Public License version 3.
 ###### Para ver una copia de esta licencia, visite:
@@ -12,66 +12,53 @@
 ## __Fuente__
 ###### [fuente]:(enlace)
 
-## __Importación de colores__
-source "${0%/*}"/000.Colores.sh
+## __Creacion de textos__
+source "${0%/*}"/540.Creacion-textos.sh
+
+## __Creacion de navbar__
+source "${0%/*}"/594.Creacion-navbar.sh
+
+## __Creacion de navbar__
+source "${0%/*}"/596.Creacion-menu.sh
 
 ## __Configuración de variables__
-FQDN=$(hostname -f)
 timestamp=$(date +%F_%H.%M.%S)
-DIV='_________________________________________________'
+DIV='  ______ ______ ______ ______ ______ ______ ______ ______ ______'
 
 ## __Respaldo de configuración__
-echo -e "$CYAN Respaldando configuración $DEFAULT"
+logger '592 | Respaldando configuración.'
 DIR='/var/gopher/'
 FILE='gophermap'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__
-echo -e "$CYAN Modificando configuración $DEFAULT"
-#ls /var/local/saludo
-#if [[ $? != 0 ]];then
-#  source "${0%/*}"/540.Creacion-saludo.sh
-#fi
-#
-#ls /var/local/motd
-#if [[ $? != 0 ]];then
-#  source "${0%/*}"/542.Creacion-mensaje-del-dia.sh
-#fi
-#
-#ls /var/local/usuaries
-#if [[ $? != 0 ]];then
-#  source "${0%/*}"/544.Creacion-usuaries.sh
-#fi
-#
-#sed 's/######/ /g' /var/local/saludo > $DIR$FILE
-#cat /var/local/motd | cowsay -f tux >> $DIR$FILE
-#echo '_________________________________________________
-#' >> $DIR$FILE
-#vrms | fold -s -w 64 >> $DIR$FILE
-#echo '_________________________________________________
-#' >> $DIR$FILE
-#echo " En línea desde: $(uptime -s)" >> $DIR$FILE
-#echo '_________________________________________________
-#' >> $DIR$FILE
-#cat /var/local/usuaries >> $DIR$FILE
-#echo '~' >> $DIR$FILE
+logger '592 | Modificando configuración.'
 
 cat <<EOF > $DIR$FILE
-=./_cartel.md
+=es/12-cartel.md
 $DIV
-=./_eslogan.md
+=es/13-eslogan.md
 $DIV
-=./_motd.md
+=es/21-navbar.txt
 $DIV
-=./_saludo.md
+=es/31-menu.txt
 $DIV
-=./_licencia.md
+
+$(fold -s -w 63 es/61-motd.md)
 $DIV
-=./_pie.md
-=./_vrms.md
+=es/62-usuaries.md
+$DIV
+
+~
+$DIV
+=es/72-pie.md
+=es/73-vrms.md
 EOF
 
-logger "$FILE modificado por $USER"
+# $DIV
+# $(sed s/Documento/gophermap/g es/71-licencia.md)
+
+logger "$FILE modificado por $(whoami)"
 
 if [ $UID == 0 ]; then
   chown root:staff $DIR$FILE
