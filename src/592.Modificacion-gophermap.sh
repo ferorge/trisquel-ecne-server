@@ -44,7 +44,7 @@ $DIV
 =es/31-menu.txt
 $DIV
 
-$(fold -s -w 63 es/61-motd.md)
+$(fold -s -w 63 $DIR'es/61-motd.md')
 $DIV
 =es/62-usuaries.md
 $DIV
@@ -54,9 +54,6 @@ $DIV
 =es/72-pie.md
 =es/73-vrms.md
 EOF
-
-# $DIV
-# $(sed s/Documento/gophermap/g es/71-licencia.md)
 
 logger "$FILE modificado por $(whoami)"
 
