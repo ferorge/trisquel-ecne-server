@@ -126,7 +126,7 @@ cat <<EOF > $DIR'72-pie.md'
 $HOST | Pubnix soberano | __En línea desde: $(uptime -s)__
 EOF
 
-vrms |fold -w 64 | sed "2,$ s/^/>  /g" > $DIR'73-vrms.md'
+vrms | fold -w 57 | sed "2,$ s/^/>  /g" > $DIR'73-vrms.md'
 
 logger "textos modificados por $USER"
 
