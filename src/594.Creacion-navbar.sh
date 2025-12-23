@@ -38,7 +38,7 @@ articles=$(cat $files | rev | cut -d / -f 1 | rev | sort)
 for file in $articles;
 do
     item=0
-    name=$(echo $file | cut -d '.' -f 2)
+    name=$(echo $(echo $file | cut -d '.' -f 2) | sed 's/_/ /g')
     path=$(grep $file $files | rev | cut -d '/' -f 1-3 | rev)
     echo -e "$item$name\t$path" >> $DIR$FILE
 done
