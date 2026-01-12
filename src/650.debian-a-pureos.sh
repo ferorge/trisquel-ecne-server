@@ -47,13 +47,14 @@ echo '
 ## debian12 bookworm | pureOS 11 crimson
 #deb https://repo.pureos.net/pureos crimson main
 
-## debian testing | debian landing
+## debian13 trixie | pureOS 12 dawn
+#deb https://repo.pureos.net/pureos dawn main
+
+## debian testing | pureOS landing
 deb https://repo.pureos.net/pureos landing main
 #deb http://deb.debian.org/debian/ testing main
-#deb http://deb.debian.org/debian/ trixie main
 
 #deb https://repo.pureos.net/pureos octarine main
-#deb https://repo.pureos.net/pureos dawn main
 ' > $DIR$FILE
 fi
 
