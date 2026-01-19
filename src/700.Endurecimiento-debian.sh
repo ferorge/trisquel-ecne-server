@@ -22,6 +22,7 @@ source "${0%/*}"/endurecimiento/LOGG-2154.sh
 source "${0%/*}"/endurecimiento/BOOT-5264_rsyslog.sh
 
 ###### Instalación de paquetes nuevos.
+source "${0%/*}"/endurecimiento/PKGS-7388.sh
 source "${0%/*}"/endurecimiento/DEB-0280.sh
 source "${0%/*}"/endurecimiento/DEB-0810.sh
 source "${0%/*}"/endurecimiento/DEB-0811.sh
@@ -113,6 +114,7 @@ source "${0%/*}"/endurecimiento/FILE-7524.sh
 source "${0%/*}"/endurecimiento/AUTH-9230.sh
 source "${0%/*}"/endurecimiento/AUTH-9286.sh
 source "${0%/*}"/endurecimiento/AUTH-9328.sh
+source "${0%/*}"/endurecimiento/AUTH-9408.sh
 source "${0%/*}"/endurecimiento/AUTH-9282.sh
 source "${0%/*}"/endurecimiento/LOGG-2190.sh
 
