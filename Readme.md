@@ -1,16 +1,37 @@
 # Trisquel Ecne server
 
 ## Objetivo
-Este repositorio proporciona una colección de guiones (scripts) de  
-configuración para el despliegue de un servidor de acceso público.  
-El proyecto está diseñado con un enfoque modular que permite tanto la puesta  
-en marcha de servicios como el endurecimiento (hardening) del sistema,  
-garantizando un entorno robusto y seguro.  
-
+Esta suite contiene una colección de scripts avanzados en Bash diseñados para  
+transformar una instalación base de Trisquel Ecne en un servidor de acceso  
+público robusto, siguiendo principios de seguridad proactiva y soberanía  
+tecnológica.  
+Está diseñado con un enfoque modular que permite tanto la puesta en marcha de  
+servicios como el endurecimiento (_hardening_) del sistema.  
+                                                                                    
 Es compatible con las distribuciones:  
 * Trisquel 11 Ecne
 * Ubuntu 24.04 Noble Numbat
 * Debian 13 Trixie
+
+## Funcionalidades principales  
+* Provisionamiento automatizado: configuración inicial de red, hostname y  
+repositorios oficiales.  
+* Hardening del sistema:
+    * Restricción de permisos en sistemas de archivos.  
+    * Configuración segura de SSH (deshabilitación de root login, cambio de  
+      puertos, llaves RSA/Ed25519).  
+    * Implementación de políticas de Firewall (IPtables/UFW) con enfoque  
+      _deny-all_ por defecto.  
+    * Optimización de Kernel: Ajustes de parámetros de red y seguridad vía  
+	  `sysctl`.  
+* Gestión de paquetes: limpieza de servicios innecesarios para reducir la  
+  superficie de ataque.  
+* Automatización con Python/Bash: guiones modulares para facilitar el  
+  mantenimiento post-despliegue.  
+      
+> Advertencia: estos guiones modifican configuraciones críticas del sistema.  
+> Se recomienda probar en entornos de staging antes de su ejecución en  
+> producción.  
 
 ## Instalación y despliegue
 El repositorio debe alojarse en la ruta local del sistema.  
