@@ -1,13 +1,13 @@
 # Trisquel Ecne server
 
 ## Objetivo
-Este repositorio proporciona una colección de guiones (scripts) de 
+Este repositorio proporciona una colección de guiones (scripts) de  
 configuración para el despliegue de un servidor de acceso público.  
 El proyecto está diseñado con un enfoque modular que permite tanto la puesta  
 en marcha de servicios como el endurecimiento (hardening) del sistema,  
 garantizando un entorno robusto y seguro.  
 
-Es compatible con las distribuciones:
+Es compatible con las distribuciones:  
 * Trisquel 11 Ecne
 * Ubuntu 24.04 Noble Numbat
 * Debian 13 Trixie
@@ -33,5 +33,5 @@ El sistema debe contar con las siguientes herramientas básicas:
 * bash: Intérprete de comandos para la ejecución de los guiones.
 
 ## Licencia
-trisquel-ecne-server se distribuye bajo la licencia GPLv3.
-Consulte el fichero `LICENSE` para más detalles.
+trisquel-ecne-server se distribuye bajo la licencia GPLv3.  
+Consulte el fichero `LICENSE` para más detalles.  
