@@ -89,7 +89,7 @@ cat <<EOF > $DIR'60-article.md'
 
 EOF
 
-/usr/games/fortune rms2 > $DIR'61-motd.md'
+/usr/games/fortune /usr/share/games/fortunes/es/rms2 > $DIR'61-motd.md'
 
 toilet -f mini -k '    Usuaries' > $DIR'62-usuaries.md'
 
