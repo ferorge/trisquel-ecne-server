@@ -14,14 +14,15 @@
 
 ## __Configuración de variables__
 timestamp=$(date +%F_%H.%M.%S)
-DIR_SRC='/home/'
-DIR_DST='/mnt/homes/'
+DIR_SRC='/home'
+DIR_DST='/mnt/homes'
 
 ## __Respaldo de incremental de /home__
 if grep $DIR_DST /proc/mounts > /dev/null ; then
-    rsync -av --exclude=".cache" $DIR_SRC $DIR_DST
+    rsync -av --exclude=".cache" $DIR_SRC/* $DIR_DST
 else
     logger -p backup.emerg $DIR_DST not mounted
+fi
 
 ### __Ejecución a las 2 AM__
 ### Agregar a crontab
