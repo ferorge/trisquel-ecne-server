@@ -16,7 +16,7 @@
 HOST=$(hostname -s)
 FQDN=$(hostname -f)
 CURRENT_IP=$(curl -s ifconfig.me)
-WD='/var/local/ubuntu-noble-server/src'
+WD='/var/local/trisquel-ecne-server/src'
 
 ## __Cambio de directorio de trabajo__
 ###### Es necesario cuando el script es ejecutado a través de un enlace

@@ -16,7 +16,7 @@
 DIR='/var/gopher/'
 FILE=$DIR'_aside.md'
 FQDN=$(hostname -f)
-DR='/var/local/ubuntu-noble-server/doc/site/'
+DR='/var/local/trisquel-ecne-server/doc/site/'
 SUB_DIR=''
 timestamp=$(date +%F_%H.%M.%S)
 

@@ -27,7 +27,7 @@ echo -e "$CYAN Respaldando configuración $DEFAULT"
 DIR='/var/www/html/public/'
 FILE='index.html'
 META='/var/gopher/es/.01-head.mmd'
-HOME='/var/local/ubuntu-noble-server/doc/site/10.Inicio.md'
+HOME='/var/local/trisquel-ecne-server/doc/site/10.Inicio.md'
 cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 
 ## __Modificación de configuración__

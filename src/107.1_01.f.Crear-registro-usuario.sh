@@ -16,7 +16,7 @@
 FQDN=$(hostname -f)
 USER='registro'
 timestamp=$(date +%F_%H.%M.%S)
-WD='/var/local/ubuntu-noble-server/src'
+WD='/var/local/trisquel-ecne-server/src'
 
 ## __Cambio de directorio de trabajo__
 ###### Es necesario cuando el script es ejecutado a través de un enlace

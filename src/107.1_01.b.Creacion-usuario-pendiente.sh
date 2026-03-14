@@ -13,7 +13,7 @@
 ###### [fuente]:(enlace)
 
 ## __Configuración de variables__
-WD='/var/local/ubuntu-noble-server/src'
+WD='/var/local/trisquel-ecne-server/src'
 
 ## __Cambio de directorio de trabajo__
 cd $WD

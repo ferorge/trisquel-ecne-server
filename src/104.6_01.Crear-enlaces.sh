@@ -33,6 +33,6 @@ echo -e "$CYAN Modificando configuración $DEFAULT"
 ###### ' >> $DIR$FILE
 #fi
 
-ln -s /var/local/ubuntu-noble-server/src/540.Creacion-textos.sh /etc/cron.hourly/Crear-textos
-ln -s /var/local/ubuntu-noble-server/src/102.4_01.a.Actualizacion-paquetes.sh /etc/cron.daily/Actualizar-paquetes
-ln -s /var/local/ubuntu-noble-server/src/542.Creacion-plantilla-md.sh /etc/cron.daily/Crear-plantilla
+ln -s /var/local/trisquel-ecne-server/src/540.Creacion-textos.sh /etc/cron.hourly/Crear-textos
+ln -s /var/local/trisquel-ecne-server/src/102.4_01.a.Actualizacion-paquetes.sh /etc/cron.daily/Actualizar-paquetes
+ln -s /var/local/trisquel-ecne-server/src/542.Creacion-plantilla-md.sh /etc/cron.daily/Crear-plantilla

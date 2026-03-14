@@ -14,7 +14,7 @@
 
 ## __Configuración de variables__
 USERS=$(cut -d: -f1,3 /etc/shadow | grep :0 | cut -d: -f1)
-WD='/var/local/ubuntu-noble-server/src'
+WD='/var/local/trisquel-ecne-server/src'
 
 ## __Cambio de directorio de trabajo__
 ###### Es necesario cuando el script es ejecutado a través de un enlace
