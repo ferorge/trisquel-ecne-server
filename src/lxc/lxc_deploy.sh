@@ -28,7 +28,7 @@
 #
 ### __Uso__
 #
-#    ./deploy_lxc.sh [NOMBRE_CONTENEDOR]
+#    ./lxc_deploy.sh [NOMBRE_CONTENEDOR]
 #
 ### __Autor__
 #
