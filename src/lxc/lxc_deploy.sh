@@ -105,6 +105,10 @@ validate_environment() {
         echo -e "${RED}Error: lxc-copy no está instalado${RESET}"; \
         exit 1; \
     }
+    lxc-ls | grep -qw "$LXC_BASE" || { \
+        echo -e "${RED}Error: Contenedor base $LXC_BASE no existe${RESET}"; \
+        exit 1; \
+    }
     command -v nft >/dev/null || { \
         echo -e "${RED}Error: nftables no está instalado${RESET}"; \
         exit 1; \
@@ -113,8 +117,16 @@ validate_environment() {
         echo -e "${RED}Error: $LXC_WD no existe${RESET}"; \
         exit 1; \
     }
-    lxc-ls | grep -qw "$LXC_BASE" || { \
-        echo -e "${RED}Error: Contenedor base $LXC_BASE no existe${RESET}"; \
+    [ -d "$LXC_DIR" ] || { \
+        echo -e "${RED}Error: $LXC_DIR no existe${RESET}"; \
+        exit 1; \
+    }
+    [ -d "$LXC_OPT_DIR" ] || { \
+        echo -e "${RED}Error: $LXC_OPT_DIR no existe${RESET}"; \
+        exit 1; \
+    }
+    [ -d "$LXC_SRV_DIR" ] || { \
+        echo -e "${RED}Error: $LXC_SRV_DIR no existe${RESET}"; \
         exit 1; \
     }
     ping -c 1 "$LXC_IP" >/dev/null 2>&1 && { \
