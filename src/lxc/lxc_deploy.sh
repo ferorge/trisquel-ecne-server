@@ -218,8 +218,8 @@ configure_nfs() {
     CURRENT_USERS=$(awk -F: '$4 == 100 && $1 != "x"' /etc/passwd | cut -d: -f1)
 
     for user in $CURRENT_USERS; do
-        local user_dir="$LXC_DIR$user"
-        local public_link="/home/$user/public_gemini"
+        local user_dir="$LXC_DIR${user}"
+        local public_link="/home/${user}/public_${LXC_NAME}"
 
         # Crear directorio si no existe
         if [ ! -e "$user_dir" ]; then
@@ -278,15 +278,15 @@ ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/ none bind,ro 0 0
 lxc.mount.entry = ${LXC_DIR} \
 ${LXC_WD}${LXC_NAME}/rootfs/srv/${LXC_NAME}/users none bind,ro 0 0
 lxc.mount.entry = ${LXC_SRV_DIR} \
-${LXC_WD}${LXC_NAME}/rootfs/srv/${LXC_NAME}/gmi none bind,ro 0 0
+${LXC_WD}${LXC_NAME}/rootfs/srv/${LXC_NAME}/home none bind,ro 0 0
 lxc.mount.entry = ${LXC_OPT_DIR} \
 ${LXC_WD}${LXC_NAME}/rootfs/opt/${LXC_NAME} none bind,ro 0 0
 EOF
     mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/
-    mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/srv/${LXC_NAME}/{gmi,users}
+    mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/srv/${LXC_NAME}/{home,users}
     mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/opt/${LXC_NAME}
 
-    chmod 0755 ${LXC_WD}${LXC_NAME}/rootfs/srv/${LXC_NAME}/{gmi,users}
+    chmod 0755 ${LXC_WD}${LXC_NAME}/rootfs/srv/${LXC_NAME}/{home,users}
     chmod 0755 ${LXC_WD}${LXC_NAME}/rootfs/opt/${LXC_NAME}
 
 }
