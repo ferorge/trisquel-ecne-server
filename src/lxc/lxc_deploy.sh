@@ -121,6 +121,7 @@ validate_environment() {
         echo -e "${RED}Error: IP $LXC_IP ya está en uso${RESET}"; \
         exit 1; \
     }
+    echo -e "${GREEN}OK: Entorno validado.${RESET}"
 }
 !
 ### __Creación del usuario__
