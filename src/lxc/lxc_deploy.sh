@@ -90,7 +90,6 @@ LXC_OPT_DIR="/opt/lxc/${LXC_NAME}/"   # Directorio de configuración
 LXC_WD="/var/lib/lxc/"                # Directorio de trabajo LXC
 LXC_NET="/etc/dnsmasq.d/lxc.conf"     # Configuración de red
 NFS_EXPORT="/etc/exports"             # Archivo de exports NFS
-declare -p | grep LXC_
 !
 ### __Verificación de entorno__
 #
@@ -351,6 +350,7 @@ configure_service() {
 \
 cleanup() {
     echo -e "${RED}Advertencia: Limpieza por error...${RESET}"
+    declare -p | grep LXC_
     lxc-stop -n "$LXC_NAME" 2>/dev/null || true
     lxc-destroy -n "$LXC_NAME" 2>/dev/null || true
     sed -i "/$LXC_NAME,$LXC_IP/d" "$LXC_NET" 2>/dev/null || true
