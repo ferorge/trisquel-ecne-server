@@ -129,8 +129,8 @@ validate_environment() {
 # Crea el usuario solo si no existe.
 \
 create_user() {
-    if id "molly-brown" &>/dev/null; then
-        echo -e "${GREEN}OK: Usuario molly-brown ya existe.${RESET}"
+    if id "${LXC_USER}" &>/dev/null; then
+        echo -e "${GREEN}OK: Usuario ${LXC_USER} ya existe.${RESET}"
     else
         echo -e "${CYAN}Creando usuario $LXC_USER con UID $LXC_UID...${RESET}"
         useradd -u ${LXC_UID} -g ${LXC_GID} -m -s /usr/sbin/nologin ${LXC_USER} || {
