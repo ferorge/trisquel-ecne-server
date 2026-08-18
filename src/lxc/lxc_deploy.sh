@@ -343,7 +343,7 @@ auto_start_container() {
 ### __Configuración del servicio dentro del contenedor.__
 \
 configure_service() {
-    lxc-attach -n ${LXC_NAME} -- /opt/${LXC_NAME}/${LXC_NAME}_lxc_setup.sh
+    lxc-attach -n ${LXC_NAME} -- /opt/${LXC_NAME}_lxc_setup.sh
 }
 !
 ### __Reversión__
