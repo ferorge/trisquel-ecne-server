@@ -238,7 +238,7 @@ configure_nfs() {
             echo -e "${CYAN}Creado directorio $user_dir${RESET}"
         fi
 
-        # Si public_gemini existe y NO es un enlace simbólico, moverlo
+        # Si public_link existe y NO es un enlace simbólico, moverlo
         if [ -e "$public_link" ] && [ ! -L "$public_link" ]; then
             echo -e "${CYAN}Moviendo $public_link a $user_dir${RESET}"
             mv "$public_link" "$user_dir"
@@ -287,18 +287,20 @@ ${LXC_WD}${LXC_NAME}/rootfs/etc/gshadow none bind,ro 0 0
 lxc.mount.entry = /etc/letsencrypt/ \
 ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/ none bind,ro 0 0
 lxc.mount.entry = ${LXC_DIR} \
-${LXC_WD}${LXC_NAME}/rootfs/srv/${LXC_NAME}/users none bind,ro 0 0
+${LXC_WD}${LXC_NAME}/rootfs/home/ none bind,ro 0 0
 lxc.mount.entry = ${LXC_SRV_DIR} \
-${LXC_WD}${LXC_NAME}/rootfs/srv/${LXC_NAME}/home none bind,ro 0 0
+${LXC_WD}${LXC_NAME}/rootfs/srv/ none bind,ro 0 0
 lxc.mount.entry = ${LXC_OPT_DIR} \
-${LXC_WD}${LXC_NAME}/rootfs/opt/${LXC_NAME} none bind,ro 0 0
+${LXC_WD}${LXC_NAME}/rootfs/opt/ none bind,ro 0 0
 EOF
     mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/
-    mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/srv/${LXC_NAME}/{home,users}
-    mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/opt/${LXC_NAME}
+    mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/home/
+    mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/opt/
+    mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/srv/
 
-    chmod 0755 ${LXC_WD}${LXC_NAME}/rootfs/srv/${LXC_NAME}/{home,users}
-    chmod 0755 ${LXC_WD}${LXC_NAME}/rootfs/opt/${LXC_NAME}
+    chmod 0755 ${LXC_WD}${LXC_NAME}/rootfs/home/
+    chmod 0755 ${LXC_WD}${LXC_NAME}/rootfs/opt/
+    chmod 0755 ${LXC_WD}${LXC_NAME}/rootfs/srv/
 
 }
 !
