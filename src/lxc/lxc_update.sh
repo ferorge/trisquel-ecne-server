@@ -66,14 +66,14 @@ cfg_safe_env || {
 \
 validate_environment() {
     command -v apt-get >/dev/null || { \
-        echo -e "${RED}Error: apt-get no está instalado${RESET}"; \
+        logger "${RED}Error: apt-get no está instalado${RESET}"; \
         exit 1; \
     }
     command -v logger >/dev/null || { \
-        echo -e "${RED}Error: logger no está instalado${RESET}"; \
+        logger "${RED}Error: logger no está instalado${RESET}"; \
         exit 1; \
     }
-    echo -e "${GREEN}OK: Entorno validado.${RESET}"
+    # logger "${GREEN}OK: Entorno validado.${RESET}"
 }
 !
 ### __Actualización de debian__
@@ -86,7 +86,6 @@ debian_update() {
 	apt-get clean -qq && \
 	apt-get autoclean -qq && \
 	apt-get distclean ; } 2>&1 | logger -t "debian_update"
-    logger -t "debian_update" "${GREEN}OK: debian actualizado${RESET}"
 }
 !
 ### __Ejecución principal__
@@ -94,7 +93,7 @@ debian_update() {
 main() {
     validate_environment
     debian_update
-    echo -e "${GREEN}OK: Despliegue completado para $LXC_NAME${RESET}"
+    logger -t "debian_update" "${GREEN}OK: debian actualizado${RESET}"
 }
 
 main "$@"
