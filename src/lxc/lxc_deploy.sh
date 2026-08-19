@@ -93,6 +93,17 @@ NFS_EXPORT="/etc/exports"             # Archivo de exports NFS
 
 DOMAIN="sobnix.ar"
 !
+### __Creación de directorios__
+#
+create_directories() {
+    local DIRS="${LXC_DIR} ${LXC_OPT_DIR} ${LXC_SRV_DIR}"
+    for dir in $DIRS; do
+	if [ ! -d "$dir" ]; then
+            mkdir -p ${user_dir}
+            echo -e "${GREEN}OK: Directorio $user_dir creado. ${RESET}"
+	fi
+    done
+}
 ### __Verificación de entorno__
 #
 # Comprueba que las herramientas y recursos necesarios están disponibles.
@@ -384,6 +395,7 @@ trap cleanup ERR
 ### __Ejecución principal__
 \
 main() {
+    create_directories
     validate_environment
     create_user
     create_container
