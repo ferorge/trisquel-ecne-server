@@ -290,8 +290,8 @@ configure_nfs() {
 # Escribe la configuración del contenedor.
 \
 configure_container() {
-    echo -e "${CYAN}Configurando $config_file...${RESET}"
     local config_file="${LXC_WD}${LXC_NAME}/config"
+    echo -e "${CYAN}Configurando $config_file...${RESET}"
     cat <<EOF >> "$config_file"
 lxc.start.auto = 1
 lxc.mount.entry = /etc/passwd \
