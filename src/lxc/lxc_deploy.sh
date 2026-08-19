@@ -90,6 +90,8 @@ LXC_OPT_DIR="/opt/lxc/${LXC_NAME}/"   # Directorio de configuración
 LXC_WD="/var/lib/lxc/"                # Directorio de trabajo LXC
 LXC_NET="/etc/dnsmasq.d/lxc.conf"     # Configuración de red
 NFS_EXPORT="/etc/exports"             # Archivo de exports NFS
+
+DOMAIN="sobnix.ar"
 !
 ### __Verificación de entorno__
 #
@@ -201,6 +203,22 @@ create_container() {
 !
 ### __Configuración de red__
 #
+# Asigna nombre de hosts
+\
+configure_hosts() {
+    echo ${LXC_IP}  ${LXC_NAME}.${DOMAIN} ${LXC_NAME} >> \
+	 ${LXC_WD}${LXC_NAME}/rootfs/etc/hosts
+    
+    if ! grep -qF "${LXC_NAME}.${DOMAIN}" /etc/hosts; then
+        echo -e "${CYAN}Configurando nombre de host $LXC_NAME" \
+            "($LXC_IP)...${RESET}"
+	echo ${LXC_IP}  ${LXC_NAME}.${DOMAIN} ${LXC_NAME} >> \
+	       /etc/hosts
+    else
+        echo -e "${GREEN}OK: Asignación DHCP ya existe.${RESET}"
+    fi
+}
+!
 # Asigna liberación estática al servidor DHCP
 \
 configure_dhcp() {
@@ -272,8 +290,8 @@ configure_nfs() {
 # Escribe la configuración del contenedor.
 \
 configure_container() {
-    local config_file="${LXC_WD}${LXC_NAME}/config"
     echo -e "${CYAN}Configurando $config_file...${RESET}"
+    local config_file="${LXC_WD}${LXC_NAME}/config"
     cat <<EOF >> "$config_file"
 lxc.start.auto = 1
 lxc.mount.entry = /etc/passwd \
@@ -369,6 +387,7 @@ main() {
     validate_environment
     create_user
     create_container
+    configure_hosts
     configure_dhcp
     configure_nfs
     configure_container
