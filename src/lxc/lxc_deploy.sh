@@ -156,6 +156,12 @@ create_user() {
     if id "${LXC_USER}" &>/dev/null; then
         echo -e "${GREEN}OK: Usuario ${LXC_USER} ya existe.${RESET}"
     else
+        echo -e "${CYAN}Creando grupo $LXC_USER con GID $LXC_GID...${RESET}"
+        groupadd -r -g ${LXC_GID} -U ${LXC_USER} ${LXC_USER} || {
+            echo -e "${RED}Error: No se pudo crear el grupo ${LXC_USER}${RESET}"
+            exit 1
+	}
+	
         echo -e "${CYAN}Creando usuario $LXC_USER con UID $LXC_UID...${RESET}"
         useradd -u ${LXC_UID} -g ${LXC_GID} -m -s /usr/sbin/nologin ${LXC_USER} || {
             echo -e "${RED}Error: No se pudo crear el usuario ${LXC_USER}${RESET}"
