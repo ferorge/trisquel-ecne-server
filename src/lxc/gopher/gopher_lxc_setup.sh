@@ -56,7 +56,7 @@ cfg_safe_env || {
 FQDN='sobnix.ar'
 PKG='gophernicus'
 UNIT='gophernicus.socket'
-SRV_DIR='/srv/gopher/'
+SRV_DIR='/srv/'
 USERS_DIR="/home/"
 timestamp=$(date +%F_%H.%M.%S)
 BACKUP_DIR='/var/local/backups/'
