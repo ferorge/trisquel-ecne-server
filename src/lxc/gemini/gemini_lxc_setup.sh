@@ -13,7 +13,7 @@
 # Licenciado bajo GNU Affero Public License version 3.
 # Para ver una copia de esta licencia, visite:
 # [AGPLv3]:(https://www.gnu.org/licenses/agpl.md)
-# 
+#
 ### Requisitos:
 #* bash 4.0 o superior
 #
@@ -73,6 +73,7 @@ ERROR_LOG_FILE="${LOG_DIR}${PKG}-error.log"
 
 ## Instalación de paquetes
 echo -e "$CYAN Instalando paquetes ${RESET}"
+apt update
 apt install -y ${PKG}
 
 ## __Respaldo de configuración__
