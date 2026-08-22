@@ -77,6 +77,7 @@ parse_config_file "${CFG_FILE}" || {
 \
 LXC_NAME="${LXC_NAME}"                # Nombre del contenedor
 LXC_BASE="${LXC_BASE}"                # Contenedor base
+LXC_MAC="${LXC_MAC}"                  # MAC address
 LXC_IP="${LXC_IP}"                    # IP estática
 LXC_PORT="${LXC_PORT}"                # Puerto a exponer
 LXC_CMT="${LXC_CMT}"                  # Comentario en cortafuegos
@@ -156,14 +157,8 @@ create_user() {
     if id "${LXC_USER}" &>/dev/null; then
         echo -e "${GREEN}OK: Usuario ${LXC_USER} ya existe.${RESET}"
     else
-        echo -e "${CYAN}Creando grupo $LXC_USER con GID $LXC_GID...${RESET}"
-        groupadd -r -g ${LXC_GID} -U ${LXC_USER} ${LXC_USER} || {
-            echo -e "${RED}Error: No se pudo crear el grupo ${LXC_USER}${RESET}"
-            exit 1
-	}
-	
         echo -e "${CYAN}Creando usuario $LXC_USER con UID $LXC_UID...${RESET}"
-        useradd -u ${LXC_UID} -g ${LXC_GID} -m -s /usr/sbin/nologin ${LXC_USER} || {
+        useradd -u ${LXC_UID} -U -g ${LXC_GID} -M -s /usr/sbin/nologin ${LXC_USER} || {
             echo -e "${RED}Error: No se pudo crear el usuario ${LXC_USER}${RESET}"
             exit 1
         }
@@ -242,7 +237,7 @@ configure_dhcp() {
     if ! grep -qF "$LXC_NAME,$LXC_IP" "$LXC_NET"; then
         echo -e "${CYAN}Configurando asignación DHCP para $LXC_NAME" \
             "($LXC_IP)...${RESET}"
-        echo "dhcp-host=$LXC_NAME,$LXC_IP" >> "$LXC_NET"
+        echo "dhcp-host=$LXC_MAC,$LXC_IP" >> "$LXC_NET"
         systemctl restart lxc-net
     else
         echo -e "${GREEN}OK: Asignación DHCP ya existe.${RESET}"
