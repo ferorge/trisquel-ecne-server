@@ -75,22 +75,23 @@ parse_config_file "${CFG_FILE}" || {
 !
 #### _Contenedor_
 \
-LXC_NAME="${LXC_NAME}"                # Nombre del contenedor
-LXC_BASE="${LXC_BASE}"                # Contenedor base
-LXC_MAC="${LXC_MAC}"                  # MAC address
-LXC_IP="${LXC_IP}"                    # IP estática
-LXC_PORT="${LXC_PORT}"                # Puerto a exponer
-LXC_CMT="${LXC_CMT}"                  # Comentario en cortafuegos
-LXC_USER="${LXC_USER}"                # Nombre de usuario
-LXC_UID="${LXC_UID}"                  # Id de usuario
-LXC_GID="${LXC_GID}"                  # Id de grupo
-LXC_DIR="/var/nfs/${LXC_NAME}/"       # Directorio NFS
-LXC_SRV_DIR="/srv/lxc/${LXC_NAME}/"   # Directorio de servicio
-LXC_OPT_DIR="/opt/lxc/${LXC_NAME}/"   # Directorio de configuración
+LXC_NAME="${LXC_NAME}"                            # Nombre del contenedor
+LXC_BASE="${LXC_BASE}"                            # Contenedor base
+LXC_MAC="${LXC_MAC}"                              # MAC address
+LXC_IP="${LXC_IP}"                                # IP estática
+LXC_PORT="${LXC_PORT}"                            # Puerto a exponer
+LXC_CMT="${LXC_CMT}"                              # Comentario en cortafuegos
+LXC_USER="${LXC_USER}"                            # Nombre de usuario
+LXC_UID="${LXC_UID}"                              # Id de usuario
+LXC_GID="${LXC_GID}"                              # Id de grupo
+LXC_DIR="/var/nfs/${LXC_NAME}/"                   # Directorio NFS
+LXC_SRV_DIR="/srv/lxc/${LXC_NAME}/"               # Directorio de servicio
+LXC_OPT_DIR="/opt/lxc/${LXC_NAME}/"               # Directorio de configuración
 
-LXC_WD="/var/lib/lxc/"                # Directorio de trabajo LXC
-LXC_NET="/etc/dnsmasq.d/lxc.conf"     # Configuración de red
-NFS_EXPORT="/etc/exports"             # Archivo de exports NFS
+LXC_WD="/var/lib/lxc/"                            # Directorio de trabajo LXC
+LXC_NET="/etc/dnsmasq.d/lxc.conf"                 # Configuración de red
+LXC_LEASES="/var/lib/misc/dnsmasq.lxcbr0.leases"  # Asignación de IPs
+NFS_EXPORT="/etc/exports"                         # Archivo de exports NFS
 
 DOMAIN="sobnix.ar"
 !
@@ -236,6 +237,8 @@ configure_dhcp() {
     if ! grep -qF "$LXC_MAC,$LXC_IP" "$LXC_NET"; then
         echo -e "${CYAN}Configurando asignación DHCP para $LXC_NAME" \
             "($LXC_IP)...${RESET}"
+	sed -i '/${LXC_IP}$/d' ${LXC_NET}
+	sed -i '/${LXC_IP}/d' ${LXC_LEASES}
         echo "dhcp-host=$LXC_MAC,$LXC_IP" >> "$LXC_NET"
         systemctl restart lxc-net
     else
