@@ -81,8 +81,9 @@ cp ${CFG_DIR}${CFG_FILE} ${BACKUP_DIR}${CFG_FILE}.${timestamp}
 ### __Modificación de configuración__
 \
 echo -e "${CYAN} Modificando configuración ${RESET}"
-grep -q ferorge ${CFG_DIR}${CFG_FILE}
-if [[ $? != 0 ]];then
+sed -i 's/OPTIONS/#OPTIONS/' ${CFG_DIR}${CFG_FILE}
+
+if ! grep -q ferorge ${CFG_DIR}${CFG_FILE} ;then
     echo -e "${CYAN} Creando fichero ${RESET}"
     cat <<EOF >> ${CFG_DIR}${CFG_FILE}
 ########################
