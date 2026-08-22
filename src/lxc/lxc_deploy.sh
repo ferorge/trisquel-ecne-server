@@ -367,6 +367,7 @@ auto_start_container() {
     if grep -qF "lxc.start.auto = 1" "$config_file"; then
         echo -e "${CYAN}Configurando inicio automático para $LXC_NAME...${RESET}"
         systemctl enable lxc@${LXC_NAME}
+	sed -i 's/lxc.start.auto = 1/lxc.start.auto = 0/g' $config_file
     fi
 }
 !
