@@ -218,7 +218,7 @@ create_container() {
 # Asigna nombre de hosts
 \
 configure_hosts() {
-    echo ${LXC_IP}  ${LXC_NAME}.${DOMAIN} ${LXC_NAME} >> \
+    echo ${LXC_IP}  ${DOMAIN} >> \
 	 ${LXC_WD}${LXC_NAME}/rootfs/etc/hosts
     
     if ! grep -qF "${LXC_NAME}.${DOMAIN}" /etc/hosts; then
