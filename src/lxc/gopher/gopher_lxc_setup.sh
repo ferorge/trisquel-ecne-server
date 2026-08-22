@@ -69,6 +69,7 @@ ERROR_LOG_FILE="${LOG_DIR}${PKG}-error.log"
 ### __Instalación de paquetes__
 \
 echo -e "$CYAN Instalando paquetes ${RESET}"
+apt update
 apt install -y ${PKG}
 !
 ### __Respaldo de configuración__
