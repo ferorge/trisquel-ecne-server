@@ -95,17 +95,17 @@ fi
 #
 chmod 0644 ${CFG_DIR}${CFG_FILE}
 !
-## __Activación de servicio__
+### __Activación de servicio__
 \
 echo -e "${CYAN} Activando servicio ${RESET}"
 systemctl enable $UNIT
 !
-## __Reinicio de servicio__
+### __Reinicio de servicio__
 \
 echo -e "${CYAN} Reiniciando servicio ${RESET}"
 systemctl restart $UNIT
 !
-## __Verificación de servicio__
+### __Verificación de servicio__
 \
 echo -e "${CYAN} Verificando servicio ${RESET}"
 systemctl status $UNIT
