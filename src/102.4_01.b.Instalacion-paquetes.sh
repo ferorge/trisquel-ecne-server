@@ -26,7 +26,7 @@ libaa-bin espeak toilet toilet-fonts rig amfora gopher lynx finger exa tmux moc\
 nano vim emacs elpa-markdown-mode ed micro joe lftp
 
 ##### Endurecimiento
-#apt install -y  acct sysstat auditd audispd-plugins libpam-cracklib haveged debian-goodies debsecan libpam-tmpdir apt-listbugs apt-listchanges needrestart fail2ban aide aide-common ufw clamav arpwatch arpon debsums apt-show-versions unattended-upgrades cfengine3 puppet
+#apt install -y  acct sysstat auditd audispd-plugins libpam-cracklib haveged debian-goodies debsecan libpam-tmpdir apt-listbugs apt-listchanges needrestart fail2ban aide aide-common ufw clamav clamav-daemon arpwatch arpon debsums apt-show-versions unattended-upgrades cfengine3 puppet
 
 ## __Limpieza de paquetes__
 echo -e "$CYAN Limpiando paquetes $DEFAULT"
