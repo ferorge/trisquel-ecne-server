@@ -303,6 +303,7 @@ configure_nfs() {
 configure_container() {
     local config_file="${LXC_WD}${LXC_NAME}/config"
     echo -e "${CYAN}Configurando $config_file...${RESET}"
+    sed -i "s/^\(lxc\.net\.0\.hwaddr\s*=\s*\).*$/\1${LXC_MAC}/" $config_file
     cat <<EOF >> "$config_file"
 lxc.start.auto = 1
 lxc.mount.entry = /etc/passwd \
