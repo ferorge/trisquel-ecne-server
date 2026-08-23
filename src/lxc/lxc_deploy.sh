@@ -101,7 +101,7 @@ create_directories() {
     local DIRS="${LXC_DIR} ${LXC_OPT_DIR} ${LXC_SRV_DIR}"
     for dir in $DIRS; do
 	if [ ! -d "$dir" ]; then
-            mkdir -p ${user_dir}
+            mkdir -p ${dir}
             echo -e "${GREEN}OK: Directorio $user_dir creado. ${RESET}"
 	fi
     done
