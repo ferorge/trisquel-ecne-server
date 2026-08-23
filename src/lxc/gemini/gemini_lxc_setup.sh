@@ -55,8 +55,8 @@ cfg_safe_env || {
 FQDN='sobnix.ar'
 PKG='molly-brown'
 UNIT="${PKG}@${FQDN}"
-SRV_DIR='/srv/'
-USERS_DIR="/home/"
+SRV_DIR='/home'
+USERS_DIR="/"
 timestamp=$(date +%F_%H.%M.%S)
 BACKUP_DIR='/var/local/backups/'
 CFG_DIR="/etc/${PKG}/"
@@ -75,7 +75,9 @@ apt install -y ${PKG}
 \
 echo -e "${CYAN} Respaldando configuración ${RESET}"
 mkdir -p ${BACKUP_DIR}
-cp ${CFG_DIR}${CFG_FILE} ${BACKUP_DIR}${CFG_FILE}.${timestamp}
+if [[ ! -f ${CFG_DIR}${CFG_FILE} ]]; then
+    cp ${CFG_DIR}${CFG_FILE} ${BACKUP_DIR}${CFG_FILE}.${timestamp}
+fi
 !
 ### __Modificación de configuración__
 \
