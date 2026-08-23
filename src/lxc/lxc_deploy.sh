@@ -102,7 +102,7 @@ create_directories() {
     for dir in $DIRS; do
 	if [ ! -d "$dir" ]; then
             mkdir -p ${dir}
-            echo -e "${GREEN}OK: Directorio $user_dir creado. ${RESET}"
+            echo -e "${GREEN}OK: Directorio $dir creado. ${RESET}"
 	fi
     done
 }
