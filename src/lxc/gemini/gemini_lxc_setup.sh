@@ -75,7 +75,7 @@ apt install -y ${PKG}
 \
 echo -e "${CYAN} Respaldando configuración ${RESET}"
 mkdir -p ${BACKUP_DIR}
-if [[ ! -f ${CFG_DIR}${CFG_FILE} ]]; then
+if [[ -f ${CFG_DIR}${CFG_FILE} ]]; then
     cp ${CFG_DIR}${CFG_FILE} ${BACKUP_DIR}${CFG_FILE}.${timestamp}
 fi
 !
@@ -83,7 +83,7 @@ fi
 \
 echo -e "${CYAN} Modificando configuración ${RESET}"
 
-if ! grep -q ferorge ${CFG_DIR}${CFG_FILE} ;then
+if ! grep -qs ferorge ${CFG_DIR}${CFG_FILE} ;then
     echo -e "${CYAN} Creando fichero ${RESET}"
     cat <<EOF > ${CFG_DIR}${CFG_FILE}
 
