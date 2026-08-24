@@ -54,7 +54,7 @@ cfg_safe_env || {
 ### __Configuración de variables__
 \
 FQDN='sobnix.ar'
-PKG='finger-server oidentd'
+PKG='cfingerd inetutils-inetd'
 UNIT='inetutils-inetd'
 SRV_DIR='/srv/'
 USERS_DIR="/home/"
@@ -94,6 +94,10 @@ EOF
 fi
 #
 chmod 0644 ${CFG_DIR}${CFG_FILE}
+#
+echo '
+finger          stream  tcp     nowait  root    /usr/sbin/tcpd  /usr/sbin/cfingerd
+' > /etc/inetd.d/finger.conf
 !
 ### __Activación de servicio__
 \
