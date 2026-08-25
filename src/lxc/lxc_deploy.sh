@@ -22,9 +22,9 @@
 #### _Variables de entorno_
 #
 # LXC_BASE: Nombre del contenedor base (default: debianForky).
-# LXC_IP:   IP estática para el contenedor (default: 10.0.3.5).
-# LXC_PORT: Puerto a exponer (default: 1965).
-# LXC_WD:   Directorio de trabajo de LXC (default: /var/lib/lxc/).
+# LXC_IP:   IP estática para el contenedor.
+# LXC_PORT: Puerto a exponer.
+# LXC_WD:   Directorio de trabajo de LXC.
 #
 ### __Uso__
 #
