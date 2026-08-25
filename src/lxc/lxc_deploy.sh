@@ -84,7 +84,7 @@ LXC_CMT="${LXC_CMT}"                              # Comentario en cortafuegos
 LXC_USER="${LXC_USER}"                            # Nombre de usuario
 LXC_UID="${LXC_UID}"                              # Id de usuario
 LXC_GID="${LXC_GID}"                              # Id de grupo
-LXC_DIR="/var/nfs/${LXC_NAME}/"                   # Directorio NFS
+LXC_HOME_DIR="/var/nfs/public/"                   # Directorio NFS
 LXC_SRV_DIR="/srv/lxc/${LXC_NAME}/"               # Directorio de servicio
 LXC_OPT_DIR="/opt/lxc/${LXC_NAME}/"               # Directorio de configuración
 
@@ -98,7 +98,7 @@ DOMAIN="sobnix.ar"
 ### __Creación de directorios__
 #
 create_directories() {
-    local DIRS="${LXC_DIR} ${LXC_OPT_DIR} ${LXC_SRV_DIR}"
+    local DIRS="${LXC_HOME_DIR} ${LXC_OPT_DIR} ${LXC_SRV_DIR}"
     for dir in $DIRS; do
 	if [ ! -d "$dir" ]; then
             mkdir -p ${dir}
@@ -131,8 +131,8 @@ validate_environment() {
         echo -e "${RED}Error: $LXC_WD no existe${RESET}"; \
         exit 1; \
     }
-    [ -d "$LXC_DIR" ] || { \
-        echo -e "${RED}Error: $LXC_DIR no existe${RESET}"; \
+    [ -d "$LXC_HOME_DIR" ] || { \
+        echo -e "${RED}Error: $LXC_HOME_DIR no existe${RESET}"; \
         exit 1; \
     }
     [ -d "$LXC_OPT_DIR" ] || { \
@@ -251,18 +251,18 @@ configure_dhcp() {
 # Configura el directorio NFS y su export.
 \
 configure_nfs() {
-    mkdir -p "$LXC_DIR"
-    chown root:root "$LXC_DIR"
-    chmod 0755 "$LXC_DIR"
+    mkdir -p "$LXC_HOME_DIR"
+    chown root:root "$LXC_HOME_DIR"
+    chmod 0755 "$LXC_HOME_DIR"
 
     # --- Configuración de directorios para usuarios con UID 100 ---
-    echo -e "${CYAN}Configurando directorios de usuarios en $LXC_DIR...${RESET}"
+    echo -e "${CYAN}Configurando directorios de usuarios en $LXC_HOME_DIR...${RESET}"
     local CURRENT_USERS
     CURRENT_USERS=$(awk -F: '$4 == 100 && $1 != "x"' /etc/passwd | cut -d: -f1)
 
     for user in $CURRENT_USERS; do
-        local user_dir="$LXC_DIR${user}"
-        local public_link="/home/${user}/public_${LXC_NAME}"
+        local user_dir="$LXC_HOME_DIR"
+        local public_link="/home/${user}/public/"
 
         # Crear directorio si no existe
         if [ ! -e "$user_dir" ]; then
@@ -289,9 +289,9 @@ configure_nfs() {
         fi
     done
 
-    local export_entry="$LXC_DIR $LXC_IP(rw,no_subtree_check,root_squash,fsid=0)"
+    local export_entry="$LXC_HOME_DIR $LXC_IP(rw,no_subtree_check,root_squash,fsid=0)"
     if ! grep -qF "$export_entry" "$NFS_EXPORT"; then
-        echo -e "${CYAN}Configurando NFS para $LXC_DIR...${RESET}"
+        echo -e "${CYAN}Configurando NFS para $LXC_HOME_DIR...${RESET}"
         echo "$export_entry" >> "$NFS_EXPORT"
         systemctl restart nfs-kernel-server
     else
@@ -319,7 +319,7 @@ lxc.mount.entry = /etc/gshadow \
 ${LXC_WD}${LXC_NAME}/rootfs/etc/gshadow none bind,ro 0 0
 lxc.mount.entry = /etc/letsencrypt/ \
 ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/ none bind,ro 0 0
-lxc.mount.entry = ${LXC_DIR} \
+lxc.mount.entry = ${LXC_HOME_DIR} \
 ${LXC_WD}${LXC_NAME}/rootfs/home/ none bind,ro 0 0
 lxc.mount.entry = ${LXC_SRV_DIR} \
 ${LXC_WD}${LXC_NAME}/rootfs/srv/ none bind,ro 0 0
@@ -390,7 +390,7 @@ cleanup() {
     lxc-stop -n "$LXC_NAME" 2>/dev/null || true
     lxc-destroy -n "$LXC_NAME" 2>/dev/null || true
     sed -i "/$LXC_NAME,$LXC_IP/d" "$LXC_NET" 2>/dev/null || true
-    sed -i "/$LXC_DIR.*$LXC_IP/d" "$NFS_EXPORT" 2>/dev/null || true
+    sed -i "/$LXC_HOME_DIR.*$LXC_IP/d" "$NFS_EXPORT" 2>/dev/null || true
     nft flush ruleset 2>/dev/null || true
     systemctl restart lxc-net nfs-kernel-server 2>/dev/null || true
     #userdel ${LXC_USER} 2>/dev/null || true
