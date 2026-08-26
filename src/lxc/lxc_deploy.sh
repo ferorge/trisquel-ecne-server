@@ -261,8 +261,8 @@ configure_nfs() {
     CURRENT_USERS=$(awk -F: '$4 == 100 && $1 != "x"' /etc/passwd | cut -d: -f1)
 
     for user in $CURRENT_USERS; do
-        local user_dir="$LXC_HOME_DIR"
-        local public_link="/home/${user}/public/"
+	local user_dir="${LXC_HOME_DIR}${user}"
+        local public_link="/home/${user}/public"
 
         # Crear directorio si no existe
         if [ ! -e "$user_dir" ]; then
