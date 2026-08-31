@@ -270,14 +270,10 @@ configure_nfs() {
             echo -e "${CYAN}Creado directorio $user_dir${RESET}"
         fi
 
-        # Si public_link existe y es un directorio, moverlo
-        if [ -e "$public_link" ] && [ -d "$public_link" ]; then
-            echo -e "${CYAN}Moviendo $public_link a $user_dir${RESET}"
-            mv "$public_link" "$user_dir"
-        fi
-
         # Crear enlace simbólico si no existe
         if [ ! -L "$public_link" ]; then
+            echo -e "${CYAN}Moviendo $public_link a $user_dir${RESET}"
+            mv "$public_link" "$user_dir"
             echo -e "${CYAN}Creando enlace simbólico $public_link -> $user_dir${RESET}"
             ln -s "$user_dir" "$public_link"
         fi
