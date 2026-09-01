@@ -26,7 +26,7 @@ cp $DIR$FILE /var/local/backups/$FILE.$timestamp
 ## __Modificación de configuración__
 logger "109.2_01.b | Modificando configuracion."
 
-sed -i "/$FQDN/d" $DIR$FILE
+sed -i "/${HOST}$/d" $DIR$FILE
 echo "$CURRENT_IP	$FQDN $HOST" >> $DIR$FILE
 
 ## __Verificacion de configuracion__
