@@ -234,7 +234,7 @@ configure_hosts() {
 # Asigna liberación estática al servidor DHCP
 \
 configure_dhcp() {
-    if ! grep -qF "$LXC_MAC,$LXC_IP" "$LXC_NET"; then
+    if ! grep -qF "${LXC_MAC},${LXC_NAME},${LXC_IP}" "$LXC_NET"; then
         echo -e "${CYAN}Configurando asignación DHCP para $LXC_NAME" \
             "($LXC_IP)...${RESET}"
 	sed -i '/${LXC_IP}$/d' ${LXC_NET}
