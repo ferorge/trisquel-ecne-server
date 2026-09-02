@@ -239,7 +239,7 @@ configure_dhcp() {
             "($LXC_IP)...${RESET}"
 	sed -i '/${LXC_IP}$/d' ${LXC_NET}
 	sed -i '/${LXC_IP}/d' ${LXC_LEASES}
-        echo "dhcp-host=$LXC_MAC,$LXC_IP" >> "$LXC_NET"
+        echo "dhcp-host=${LXC_MAC},${LXC_NAME},${LXC_IP}" >> "$LXC_NET"
         systemctl restart lxc-net
     else
         echo -e "${GREEN}OK: Asignación DHCP ya existe.${RESET}"
