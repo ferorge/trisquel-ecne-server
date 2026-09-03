@@ -92,9 +92,9 @@ if ! grep -q ferorge ${CFG_DIR}${CFG_FILE} ;then
 # Editado por ~ferorge #
 ########################
 EOF
-fi
 #
 chmod 0644 ${CFG_DIR}${CFG_FILE}
+fi
 !
 ### __Modificación de servicio__
 \
