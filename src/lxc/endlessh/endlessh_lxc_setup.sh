@@ -94,6 +94,10 @@ fi
 #
 chmod 0644 ${CFG_DIR}${CFG_FILE}
 !
+### __Modificación de servicio__
+\
+sed -i 's/ExecStart=\/usr\/bin\/endlessh/ExecStart=\/usr\/bin\/endlessh -sv/' /usr/lib/systemd/system/endlessh.service
+!
 ### __Activación de servicio__
 \
 echo -e "${CYAN} Activando servicio ${RESET}"
