@@ -50,7 +50,7 @@ cfg_safe_env || {
     exit 1
 }
 !
-# 
+#
 ### __Configuración de variables__
 \
 FQDN='sobnix.ar'
@@ -92,9 +92,9 @@ if ! grep -q ferorge ${CFG_DIR}${CFG_FILE} ;then
 # Editado por ~ferorge #
 ########################
 EOF
-fi
 #
 chmod 0644 ${CFG_DIR}${CFG_FILE}
+fi
 !
 ### __Activación de servicio__
 \
