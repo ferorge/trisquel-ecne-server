@@ -77,7 +77,9 @@ apt distclean
 \
 echo -e "${CYAN} Respaldando configuración ${RESET}"
 mkdir -p ${BACKUP_DIR}
-cp ${CFG_DIR}${CFG_FILE} ${BACKUP_DIR}${CFG_FILE}.${timestamp}
+if [[ -f ${CFG_DIR}${CFG_FILE} ]]; then
+    cp ${CFG_DIR}${CFG_FILE} ${BACKUP_DIR}${CFG_FILE}.${timestamp}
+fi
 !
 ### __Modificación de configuración__
 \
