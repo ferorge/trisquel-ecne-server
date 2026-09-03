@@ -63,8 +63,8 @@ BACKUP_DIR='/var/local/backups/'
 CFG_DIR="/etc/TITLE/"
 CFG_FILE="TITLE.conf"
 LOG_DIR='/var/log/'
-ACCESS_LOG_FILE="${LOG_DIR}${PKGS}-access.log"
-ERROR_LOG_FILE="${LOG_DIR}${PKGS}-error.log"
+ACCESS_LOG_FILE="${LOG_DIR}${UNIT}-access.log"
+ERROR_LOG_FILE="${LOG_DIR}${UNIT}-error.log"
 !
 ### __Instalación de paquetes__
 \
