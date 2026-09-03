@@ -96,7 +96,7 @@ EOF
 chmod 0644 ${CFG_DIR}${CFG_FILE}
 fi
 !
-### __Modificación de servicio__
+### __Modificación de unit__
 \
 sed -i 's/ExecStart=\/usr\/bin\/endlessh/ExecStart=\/usr\/bin\/endlessh -sv/' /usr/lib/systemd/system/endlessh.service
 !
