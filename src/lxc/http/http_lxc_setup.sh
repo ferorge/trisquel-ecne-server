@@ -119,6 +119,12 @@ if ! grep -q ferorge ${CFG_DIR}${CFG_FILE} ;then
 ########################
 # Editado por ~ferorge #
 ########################
+<Directory /srv/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+
 <IfModule mod_dir.c>
     DirectoryIndex index.html index.py index.php
 </IfModule>
@@ -147,7 +153,7 @@ if ! grep -q ferorge ${CFG_DIR}${CFG_FILE} ;then
 ########################
 # Editado por ~ferorge #
 ########################
-<Directory $VAR_DIR/html/public>
+<Directory $SRV_DIR/html/public>
     Options +ExecCGI
     AddHandler cgi-script .cgi .py
 </Directory>
