@@ -118,9 +118,8 @@ echo '
 ########################
 # Editado por ~ferorge #
 ########################
-echo "
 ServerName $FQDN
-" >> $DIR$FILE
+' >> $DIR$FILE
 fi
 
 ### Creación de directorios.
