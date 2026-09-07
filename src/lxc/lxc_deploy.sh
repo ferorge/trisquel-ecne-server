@@ -93,6 +93,7 @@ LXC_NET="/etc/dnsmasq.d/lxc.conf"                 # Configuración de red
 LXC_LEASES="/var/lib/misc/dnsmasq.lxcbr0.leases"  # Asignación de IPs
 NFS_EXPORT="/etc/exports"                         # Archivo de exports NFS
 
+IFACE="eth0"
 DOMAIN="sobnix.ar"
 !
 ### __Creación de directorios__
@@ -342,7 +343,7 @@ configure_firewall() {
         echo -e "${CYAN}Configurando cortafuegos para puerto $LXC_PORT...${RESET}"
         nft add rule inet filter TCP tcp dport "$LXC_PORT" \
             accept comment "$LXC_CMT"
-        nft add rule ip nat prerouting tcp dport "$LXC_PORT" \
+        nft add rule ip nat prerouting iifname "${IFACE}" tcp dport "$LXC_PORT" \
             dnat to "$LXC_IP:$LXC_PORT"
     else
         echo -e "${GREEN}OK: Reglas de cortafuegos ya existen.${RESET}"
