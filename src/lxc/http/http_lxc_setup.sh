@@ -54,7 +54,7 @@ cfg_safe_env || {
 ### __Configuración de variables__
 \
 FQDN='sobnix.ar'
-PKGS='apache2 curl certbot'
+PKGS='apache2'
 UNIT='apache2'
 SRV_DIR='/srv/'
 USERS_DIR="/home/"
@@ -166,6 +166,16 @@ EOF
 #
 chmod 0644 ${CFG_DIR}${CFG_FILE}
 fi
+!
+### __Activación de UserDir__
+\
+echo -e "$CYAN Configurando userdir $DEFAULT"
+a2enmod userdir
+!
+### __Activación de cgid__
+\
+echo -e "$CYAN Configurando cgid $DEFAULT"
+a2enmod cgid
 !
 ### __Activación de servicio__
 \
