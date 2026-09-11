@@ -334,6 +334,17 @@ EOF
 
 }
 !
+### __Iniciación del contenedor al inicio del sistema.__
+\
+auto_start_container() {
+    local config_file="${LXC_WD}${LXC_NAME}/config"
+    if grep -qF "lxc.start.auto = 1" "$config_file"; then
+        echo -e "${CYAN}Configurando inicio automático para $LXC_NAME...${RESET}"
+        systemctl enable lxc@${LXC_NAME}
+	sed -i 's/lxc.start.auto = 1/lxc.start.auto = 0/g' $config_file
+    fi
+}
+!
 ### __Configuración de cortafuegos con nftables__
 #
 # Abre el puerto en host y desvia al contenedor
@@ -349,25 +360,14 @@ configure_firewall() {
         echo -e "${GREEN}OK: Reglas de cortafuegos ya existen.${RESET}"
     fi
 }
-
-## Iniciación del contenedor si no está en ejecución.
+!
+### __Iniciación del contenedor si no está en ejecución.__
 start_container() {
     if ! lxc-info -n "$LXC_NAME" | grep -q "RUNNING"; then
         echo -e "${CYAN}Iniciando contenedor $LXC_NAME...${RESET}"
-        lxc-start -n "$LXC_NAME"
+        systemctl start lxc@${LXC_NAME}
     else
         echo -e "${GREEN}OK: Contenedor $LXC_NAME ya está en ejecución.${RESET}"
-    fi
-}
-!
-### __Iniciación del contenedor al inicio del sistema.__
-\
-auto_start_container() {
-    local config_file="${LXC_WD}${LXC_NAME}/config"
-    if grep -qF "lxc.start.auto = 1" "$config_file"; then
-        echo -e "${CYAN}Configurando inicio automático para $LXC_NAME...${RESET}"
-        systemctl enable lxc@${LXC_NAME}
-	sed -i 's/lxc.start.auto = 1/lxc.start.auto = 0/g' $config_file
     fi
 }
 !
