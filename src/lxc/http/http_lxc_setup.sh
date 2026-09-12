@@ -54,7 +54,7 @@ cfg_safe_env || {
 ### __Configuración de variables__
 \
 FQDN='sobnix.ar'
-PKGS='apache2'
+PKGS='apache2 certbot'
 UNIT='apache2'
 SRV_DIR='/srv/'
 USERS_DIR="/home/"
@@ -166,6 +166,17 @@ EOF
 #
 chmod 0644 ${CFG_DIR}${CFG_FILE}
 fi
+!
+### __Eliminación de acceso__
+sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/s/^/#/' /etc/apache2/apache2.conf
+\
+echo -e "$CYAN Desactivando sitios $DEFAULT"
+!
+### __Desactivación de sitios__
+\
+echo -e "$CYAN Desactivando sitios $DEFAULT"
+a2dissite 000-default
+a2dissite default-ssl
 !
 ### __Activación de UserDir__
 \
