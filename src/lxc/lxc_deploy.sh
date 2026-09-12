@@ -103,15 +103,19 @@ create_directories() {
     for dir in $DIRS; do
 	if [ ! -d "$dir" ]; then
             mkdir -p ${dir}
-            echo -e "${GREEN}OK: Directorio $dir creado. ${RESET}"
+            echo -e "${CYAN}Creando directorio $dir... ${RESET}"
+	else
+            echo -e "${GREEN}OK: Directorio $dir ya existe. ${RESET}"
 	fi
     done
+    echo -e "${GREEN}OK: Directorios creados. ${RESET}"
 }
 ### __Verificación de entorno__
 #
 # Comprueba que las herramientas y recursos necesarios están disponibles.
 \
 validate_environment() {
+    echo -e "${CYAN}Validando entorno... ${RESET}"
     command -v lxc-stop >/dev/null || { \
         echo -e "${RED}Error: lxc-stop no está instalado${RESET}"; \
         exit 1; \
@@ -220,16 +224,16 @@ create_container() {
 # Asigna nombre de hosts
 \
 configure_hosts() {
+    echo -e "${CYAN}Configurando nombre de huésped $LXC_NAME" \
     sed -i "s/${LXC_NAME}/${DOMAIN}/g" ${LXC_WD}${LXC_NAME}/rootfs/etc/hostname
     
     if ! grep -qF "${LXC_NAME}.${DOMAIN}" /etc/hosts; then
-        echo -e "${CYAN}Configurando nombre de host $LXC_NAME" \
-            "($LXC_IP)...${RESET}"
 	echo ${LXC_IP}  ${LXC_NAME}.${DOMAIN} ${LXC_NAME} >> \
 	       /etc/hosts
     else
-        echo -e "${GREEN}OK: Asignación DHCP ya existe.${RESET}"
+        echo -e "${GREEN}OK: Nombre de huésped ya existe en /etc/hosts.${RESET}"
     fi
+    echo -e "${GREEN}OK: Nombre de huésped configurado.${RESET}"
 }
 !
 # Asigna liberación estática al servidor DHCP
@@ -245,6 +249,7 @@ configure_dhcp() {
     else
         echo -e "${GREEN}OK: Asignación DHCP ya existe.${RESET}"
     fi
+    echo -e "${GREEN}OK: Asignación DHCP configurada.${RESET}"
 }
 !
 ### __Creación de directorio__
@@ -252,12 +257,12 @@ configure_dhcp() {
 # Configura el directorio NFS y su export.
 \
 configure_nfs() {
+    echo -e "${CYAN}Configurando directorios de usuarios en $LXC_HOME_DIR...${RESET}"
     mkdir -p "$LXC_HOME_DIR"
     chown root:root "$LXC_HOME_DIR"
     chmod 0755 "$LXC_HOME_DIR"
 
     # --- Configuración de directorios para usuarios con UID 100 ---
-    echo -e "${CYAN}Configurando directorios de usuarios en $LXC_HOME_DIR...${RESET}"
     local CURRENT_USERS
     CURRENT_USERS=$(awk -F: '$4 == 100 && $1 != "x"' /etc/passwd | cut -d: -f1)
 
@@ -294,6 +299,7 @@ configure_nfs() {
     else
         echo -e "${GREEN}OK: Export NFS ya existe.${RESET}"
     fi
+    echo -e "${GREEN}OK: Directorios de usuarios configurados.${RESET}"
 }
 !
 ### __Configuración del contenedor__
@@ -305,17 +311,6 @@ configure_container() {
     echo -e "${CYAN}Configurando $config_file...${RESET}"
     sed -i "s/^\(lxc\.net\.0\.hwaddr\s*=\s*\).*$/\1${LXC_MAC}/" $config_file
     cat <<EOF >> "$config_file"
-lxc.start.auto = 1
-lxc.mount.entry = /etc/passwd \
-${LXC_WD}${LXC_NAME}/rootfs/etc/passwd none bind,ro 0 0
-lxc.mount.entry = /etc/shadow \
-${LXC_WD}${LXC_NAME}/rootfs/etc/shadow none bind,ro 0 0
-lxc.mount.entry = /etc/group \
-${LXC_WD}${LXC_NAME}/rootfs/etc/group none bind,ro 0 0
-lxc.mount.entry = /etc/gshadow \
-${LXC_WD}${LXC_NAME}/rootfs/etc/gshadow none bind,ro 0 0
-lxc.mount.entry = /etc/letsencrypt/ \
-${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/ none bind,ro 0 0
 lxc.mount.entry = ${LXC_HOME_DIR} \
 ${LXC_WD}${LXC_NAME}/rootfs/home/ none bind,ro 0 0
 lxc.mount.entry = ${LXC_SRV_DIR} \
@@ -323,7 +318,6 @@ ${LXC_WD}${LXC_NAME}/rootfs/srv/ none bind,ro 0 0
 lxc.mount.entry = ${LXC_OPT_DIR} \
 ${LXC_WD}${LXC_NAME}/rootfs/opt/ none bind,ro 0 0
 EOF
-    mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/
     mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/home/
     mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/opt/
     mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/srv/
@@ -374,7 +368,32 @@ start_container() {
 ### __Configuración del servicio dentro del contenedor.__
 \
 configure_service() {
+    echo -e "${CYAN}Configurando servicio $LXC_NAME...${RESET}"
     lxc-attach -n ${LXC_NAME} -- /opt/${LXC_NAME}_lxc_setup.sh
+}
+!
+### __Configuración de passwd.__
+\
+configure_passwd() {
+    if ! lxc-info -n "$LXC_NAME" | grep -q "RUNNING"; then
+        echo -e "${GREEN}OK: Contenedor $LXC_NAME ya está detenido.${RESET}"
+    else
+        echo -e "${CYAN}Deteniendo contenedor $LXC_NAME...${RESET}"
+        systemctl stop lxc@${LXC_NAME}
+    fi
+    echo -e "${CYAN}Configurando passwd...${RESET}"
+    lxc.mount.entry = /etc/passwd \
+    ${LXC_WD}${LXC_NAME}/rootfs/etc/passwd none bind,ro 0 0
+    lxc.mount.entry = /etc/shadow \
+    ${LXC_WD}${LXC_NAME}/rootfs/etc/shadow none bind,ro 0 0
+    lxc.mount.entry = /etc/group \
+    ${LXC_WD}${LXC_NAME}/rootfs/etc/group none bind,ro 0 0
+    lxc.mount.entry = /etc/gshadow \
+    ${LXC_WD}${LXC_NAME}/rootfs/etc/gshadow none bind,ro 0 0
+    lxc.mount.entry = /etc/letsencrypt/ \
+    ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/ none bind,ro 0 0
+    mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/
+    echo -e "${GREEN}OK: passwd configurado.${RESET}"
 }
 !
 ### __Reversión__
@@ -409,6 +428,8 @@ main() {
     configure_firewall
     start_container
     configure_service
+    configure_passwd
+    start_container
     echo -e "${GREEN}OK: Despliegue completado para $LXC_NAME${RESET}"
 }
 
