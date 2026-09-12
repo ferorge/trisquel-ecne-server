@@ -74,6 +74,32 @@ apt distclean
 ### __Respaldo de configuración__
 \
 echo -e "${CYAN} Respaldando configuración ${RESET}"
+CFG_DIR="/etc/apache2/"
+CFG_FILE="apache2.conf"
+mkdir -p ${BACKUP_DIR}
+if [[ -f ${CFG_DIR}${CFG_FILE} ]]; then
+    cp ${CFG_DIR}${CFG_FILE} ${BACKUP_DIR}${CFG_FILE}.${timestamp}
+fi
+!
+### __Modificación de configuración__
+\
+echo -e "${CYAN} Modificando configuración ${RESET}"
+#
+if ! grep -q ferorge ${CFG_DIR}${CFG_FILE} ;then
+    echo -e "${CYAN} Creando fichero ${RESET}"
+    cat <<EOF >> ${CFG_DIR}${CFG_FILE}
+########################
+# Editado por ~ferorge #
+########################
+ServerName $FQDN
+EOF
+#
+chmod 0644 ${CFG_DIR}${CFG_FILE}
+fi
+!
+### __Respaldo de configuración__
+\
+echo -e "${CYAN} Respaldando configuración ${RESET}"
 CFG_DIR="/etc/apache2/conf-enabled/"
 CFG_FILE="security.conf"
 mkdir -p ${BACKUP_DIR}
