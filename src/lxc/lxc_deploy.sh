@@ -224,7 +224,7 @@ create_container() {
 # Asigna nombre de hosts
 \
 configure_hosts() {
-    echo -e "${CYAN}Configurando nombre de huésped $LXC_NAME" \
+    echo -e "${CYAN}Configurando nombre de huésped $LXC_NAME"
     sed -i "s/${LXC_NAME}/${DOMAIN}/g" ${LXC_WD}${LXC_NAME}/rootfs/etc/hostname
     
     if ! grep -qF "${LXC_NAME}.${DOMAIN}" /etc/hosts; then
