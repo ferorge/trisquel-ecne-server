@@ -129,3 +129,16 @@ set_pager() {
         echo -e "${GREEN}PAGER ya está configurado a: $PAGER${RESET}"
     fi
 }
+
+# Muestra un spin durante la ejecución de un programa de larga duración.
+spin() {
+    local delay=0.1
+    local spinstr='|/-\'
+    while true; do
+	for (( i=0; i<${#spinstr}; i++ )); do
+	    echo -n "${spinstr:$i:1}"
+	    echo -en "\010"
+	    sleep $delay
+	done
+    done
+}
