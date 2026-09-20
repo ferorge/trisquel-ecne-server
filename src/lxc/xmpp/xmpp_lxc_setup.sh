@@ -74,8 +74,8 @@ apt distclean
 ### __Respaldo de configuración__
 \
 echo -e "${CYAN} Respaldando configuración ${RESET}"
-CFG_DIR="/etc/apache2/"
-CFG_FILE="apache2.conf"
+CFG_DIR="/etc/ejabberd/"
+CFG_FILE="ejabberd.conf"
 mkdir -p ${BACKUP_DIR}
 if [[ -f ${CFG_DIR}${CFG_FILE} ]]; then
     cp ${CFG_DIR}${CFG_FILE} ${BACKUP_DIR}${CFG_FILE}.${timestamp}
@@ -91,7 +91,6 @@ if ! grep -q ferorge ${CFG_DIR}${CFG_FILE} ;then
 ########################
 # Editado por ~ferorge #
 ########################
-ServerName $FQDN
 EOF
 #
 chmod 0644 ${CFG_DIR}${CFG_FILE}
