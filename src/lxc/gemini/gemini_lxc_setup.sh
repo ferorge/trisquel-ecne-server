@@ -65,6 +65,12 @@ LOG_DIR='/var/log/'
 ACCESS_LOG_FILE="${LOG_DIR}${PKG}-access.log"
 ERROR_LOG_FILE="${LOG_DIR}${PKG}-error.log"
 !
+### __Configuración de directorio temporal__
+\
+echo -e "$CYAN Configurando directorio temporal ${RESET}"
+mkdir -p $TMP
+chmod 1777 $TMP
+!
 ### __Instalación de paquetes__
 \
 echo -e "$CYAN Instalando paquetes ${RESET}"

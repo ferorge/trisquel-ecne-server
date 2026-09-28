@@ -50,7 +50,7 @@ cfg_safe_env || {
     exit 1
 }
 !
-# 
+#
 ### __Configuración de variables__
 \
 FQDN='sobnix.ar'
@@ -65,6 +65,12 @@ CFG_FILE="cfingerd.conf"
 LOG_DIR='/var/log/'
 ACCESS_LOG_FILE="${LOG_DIR}${PKG}-access.log"
 ERROR_LOG_FILE="${LOG_DIR}${PKG}-error.log"
+!
+### __Configuración de directorio temporal__
+\
+echo -e "$CYAN Configurando directorio temporal ${RESET}"
+mkdir -p $TMP
+chmod 1777 $TMP
 !
 ### __Instalación de paquetes__
 \
