@@ -77,6 +77,7 @@ chmod 1777 $TMP
 echo -e "$CYAN Instalando paquetes ${RESET}"
 apt update
 apt install -y ${PKG}
+apt distclean
 !
 ### __Respaldo de configuración__
 \
