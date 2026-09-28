@@ -81,7 +81,7 @@ apt distclean
 \
 echo -e "${CYAN} Respaldando configuración ${RESET}"
 CFG_DIR="/etc/ejabberd/"
-CFG_FILE="ejabberd.conf"
+CFG_FILE="ejabberd.yml"
 mkdir -p ${BACKUP_DIR}
 if [[ -f ${CFG_DIR}${CFG_FILE} ]]; then
     cp ${CFG_DIR}${CFG_FILE} ${BACKUP_DIR}${CFG_FILE}.${timestamp}
