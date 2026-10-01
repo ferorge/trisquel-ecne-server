@@ -344,15 +344,20 @@ auto_start_container() {
 # Abre el puerto en host y desvia al contenedor
 \
 configure_firewall() {
-    if ! nft list ruleset | grep -q "dport $LXC_PORT.*comment.*$LXC_CMT"; then
-        echo -e "${CYAN}Configurando cortafuegos para puerto $LXC_PORT...${RESET}"
-        nft add rule inet filter TCP tcp dport "$LXC_PORT" \
+    # Convertir LXC_PORT en un array
+    IFS=',' read -ra PORTS <<< "$LXC_PORT"
+
+    for PORT in "${PORTS[@]}"; do
+        if ! nft list ruleset | grep -q "dport ${PORT}.*comment.*$LXC_CMT"; then
+            echo -e "${CYAN}Configurando cortafuegos para puerto $PORT...${RESET}"
+            nft add rule inet filter TCP tcp dport "$PORT" \
             accept comment "$LXC_CMT"
-        nft add rule ip nat prerouting iifname "${IFACE}" tcp dport "$LXC_PORT" \
-            dnat to "$LXC_IP:$LXC_PORT"
-    else
-        echo -e "${GREEN}OK: Reglas de cortafuegos ya existen.${RESET}"
-    fi
+            nft add rule ip nat prerouting iifname "${IFACE}" tcp dport "$PORT" \
+            dnat to "$LXC_IP:$PORT"
+        else
+            echo -e "${GREEN}OK: Reglas de cortafuegos ya existen.${RESET}"
+        fi
+    done
 }
 !
 ### __Iniciación del contenedor si no está en ejecución.__
