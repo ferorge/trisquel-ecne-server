@@ -380,6 +380,7 @@ configure_service() {
 ### __Configuración de passwd.__
 \
 configure_passwd() {
+    local config_file="${LXC_WD}${LXC_NAME}/config"
     if ! lxc-info -n "$LXC_NAME" | grep -q "RUNNING"; then
         echo -e "${GREEN}OK: Contenedor $LXC_NAME ya está detenido.${RESET}"
     else
@@ -398,12 +399,12 @@ lxc.mount.entry = /etc/gshadow \
 ${LXC_WD}${LXC_NAME}/rootfs/etc/gshadow none bind,ro 0 0
 lxc.mount.entry = /etc/letsencrypt/ \
 ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/ none bind,ro 0 0
-    EOF
+EOF
     mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/
 
     echo -e "${CYAN}Iniciando contenedor $LXC_NAME...${RESET}"
     systemctl start lxc@${LXC_NAME}
-    
+
     echo -e "${GREEN}OK: passwd configurado.${RESET}"
 }
 :
@@ -445,4 +446,4 @@ main() {
 }
 
 main "$@"
-\
+:
