@@ -387,17 +387,23 @@ configure_passwd() {
         systemctl stop lxc@${LXC_NAME}
     fi
     echo -e "${CYAN}Configurando passwd...${RESET}"
-    lxc.mount.entry = /etc/passwd \
-    ${LXC_WD}${LXC_NAME}/rootfs/etc/passwd none bind,ro 0 0
-    lxc.mount.entry = /etc/shadow \
-    ${LXC_WD}${LXC_NAME}/rootfs/etc/shadow none bind,ro 0 0
-    lxc.mount.entry = /etc/group \
-    ${LXC_WD}${LXC_NAME}/rootfs/etc/group none bind,ro 0 0
-    lxc.mount.entry = /etc/gshadow \
-    ${LXC_WD}${LXC_NAME}/rootfs/etc/gshadow none bind,ro 0 0
-    lxc.mount.entry = /etc/letsencrypt/ \
-    ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/ none bind,ro 0 0
+    cat <<EOF >> "$config_file"
+lxc.mount.entry = /etc/passwd \
+${LXC_WD}${LXC_NAME}/rootfs/etc/passwd none bind,ro 0 0
+lxc.mount.entry = /etc/shadow \
+${LXC_WD}${LXC_NAME}/rootfs/etc/shadow none bind,ro 0 0
+lxc.mount.entry = /etc/group \
+${LXC_WD}${LXC_NAME}/rootfs/etc/group none bind,ro 0 0
+lxc.mount.entry = /etc/gshadow \
+${LXC_WD}${LXC_NAME}/rootfs/etc/gshadow none bind,ro 0 0
+lxc.mount.entry = /etc/letsencrypt/ \
+${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/ none bind,ro 0 0
+    EOF
     mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/
+
+    echo -e "${CYAN}Iniciando contenedor $LXC_NAME...${RESET}"
+    systemctl start lxc@${LXC_NAME}
+    
     echo -e "${GREEN}OK: passwd configurado.${RESET}"
 }
 :
