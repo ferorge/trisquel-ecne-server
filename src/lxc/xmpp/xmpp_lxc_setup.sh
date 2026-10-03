@@ -53,7 +53,7 @@ cfg_safe_env || {
 #
 ### __Configuración de variables__
 \
-FQDN='sobnix.ar'
+FQDN='xmpp.sobnix.ar'
 PKGS='ejabberd'
 UNIT='ejabberd'
 SRV_DIR='/srv/'
@@ -63,6 +63,12 @@ BACKUP_DIR='/var/local/backups/'
 LOG_DIR='/var/log/'
 ACCESS_LOG_FILE="${LOG_DIR}${UNIT}-access.log"
 ERROR_LOG_FILE="${LOG_DIR}${UNIT}-error.log"
+!
+### __Modificación de nombre de huésped__
+\
+echo -e "$CYAN Modificando nombre de huésped ${RESET}"
+hostnamectl hostname ${FQDN}
+echo -e "$GREEN Nombre de huésped: $(hostname) ${RESET}"
 !
 ### __Configuración de directorio temporal__
 \
