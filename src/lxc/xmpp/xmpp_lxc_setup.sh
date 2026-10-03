@@ -67,8 +67,15 @@ ERROR_LOG_FILE="${LOG_DIR}${UNIT}-error.log"
 ### __Modificación de nombre de huésped__
 \
 echo -e "$CYAN Modificando nombre de huésped ${RESET}"
-hostnamectl hostname ${FQDN}
+echo ${FQDN} > /etc/hostname
+echo ${FQDN} > /proc/sys/kernel/hostname
+sed -i "s/127.0.1.1/127.0.1.1 ${FQDN}/g" /etc/hosts
 echo -e "$GREEN Nombre de huésped: $(hostname) ${RESET}"
+:
+### __Actualización de repositorio__
+\
+echo -e "$CYAN Actualizando repositorio ${RESET}"
+apt update
 :
 ### __Configuración de directorio temporal__
 \
@@ -79,7 +86,6 @@ chmod 1777 $TMP
 ### __Instalación de paquetes__
 \
 echo -e "$CYAN Instalando paquetes ${RESET}"
-apt update
 apt install -y ${PKGS}
 apt distclean
 :
