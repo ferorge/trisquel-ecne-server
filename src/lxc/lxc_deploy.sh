@@ -46,7 +46,7 @@
 \
 readonly SCRIPT_NAME=$(basename "$0")
 readonly SCRIPT_DIR=$(dirname "$(realpath "$0")")
-!
+:
 ### __Importar funciones auxiliares__
 \
 if [[ ! -f "${SCRIPT_DIR}/aux.sh" ]]; then
@@ -56,14 +56,14 @@ if [[ ! -f "${SCRIPT_DIR}/aux.sh" ]]; then
     exit 1
 fi
 source "${SCRIPT_DIR}/aux.sh"
-!
+:
 ### __Configuración inicial__
 \
 cfg_safe_env || {
     echo -e "${RED}Error: No configurarse un entorno seguro.${RESET}" >&2
     exit 1
 }
-!
+:
 ### __Procesar el fichero de configuración__
 \
 readonly CFG_FILE=$1
@@ -72,7 +72,7 @@ parse_config_file "${CFG_FILE}" || {
     echo -e "${RED}Error: No se pudo procesar ${CFG_FILE}${RESET}" >&2
     exit 1
 }
-!
+:
 #### _Contenedor_
 \
 LXC_NAME="${LXC_NAME}"                            # Nombre del contenedor
@@ -95,7 +95,7 @@ NFS_EXPORT="/etc/exports"                         # Archivo de exports NFS
 
 IFACE="eth0"
 DOMAIN="sobnix.ar"
-!
+:
 ### __Creación de directorios__
 #
 create_directories() {
@@ -154,7 +154,7 @@ validate_environment() {
     }
     echo -e "${GREEN}OK: Entorno validado.${RESET}"
 }
-!
+:
 ### __Creación del usuario__
 #
 # Crea el usuario solo si no existe.
@@ -171,7 +171,7 @@ create_user() {
         echo -e "${GREEN}OK: Usuario ${LXC_USER} creado con UID $LXC_UID.${RESET}"
     fi
 }
-!
+:
 ### __Creación del contenedor__
 #
 # Crea el contenedor solo si no existe.
@@ -218,7 +218,7 @@ create_container() {
 	echo -e "${GREEN}OK: Contenedor $LXC_NAME ya existe.${RESET}"
     fi
 }
-!
+:
 ### __Configuración de red__
 #
 # Asigna nombre de hosts
@@ -235,7 +235,7 @@ configure_hosts() {
     fi
     echo -e "${GREEN}OK: Nombre de huésped configurado.${RESET}"
 }
-!
+:
 # Asigna liberación estática al servidor DHCP
 \
 configure_dhcp() {
@@ -251,7 +251,7 @@ configure_dhcp() {
     fi
     echo -e "${GREEN}OK: Asignación DHCP configurada.${RESET}"
 }
-!
+:
 ### __Creación de directorio__
 #
 # Configura el directorio NFS y su export.
@@ -301,7 +301,7 @@ configure_nfs() {
     fi
     echo -e "${GREEN}OK: Directorios de usuarios configurados.${RESET}"
 }
-!
+:
 ### __Configuración del contenedor__
 #
 # Escribe la configuración del contenedor.
@@ -327,7 +327,7 @@ EOF
     chmod 0755 ${LXC_WD}${LXC_NAME}/rootfs/srv/
 
 }
-!
+:
 ### __Iniciación del contenedor al inicio del sistema.__
 \
 auto_start_container() {
@@ -338,7 +338,7 @@ auto_start_container() {
 	sed -i 's/lxc.start.auto = 1/lxc.start.auto = 0/g' $config_file
     fi
 }
-!
+:
 ### __Configuración de cortafuegos con nftables__
 #
 # Abre el puerto en host y desvia al contenedor
@@ -359,7 +359,7 @@ configure_firewall() {
         fi
     done
 }
-!
+:
 ### __Iniciación del contenedor si no está en ejecución.__
 start_container() {
     if ! lxc-info -n "$LXC_NAME" | grep -q "RUNNING"; then
@@ -369,14 +369,14 @@ start_container() {
         echo -e "${GREEN}OK: Contenedor $LXC_NAME ya está en ejecución.${RESET}"
     fi
 }
-!
+:
 ### __Configuración del servicio dentro del contenedor.__
 \
 configure_service() {
     echo -e "${CYAN}Configurando servicio $LXC_NAME...${RESET}"
     lxc-attach -n ${LXC_NAME} -- /opt/${LXC_NAME}_lxc_setup.sh
 }
-!
+:
 ### __Configuración de passwd.__
 \
 configure_passwd() {
@@ -400,7 +400,7 @@ configure_passwd() {
     mkdir -p ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/
     echo -e "${GREEN}OK: passwd configurado.${RESET}"
 }
-!
+:
 ### __Reversión__
 #
 # Elimina todos los recursos creados en caso de error.
@@ -417,7 +417,7 @@ cleanup() {
     #userdel ${LXC_USER} 2>/dev/null || true
 }
 trap cleanup ERR
-!
+:
 ### __Ejecución principal__
 \
 main() {

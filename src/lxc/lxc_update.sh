@@ -33,7 +33,7 @@
 \
 readonly SCRIPT_NAME=$(basename "$0")
 readonly SCRIPT_DIR=$(dirname "$(realpath "$0")")
-!
+:
 ### __Importar funciones auxiliares__
 \
 if [[ ! -f "${SCRIPT_DIR}/aux.sh" ]]; then
@@ -43,14 +43,14 @@ if [[ ! -f "${SCRIPT_DIR}/aux.sh" ]]; then
     exit 1
 fi
 source "${SCRIPT_DIR}/aux.sh"
-!
+:
 ### __Configuración inicial__
 \
 cfg_safe_env || {
     echo -e "${RED}Error: No configurarse un entorno seguro.${RESET}" >&2
     exit 1
 }
-!
+:
 ### __Procesar el fichero de configuración__
 # \
 # readonly CFG_FILE=$1
@@ -75,7 +75,7 @@ validate_environment() {
     }
     # logger "${GREEN}OK: Entorno validado.${RESET}"
 }
-!
+:
 ### __Actualización de debian__
 \
 debian_update() {
@@ -87,7 +87,7 @@ debian_update() {
 	apt-get autoclean -qq && \
 	apt-get distclean ; } 2>&1 | logger -t "debian_update"
 }
-!
+:
 ### __Ejecución principal__
 \
 main() {
@@ -97,4 +97,4 @@ main() {
 }
 
 main "$@"
-!
+:

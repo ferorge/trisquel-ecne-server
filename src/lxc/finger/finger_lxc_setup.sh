@@ -32,7 +32,7 @@
 \
 readonly SCRIPT_NAME=$(basename "$0")
 readonly SCRIPT_DIR=$(dirname "$(realpath "$0")")
-!
+:
 ### __Importar funciones auxiliares__
 \
 if [[ ! -f "${SCRIPT_DIR}/aux.sh" ]]; then
@@ -42,14 +42,14 @@ if [[ ! -f "${SCRIPT_DIR}/aux.sh" ]]; then
     exit 1
 fi
 source "${SCRIPT_DIR}/aux.sh"
-!
+:
 ### __Configuración inicial__
 \
 cfg_safe_env || {
     echo -e "${RED}Error: No configurarse un entorno seguro.${RESET}" >&2
     exit 1
 }
-!
+:
 #
 ### __Configuración de variables__
 \
@@ -65,26 +65,26 @@ CFG_FILE="cfingerd.conf"
 LOG_DIR='/var/log/'
 ACCESS_LOG_FILE="${LOG_DIR}${PKG}-access.log"
 ERROR_LOG_FILE="${LOG_DIR}${PKG}-error.log"
-!
+:
 ### __Configuración de directorio temporal__
 \
 echo -e "$CYAN Configurando directorio temporal ${RESET}"
 mkdir -p $TMP
 chmod 1777 $TMP
-!
+:
 ### __Instalación de paquetes__
 \
 echo -e "$CYAN Instalando paquetes ${RESET}"
 apt update
 apt install -y ${PKG}
 apt distclean
-!
+:
 ### __Respaldo de configuración__
 \
 echo -e "${CYAN} Respaldando configuración ${RESET}"
 mkdir -p ${BACKUP_DIR}
 cp ${CFG_DIR}${CFG_FILE} ${BACKUP_DIR}${CFG_FILE}.${timestamp}
-!
+:
 ### __Modificación de configuración__
 \
 echo -e "${CYAN} Modificando configuración ${RESET}"
@@ -105,19 +105,19 @@ chmod 0644 ${CFG_DIR}${CFG_FILE}
 echo '
 finger          stream  tcp     nowait  root    /usr/sbin/tcpd  /usr/sbin/cfingerd
 ' > /etc/inetd.d/finger.conf
-!
+:
 ### __Activación de servicio__
 \
 echo -e "${CYAN} Activando servicio ${RESET}"
 systemctl enable $UNIT
-!
+:
 ### __Reinicio de servicio__
 \
 echo -e "${CYAN} Reiniciando servicio ${RESET}"
 systemctl restart $UNIT
-!
+:
 ### __Verificación de servicio__
 \
 echo -e "${CYAN} Verificando servicio ${RESET}"
 systemctl status $UNIT
-!
+:
