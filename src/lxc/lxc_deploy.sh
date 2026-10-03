@@ -413,14 +413,14 @@ ${LXC_WD}${LXC_NAME}/rootfs/etc/letsencrypt/ none bind,ro 0 0
 \
 cleanup() {
     echo -e "${RED}Advertencia: Limpieza por error...${RESET}"
-    declare -p | grep LXC_
-    lxc-stop -n "$LXC_NAME" 2>/dev/null || true
-    lxc-destroy -n "$LXC_NAME" 2>/dev/null || true
-    sed -i "/$LXC_NAME,$LXC_IP/d" "$LXC_NET" 2>/dev/null || true
-    sed -i "/$LXC_HOME_DIR.*$LXC_IP/d" "$NFS_EXPORT" 2>/dev/null || true
-    nft flush ruleset 2>/dev/null || true
-    systemctl restart lxc-net nfs-kernel-server 2>/dev/null || true
-    #userdel ${LXC_USER} 2>/dev/null || true
+#    declare -p | grep LXC_
+#    lxc-stop -n "$LXC_NAME" 2>/dev/null || true
+#    lxc-destroy -n "$LXC_NAME" 2>/dev/null || true
+#    sed -i "/$LXC_NAME,$LXC_IP/d" "$LXC_NET" 2>/dev/null || true
+#    sed -i "/$LXC_HOME_DIR.*$LXC_IP/d" "$NFS_EXPORT" 2>/dev/null || true
+#    nft flush ruleset 2>/dev/null || true
+#    systemctl restart lxc-net nfs-kernel-server 2>/dev/null || true
+#    userdel ${LXC_USER} 2>/dev/null || true
 }
 trap cleanup ERR
 :
